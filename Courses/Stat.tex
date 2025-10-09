@@ -437,9 +437,57 @@ To summarize
     \label{tab:distributions}
 \end{table}
 
+\vspace{10pt}
+
+\hrule
+
+\vspace{10pt}
 
 
 
+
+\subsubsection{Lecture 4}
+
+Today point estimation, hypothesis testing and confidence interval, from a sample we try to generate a good models
+
+\vspace{10pt}
+
+Suppose that we have a population distributed with certain parameters. Like $\mu$ as mean or p as proportion.
+Since we can't check the full population (usually), we start from a sample and we try to see if the estimate can be good enough.
+
+\vspace{10pt}
+
+We have two main ways
+\begin{itemize}
+    \item Method of moments
+    \item MLE
+\end{itemize}
+
+\vspace{10pt}
+
+To start we need to define the \textbf{Parameter space}, the range of possible values of the parameter $\theta$ inside the oarameter space $\Omega$.
+Let $X_1, X_2, ..., X_n$ be n random variables that can take a value $x_1, x_2, ..., x_n$.
+The parameter space is bounded.
+
+\vspace{10pt}
+
+To estimate the $\theta$ we use a point estimator. For example the mean is a point estimator of the $\mu$.
+
+\begin{equation}
+    \bar{X} = \frac{1}{n} \Sigma X_i
+\end{equation}
+
+We define the statistic T($X_1, ..., X_n$) as point estimator to get the parameter estimation.
+If T($x_1, ..., x_n$) we get the estimate.
+
+
+\vspace{10pt}
+
+The first way is the \textbf{Method of moments}, we equate sample moments with theoretical moments.
+
+E($X^k$) is the kth theoretical moment of the distribution, k=1,2,3\dots.
+
+$m_k$ = $ \frac{1}{n} \Sigma X_i^k$
 
 
 
