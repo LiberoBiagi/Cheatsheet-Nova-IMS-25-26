@@ -1,0 +1,816 @@
+\section{Programming}
+\subsection{Theory and code examples}
+
+\subsubsection{Lecture 1}
+
+\textbf{Printing} \ra A string is returned and shown on the screen
+\begin{pythoncode}
+    print("Hello World")
+\end{pythoncode}
+
+\textbf{print() syntax} \ra print(object(s), separator=separator, end=end, file=file, flush=flush)
+
+\vspace{20pt}
+
+\textbf{Errors} \ra They happen when there is a problem in the code
+
+\begin{itemize}
+    \item \textbf{Runtime Errors} \ra Something wrong, the code won't run 
+    \item \textbf{Semantic Errors} \ra The output is not what we expected
+    
+\end{itemize}
+
+We have many more of them, to solve we have to \textbf{debug the code}.
+
+\vspace{20pt}
+
+Using Jupyter notebooks we can use some special commands that are preceded by the \% character
+\begin{itemize}
+    \item \textbf{\%timeit} \ra determines the execution time of a single-line
+statement. Performs multiple runs to achieve robust results.
+    \item \textbf{\%\%timeit} \ra same as \%timeit but for the entire cell
+    \item \textbf{\%time}\ra determines the execution time of a single-line
+statement. Performs a single run!
+    \item \textbf{\%\%time}\ra same as \%time but for the entire cell
+    \item \textbf{\%run}\ra Run the named file inside IPython as a program
+    \item \textbf{\%history}\ra displays the command history. Use \%history -n to display last n-commands with line
+numbers.
+    \item \textbf{\%recall<line\_no>}\ra  re-executes command at line\_no. You can also specify range of line numbers
+    \item \textbf{\%who}\ra Shows list of all variables defined within the current notebook
+    \item \textbf{\%Ismagic}\ra Shows a list of magic commands
+    \item \textbf{\%magic}\ra Quick and simple list of all available magic functions with detailed descriptions
+    \item \textbf{\%quickref}\ra List of common magic commands and their descriptions
+\end{itemize}
+
+And many more
+
+\vspace{10pt}
+
+\hrule
+
+\subsubsection{Lecture 2}
+
+\vspace{10pt}
+
+\textbf{Semantics} \ra in Python tabs and spaces are used to structure the code. If you use a colon you have to indent the code in the right way. Semicolons instead can be used for multiple statements on the same line
+
+\vspace{10pt}
+
+\textbf{Objects} \ra everything in Python is an object with it's own methods, functions and characteristics
+
+\vspace{10pt}
+
+\textbf{Comments} \ra \# denotes comments
+
+\vspace{10pt}
+
+To represent information we can use different kind of data types and structures
+
+\vspace{10pt}
+
+\textbf{Variables} \ra a variable can take whatever value we want
+
+\begin{pythoncode}
+    a = 2 #variable declaration
+    print(a)
+>>> 2
+    type(a)
+>>>int
+\end{pythoncode}
+
+\vspace{10pt}
+
+Other possible types are
+
+\begin{itemize}
+    \item float
+    \item string
+    \item complex
+    \item boolean
+\end{itemize}
+
+\vspace{10pt}
+
+If we want to save a collection of objects we can use
+
+\begin{pythoncode}
+    List = [1, 3, "a", 7]
+    Tuple = (1, "a", 8, 7)
+    Dictionary = {"a":1, "b":4}
+    Set = {1, "a", 4, 8}
+\end{pythoncode}
+
+\begin{table}[h!]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Data Structure} & \textbf{Mutable / Immutable} & \textbf{Ordered / Unordered} & \textbf{Indexed / History} \\
+\hline
+List        & Mutable   & Ordered   & Indexed \\
+Dictionary  & Mutable   & Unordered & History of addition \\
+Tuple       & Immutable & Ordered   & Indexed \\
+Set         & Mutable   & Unordered & No indexing (unique elements) \\
+\hline
+\end{tabular}
+\caption{Comparison of Python collection data structures.}
+\end{table}
+
+\vspace{10pt}
+
+Every data structure has it's own methods.
+
+When we are using indexed data structures we have to remember that the first index is 0.
+
+\vspace{10pt}
+
+Since we want to work with data and modify them we need a way to do it. Operators can take variables and make computations if those are compatible
+
+\begin{table}[h!]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Operator} & \textbf{Name} & \textbf{Example} \\
+\hline
+\texttt{+}  & Addition        & \texttt{x + y}  \\
+\texttt{-}  & Subtraction     & \texttt{x - y}  \\
+\texttt{*}  & Multiplication  & \texttt{x * y}  \\
+\texttt{/}  & Division        & \texttt{x / y}  \\
+\texttt{\%} & Modulus         & \texttt{x \% y} \\
+\texttt{**} & Exponentiation  & \texttt{x ** y} \\
+\texttt{//} & Floor division  & \texttt{x // y} \\
+\hline
+\end{tabular}
+\caption{Python arithmetic operators with names and examples.}
+\end{table}
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Operator} & \textbf{Example} & \textbf{Same As} \\
+\hline
+\texttt{=}   & \texttt{x = 5}    & \texttt{x = 5} \\
+\texttt{+=}  & \texttt{x += 3}   & \texttt{x = x + 3} \\
+\texttt{-=}  & \texttt{x -= 3}   & \texttt{x = x - 3} \\
+\texttt{*=}  & \texttt{x *= 3}   & \texttt{x = x * 3} \\
+\texttt{/=}  & \texttt{x /= 3}   & \texttt{x = x / 3} \\
+\texttt{\%=} & \texttt{x \%= 3}  & \texttt{x = x \% 3} \\
+\texttt{//=} & \texttt{x //= 3}  & \texttt{x = x // 3} \\
+\texttt{**=} & \texttt{x **= 3}  & \texttt{x = x ** 3} \\
+\texttt{\&=} & \texttt{x \&= 3}  & \texttt{x = x \& 3} \\
+\texttt{|=}  & \texttt{x |= 3}   & \texttt{x = x | 3} \\
+\texttt{\^=} & \texttt{x \^= 3}  & \texttt{x = x \^ 3} \\
+\texttt{>>=} & \texttt{x >>= 3}  & \texttt{x = x >> 3} \\
+\texttt{<<=} & \texttt{x <<= 3}  & \texttt{x = x << 3} \\
+\hline
+\end{tabular}
+\caption{Python assignment operators with examples.}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Operator} & \textbf{Name} & \textbf{Example} \\
+\hline
+\texttt{==} & Equal                    & \texttt{x == y} \\
+\texttt{!=} & Not equal                & \texttt{x != y} \\
+\texttt{>}  & Greater than             & \texttt{x > y}  \\
+\texttt{<}  & Less than                & \texttt{x < y}  \\
+\texttt{>=} & Greater than or equal to & \texttt{x >= y} \\
+\texttt{<=} & Less than or equal to    & \texttt{x <= y} \\
+\hline
+\end{tabular}
+\caption{Python comparison operators.}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Operator} & \textbf{Description} & \textbf{Example} \\
+\hline
+\texttt{and} & Returns True if both statements are true & \texttt{x < 5 and x < 10} \\
+\texttt{or}  & Returns True if one of the statements is true & \texttt{x < 5 or x < 4} \\
+\texttt{not} & Reverses the result, returns False if the result is True & \texttt{not(x < 5 and x < 10)} \\
+\hline
+\end{tabular}
+\caption{Python logical operators.}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|c|c|p{8cm}|}
+\hline
+\textbf{Operator} & \textbf{Name} & \textbf{Description} \\
+\hline
+\texttt{\&}  & AND  & Sets each bit to 1 if both bits are 1 \\
+\texttt{|}   & OR   & Sets each bit to 1 if one of two bits is 1 \\
+\texttt{\^}  & XOR  & Sets each bit to 1 if only one of two bits is 1 \\
+\texttt{\~}  & NOT  & Inverts all the bits \\
+\texttt{<<}  & Zero fill left shift  & Shift left by pushing zeros in from the right and let the leftmost bits fall off \\
+\texttt{>>}  & Signed right shift   & Shift right by pushing copies of the leftmost bit in from the left, and let the rightmost bits fall off \\
+\hline
+\end{tabular}
+\caption{Python bitwise operators.}
+\end{table}
+
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|c|p{10cm}|}
+\hline
+\textbf{Operator} & \textbf{Description} \\
+\hline
+\texttt{is}     & Returns True if both variables are the same object \\
+\texttt{is not} & Returns True if both variables are not the same object \\
+\hline
+\end{tabular}
+\caption{Python identity operators.}
+\end{table}
+
+\vspace{10pt}
+
+\textbf{Flow control} \ra to check that our program is doing what we want we can apply different statements.
+
+\textbf{if} \ra we define a condition under which a certain action is done if that condition is reached
+
+\begin{table}[h!]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Operator} & \textbf{Name} & \textbf{Example} \\
+\hline
+\texttt{==} & Equal                    & \texttt{x == y} \\
+\texttt{!=} & Not equal                & \texttt{x != y} \\
+\texttt{>}  & Greater than             & \texttt{x > y}  \\
+\texttt{<}  & Less than                & \texttt{x < y}  \\
+\texttt{>=} & Greater than or equal to & \texttt{x >= y} \\
+\texttt{<=} & Less than or equal to    & \texttt{x <= y} \\
+\hline
+\end{tabular}
+\caption{Python comparison operators with examples for conditional statements.}
+\end{table}
+
+\textbf{elif} \ra it means else if, we specify a new condition
+
+\textbf{else} \ra to be put as last, if neither if or elif are met we use else
+
+\begin{pythoncode}
+if name == "Libero":
+    print("Hello")
+elif name == "Jose":
+    print("Forza Milan")
+else:
+    print("None")
+\end{pythoncode}
+
+
+\vspace{10pt}
+
+\textbf{Loops} \ra for now we just cared about one time operations, we can do those on multiple times with loops. 
+
+We have two main loops
+
+\begin{itemize}
+    \item \textbf{for loops} \ra we specify an interval and the action is performed that number of times.
+    \item \textbf{while loops} \ra the operation is made as long as a certain condition is true
+\end{itemize}
+
+\begin{pythoncode}
+    for x in range (10):
+        print(x)
+
+    a = 0
+    while a < 25:
+        print(a)
+        a +=1
+\end{pythoncode}
+
+Some problems can arise if the condition of the while loop is never met.
+
+\newpage
+
+
+
+\textbf{Comprehension} \ra for faster performances we can use this particular structure. It works for all the mutable data structure
+
+\begin{pythoncode}
+    squares = [x**2 for x in range(10)]
+    print(squares)
+
+    even_squares = [x**2 for x in range(10) if x % 2 == 0]
+    print(even_squares)
+
+
+    squares_dict = {x: x**2 for x in range(5)}
+    print(squares_dict)
+
+    squares_set = {x**2 for x in range(5)}
+    print(squares_set)
+\end{pythoncode}
+
+With this general structure
+
+\begin{pythoncode}
+    {key_expression: value_expression for item in iterable if condition}
+
+    {expression for item in iterable if condition}
+
+\end{pythoncode}
+
+\textbf{Slices} \ra if we want a subset of the data structure.
+
+\vspace{10pt}
+
+General structure
+
+\begin{pythoncode}
+    list[start:stop:step]
+\end{pythoncode}
+
+Negative indexes mean to start from the end
+
+\vspace{10pt}
+
+\textbf{typecast} \ra we can transform a variable with a certain structure into another with another structure
+
+\begin{pythoncode}
+    # Typecasting examples in one snippet
+
+# String to int
+x_str = "10"
+x_int = int(x_str)
+print(x_int, type(x_int))  # 10 <class 'int'>
+
+# String to float
+y_str = "3.14"
+y_float = float(y_str)
+print(y_float, type(y_float))  # 3.14 <class 'float'>
+
+# Int to string
+z_int = 100
+z_str = str(z_int)
+print(z_str, type(z_str))  # '100' <class 'str'>
+
+# Tuple to list
+tup = (1, 2, 3)
+lst = list(tup)
+print(lst, type(lst))  # [1, 2, 3] <class 'list'>
+
+# List to tuple
+lst2 = [4, 5, 6]
+tup2 = tuple(lst2)
+print(tup2, type(tup2))  # (4, 5, 6) <class 'tuple'>
+
+# Int to float
+num = 7
+num_float = float(num)
+print(num_float, type(num_float))  # 7.0 <class 'float'>
+
+# Float to int
+num2 = 9.8
+num2_int = int(num2)  # truncates decimal part
+print(num2_int, type(num2_int))  # 9 <class 'int'>
+
+\end{pythoncode}
+
+\hrule
+
+\subsubsection{Lecture 3}
+
+\textbf{Functions} \ra like a mathematical function a python one will take some inputs and will apply the same operations to get a certain result. We define them to avoid writing the same code over and over.
+
+\begin{pythoncode}
+    def function(input): #to define
+        input operation
+        return output
+
+    function(other_input) #to call
+\end{pythoncode}
+
+\vspace{10pt}
+
+A function can also work with the elements of a list or other collections of elements using a for loop.
+
+\vspace{10pt}
+
+If we want to have a flexible number of inputs we can use *args and **kwargs
+
+\begin{itemize}
+    \item \textbf{*args} \ra the function will take a list as input and will do the computations on each element of that list
+    \item \textbf{**kwargs} \ra same as args but with a list of keys and values, the function will return a dictionary
+\end{itemize}
+
+\begin{pythoncode}
+    def multiply(*args):
+        output = 1
+        for n in args:
+            output *= n
+        return output
+
+    print(multiply(2, 3, 4))
+
+    
+\end{pythoncode}
+
+\begin{pythoncode}
+    def my_function(**kwargs):
+        for key, value in kwargs.items():
+            print(key, value)
+
+    my_function(name="Alice", age=25, city="Paris")
+
+    ###Output
+name Alice
+age 25
+city Paris
+\end{pythoncode}
+
+\href{https://youtu.be/4jBJhCaNrWU?si=h0v33a0kZZ5CMMfV}{Link for a video if it's still confusing}
+
+\vspace{10pt}
+
+You can add infos about your function with the \_\_doc\_\_
+
+\begin{pythoncode}
+    def greets(*args):
+        """This function says Hello"""
+        for name in args:
+            print("Hello", name)
+    greet.__doc__
+\end{pythoncode}
+
+\vspace{10pt}
+
+If we want a fast singular use function we can use \textbf{lambda functions}.
+
+\begin{pythoncode}
+    lambda arguments: expression
+
+    add = lambda x, y : x + y
+    add(2, 3)
+\end{pythoncode}
+
+\vspace{10pt}
+
+\textbf{Map} \ra we want to transform certain values into others in a fast way
+
+\begin{pythoncode}
+    list(map(lambda x : x * 2, [1, 2, 3, 4]))
+\end{pythoncode}
+
+\vspace{10pt}
+
+\textbf{Filter} \ra if we want to select a subset of our data
+
+\begin{pythoncode}
+    from random import sample
+
+    X = sample(range(-25, 25), 25)
+    f = filter(lambda x: x > 0, X)
+\end{pythoncode}
+
+\vspace{10pt}
+
+When we want to call a certain function multiple times we can use two main ways:
+
+\begin{itemize}
+    \item \textbf{Iteration} \ra We define a number of times and the function will do its job for that number.
+
+    \item \textbf{Recursion} \ra The function will call itself until it reaches a base case. It's important to define base, edge and general cases. Useful when we work with trees or graphs
+    
+\end{itemize}
+
+\begin{pythoncode}
+    def factorial(n):
+    if n == 1:
+        return 1   #base case
+    elif n == 0:
+        return 1   #edge case
+    else:
+        return n * factorial (n-1) #general case
+\end{pythoncode}
+
+\vspace{10pt}
+
+We should differentiate between:
+
+\begin{itemize}
+    \item \textbf{Functions} \ra defined by def or lambda, they can be applied to almost everything if well defined.
+    \item \textbf{Methods} \ra associated with certain objects
+    \item \textbf{Attributes} \ra variables associated to certain objects
+\end{itemize}
+
+\vspace{10pt}
+
+Remember kids, if you want to code something probably someone has already done it. So why bother?
+
+We can import the work done by other people
+
+\begin{pythoncode}
+    import module as mod
+    from module import method1, method2
+
+\end{pythoncode}
+
+sys.path will give us all the directories that our interpreter is watching
+
+Useful modules can be:
+\begin{itemize}
+    \item csv
+    \item datetime
+    \item io
+    \item json
+    \item math
+    \item os
+    \item random
+    \item sqlite3
+    \item xml
+    \item zipfile
+    \item zlib
+\end{itemize}
+
+\textbf{Namespace}  
+A namespace is a collection of names that reference objects.
+
+- \textbf{Built-in Names}: predefined names available in every Python interpreter.  
+Examples: \texttt{list}, \texttt{dict}, \texttt{map}, \texttt{tuple}.
+\begin{pythoncode}
+import builtins
+print(dir(builtins))   # list built-in names
+\end{pythoncode}
+
+- \textbf{Global Names}: user-defined names created in the main program body (variables, functions, classes).
+\begin{pythoncode}
+x = 42   # global variable
+def foo():
+    return x
+print(globals())   # list global names
+\end{pythoncode}
+
+- \textbf{Local Names}: names defined inside a function, valid only inside it.
+\begin{pythoncode}
+def bar():
+    y = 10  # local variable
+    print(locals())   # list local names
+bar()
+# print(y)  -> Error: y does not exist in the global scope
+\end{pythoncode}
+
+\textbf{Scope}  
+Scope defines where a variable can be accessed.
+
+- \textbf{Global Scope}: variable accessible throughout the whole program.  
+- \textbf{Local Scope}: variable accessible only inside the function where it was declared.
+
+\begin{pythoncode}
+animal = "dog"  # global variable
+
+def test_scope():
+    # local variable with the same name
+    animal = "cat"
+    print("Local:", animal)
+
+test_scope()
+print("Global:", animal)
+\end{pythoncode}
+
+Output:
+\begin{pythoncode}
+Local: cat
+Global: dog
+\end{pythoncode}
+
+\textbf{Using the keyword global}  
+It allows modifying a global variable inside a function.
+
+\begin{pythoncode}
+count = 0
+
+def increment():
+    global count
+    count += 1
+
+increment()
+print(count)  # 1
+\end{pythoncode}
+
+\hrule
+\subsubsection{Lecture 4}
+
+Today we start with Pandas, fav library for data.
+
+\begin{pythoncode}
+    import pandas a pd #always import as pd
+\end{pythoncode}
+
+\textbf{Series} \ra a Pandas series is 1-D object that can hold any data type. Is made of 2 arrays, one for the index and the other one with the actual data.
+
+\begin{pythoncode}
+    obj = pd.Series([11, 28,72, , 5, 8])
+
+    obj.array #information on the array
+    obj.index #information on the indices
+\end{pythoncode}
+
+The left column is the index one, always. We can use custom index lists
+
+\begin{pythoncode}
+    fruits = ['apples', 'oranges', 'cherries', 'pears']
+    quantities = [20, 33, 52, 10]
+    S = pd.Series(quantities, index=fruits)
+    #the index list is fruits
+
+    S2 = pd.Series([17, 13, 31, 32], index=fruits)
+    print(S + S2) #will sum the elements on the same position
+    sum(S) #will tell us the total of the nubers in the array
+
+    fruits2 = ['raspberries', 'oranges', 'cherries', 'pears']
+    S2 = pd.Series([17, 13, 31, 32], index=fruits2)
+    print(S + S2) #the operations are aligned by index, elements that don't appear in both lists will be NaN, like a Joint in relational algebra
+
+    print(S["apples]) #we can access like a dictionary, output will be 20
+    S["apples"] = 25 #to modify the element
+
+    print(S + 2) #to add 2 to every element
+    print(np.sin(S)) #to apply the sin function
+
+    S.apply(lambda x: x if x > 25 else -1 * x) #apply will make a function to all the elements of the series, Map() will work element wise
+
+    print(S[S > 25]) #to filter using booleans
+
+    "apples" in S #to see if a key exists
+
+    cities = {"London": 8615246,
+    "Sesto San Giovanni": 79121,
+    "Montevideo": 1405798}
+    city_series = pd.Series(cities) #from dictionary to series
+
+    print(cities.isnull()) #to see which element is NaN
+    print(cities.notnull()) #to see which element is not Nan
+    print(cities.fillna(0)) #to change Nan to 0.0 (floats)
+    print(cities.fillna(0).astype(int)) #to change Nan to 0 (integers)
+
+    obj.name = "Libero" #to give our series a name
+    obj.index.name = "diocane" #to give the index comlumn a name
+    obj.index #we see a list of the index column
+\end{pythoncode}
+
+\textbf{Characteristics of Index object}
+\begin{itemize}
+    \item Immutable
+    \item Behaves like a fixed size set (we can check if a certain index is in the column with the in method)
+    \item Can contain duplicate labels
+\end{itemize}
+
+We have several useful methods for the index objects.
+
+\vspace{10pt}
+
+If we put multiple series one after the other we get a matrix called \textbf{DataFrame} which can be considered like an Excel spreadsheet. Like Excel a pandas dataframe has both row and column index.
+
+\begin{pythoncode}
+    pd.concatenate([row1, row2, row3]) #to connect the rows if they share the same index
+    pd.concatenate([row1, row2, row3], axis=1) #they become columns, default is 0
+
+    df.colum.values #retrieve the columns names
+    df = pd.Dataframe(df, index= a_list) #to rename the index column with the names of a list
+    df = pd.Dataframe(df,
+    columns=("name2", "name3", "name1") #to rearrange the columns order, same as df.reindex(["name3", "name1", "name2"])
+
+    df.rename(columns={
+    "name1" = "newname1",
+    "name2" = "newname"
+    }, inplace=True) #to rename columns, inplace False will return a copy of the dataset
+
+    df = pd.Dataframe(df, columns=["name1", "name2"], index=df["other_column"]) #to put other_column as new index
+
+    df.loc("label", "other_label") #select all the rows with that label
+    df.loc(df.condition > number) #for conditions
+
+    df.sum() #sum on all the columns
+    df["column1"].sum() #sum on a single column
+    df["column1"].cumsum() #cumulative sum
+
+    #to add columns we put the new column name in the column list and we impute it with df["new_col"] = df["old_col].cumsum() for example. Default values for new columns are NaN
+
+    df["attribute"] #access a column same as df.attribute()
+
+    df["attribute"] = number #will fill the column with that number, for unique values use a list of the same size
+
+    df.T #to get the transpose
+
+    df = pd.read_csv("path/to/csv/file")
+
+    df.head(n) #to see the first n lines of the dataframe
+
+    df.to_csv("path/where/you/want/to/save/the/file")
+
+    df.loc[] #access with label based approach, KeyError if it can't find the value
+    df.iloc[] #access with index, IndexError if the requested index is out of bounds, except for slice indexers
+
+    df["b": "m"] #slices can also work by labels, we will take also the middle values
+    
+\end{pythoncode}
+
+How to select subsets
+
+\begin{itemize}
+    \item Fetching like a dictionary, select the index that you want
+    \item Slice by index
+    \item Slice by labels
+    \item Fetch multiple entries
+    \item Condition based selection
+\end{itemize}
+
+\vspace{10pt}
+
+You should use .loc[] and by index
+
+\vspace{10pt}
+
+\textbf{iloc vs loc}
+
+\begin{itemize}
+    \item iloc = by label
+    \item loc = by index
+    \item duloc = lord Farquad city
+\end{itemize}
+
+
+\begin{pythoncode}
+    df.loc["label"] #select a row by index label
+    df.loc["label", ["col1", "col3"]] #row and column selection
+    df.loc[:"label", ["col1", "col3"]] #as before but with slicing
+
+    df.iloc[[2, 1]] #fetch rows with that position
+    df.iloc[[1, 2], [3, 0, 1]] select certain rows and columns
+    df.iloc[:, :3] #with slices
+\end{pythoncode}
+
+\subsubsection{Lecture 5}
+
+To see statistical characteristics of our dataset we can do
+
+\begin{pythoncode}
+    df.describe() #the arguments are percentiles, include and exclude
+\end{pythoncode}
+
+
+To see how many null values and the object in the column
+
+\begin{pythoncode}
+    df.info() #the arguments are verbose, buf, max_cols, memory_usage, null_counts
+\end{pythoncode}
+
+To see the number of unique values
+
+\begin{pythoncode}
+    df["name_col"].value_counts() #the arguments are normalize, sort, bins, dropna
+\end{pythoncode}
+
+To group or divide kind of data, basically binning
+
+\begin{pythoncode}
+    df["col1"] = df["col1"].map(lambda x: operation on x)
+    df.groupby("col1") ["col2"].value_counts() #with parameters by, group_keys, dropn, as_index
+\end{pythoncode}
+
+If we want to make a multi dimensional visualization of group by we can use pivot
+
+\begin{pythoncode}
+    
+
+pd.pivot(index="col1", columns="col2", values="col3") #with arguments data, values, index, columns, aggfunc
+
+\end{pythoncode}
+
+To aggregate df using a relational algebra join
+
+\begin{pythoncode}
+    df3 = pd.merge(df1, df2) #with arguments right, how, on, left_on, right_on
+\end{pythoncode}
+
+To make queries (SQL style)
+
+\begin{pythoncode}
+    df.head() #to see first 5 rows
+    df.query("price < 150").head() #with argument inplace. 
+
+    #we can apply and, or and so on, basically SQL queries inside a string
+\end{pythoncode}
+
+For 1-Hot encoding
+
+\begin{pythoncode}
+    pd.get_dummies(df["key"], dtype=int) #to join with another df that has those columns we use
+
+    df = df[["data"]].join(dummies)
+\end{pythoncode}

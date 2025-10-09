@@ -1,0 +1,521 @@
+\section{Data Mining}
+\subsection{Theory}
+
+\subsubsection{Lecture 1}
+
+Fernando Becao presents himself and the tutor.
+
+Fernando Becao asks us why we weren't at the party.
+
+We study about supervised and unsupervised learning.
+
+Exam + project.
+
+Exam is 55\% of the final grade
+
+Project is 45\% and is divided into
+
+\begin{itemize}
+
+\item Deliverable 1 -> 30\% by November 4th
+\item Deliverable 2 -> 60\% by January 3rd
+\item Discussion -> 10\%
+\end{itemize}
+
+Both exam and project will expire after the year
+
+
+\subsubsection{Lecture 2}
+
+Random debate about things
+
+We need to find relevant data to reduce computation and improve the quality of works
+
+\vspace{10pt}
+
+\textbf{Big Data} -> we simplify datasets that are too big for normal processing. From big data into mean datasets
+
+Big data characteristics:
+\begin{itemize}
+    \item \textbf{Volume:} big data are big
+    \item \textbf{Velocity:} Big data technology allows databases to process and analyze data while it is being generated
+    \item \textbf{Variety:} Big data can be a mixture of structured, unstructured and semi-structured data. To solve this problem Big Data is flexible
+\end{itemize}
+
+Some information about AI, ML and Data Science.
+
+\vspace{10pt}
+
+
+\textbf{AI:} Making things that show human intelligence. Automatize human tasks.
+
+\vspace{10pt}
+
+\textbf{Machine Learning:} Approach AI using systems that can find patterns from data and examples. ML systems learn by themselves. We can see them as a sort of subset of AI or a way towards AI 
+
+\vspace{10pt}
+
+\textbf{Data Science:} the study of where information comes from and how to turn it into a valuable resource.
+\vspace{10pt}
+
+
+\textbf{Data Science vs Data Mining}
+\vspace{10pt}
+
+Data science is a set of principle that guide the extraction of information from data. We try to view problems from a data perspective.
+
+\vspace{10pt}
+
+Data mining on the other hand is the extraction of knowledge from data via the use of algorithms.
+
+
+\vspace{10pt}
+
+
+Find/build attributes is very important. Basically the properties of the things that we are studying have to be selected or preprocessed.
+
+\vspace{10pt}
+
+After the construction of the features a ML model can learn how to divide the instances on an hyperplane. This can be used to make predictions. Recall that a model will predict only based on the class that it was trained on.
+
+\vspace{10pt}
+
+Is very important to use the relevant and appropriate features. More features can mean more possibility of discriminating between the classes. 
+
+\vspace{10pt} Typically we use labeled examples, enough data and clear cut definitions.
+
+\vspace{10pt}
+
+If our models try to attribute a label we have supervised learning. Future examples will get a prediction.
+
+
+\vspace{10pt}
+
+
+To build features we use data warehouse and ETL (extract, transform and load). Recall that we can transform every relational schema into a table (at least with SQL).
+
+\vspace{10 pt}
+
+Minimum information to identify a costumer:
+\begin{itemize}
+    \item Transaction number
+    \item Date and time of transaction
+    \item Item purchased
+    \item Price
+    \item Quantity purchased
+    \item A table that matches product code to its name, subgroup code to name, product group code to group name.
+    \item Product taxonomy to link product code to subgroup code and product subgroup code to product group code.
+    \item Card ID
+\end{itemize}
+
+Consistent behaviors are easier to analyze. To found the level of consistency i can use the standard deviation and I can remove the outliers.
+
+\vspace{10pt}
+
+We can also look at relevant variables like:
+\begin{itemize}
+    \item Recency
+    \item Frequency
+    \item Monetary value
+    \item Average purchase
+    \item Most frequent store
+    \item Average time between transactions
+    \item Standard deviation of transactional interval
+    \item Costumer stability index
+    \item Relative spend on each product
+\end{itemize}
+
+\textbf{Canonical tasks in data mining}
+
+If we want to classify new data from a decision criterion previously learned we talk about \textbf{Supervised learning}
+
+\vspace{10pt}
+
+If we want to summarize a data set we talk about \textbf{Unsupervised learning}
+
+\vspace{10pt}
+
+\textbf{Supervised learning:}
+\begin{itemize}
+    \item Classification
+    \item Regression
+\end{itemize}
+
+\textbf{Unsupervised learning:}
+\begin{itemize}
+    \item Clustering
+    \item Visualization
+    \item Association
+\end{itemize}
+
+\vspace{20pt}
+
+In our datasets the features are the columns while the rows are the instances
+
+\vspace{20pt}
+
+\textbf{Clustering} -> We plot the instances on a hyperplane and we try to group them by distance, we can have different plots 
+
+\textbf{Association rules} -> based on our data we can use the transactions to find some rule to infer costumer routine. We use confidence, support, lift and so on.
+
+\textbf{Visualization} -> n-D data can be difficult to visualize so we can flatten them into 2-D ones. Examples are histograms, bubbles and goggle boxes. We can also do some dimensionality reduction using PCA or other algorithm.
+
+\textbf{Data mining process}
+
+We can have different methodologies to acquire insights from data.
+
+\vspace{10pt}
+
+\textbf{KDD}
+\begin{enumerate}
+    \item Data
+    \item Selection
+    \item Preprocessing
+    \item Transformation
+    \item Data mining
+    \item Interpretation/Evaluation
+    \item Knowledge  
+\end{enumerate}
+
+\textbf{CRISP-DM}
+\begin{enumerate}
+    \item Business understanding
+    \item Data understanding
+    \item Data preparation
+    \item Modeling
+    \item Evaluation
+    \item Deployment
+\end{enumerate}
+
+
+
+\vspace{10pt}
+
+
+
+\subsubsection{Lecture 3}
+
+
+We use ML algorithms instead of fixed formulas because the events are too complex for a simple formula.
+
+We don't understand the problems but we try to approximate solution. Black Box ML approach basically.
+
+\vspace{10pt}
+
+If the model is not good enough we can either improve the model or gather more data. The second one is quicker. Dumb algorithms with a lot of data will learn better than smart ones with not a lot of them.
+
+\vspace{10pt}
+
+Traditional statistics might be described as being characterized
+by data sets which are small and clean, which are static,
+which were sampled in an iid manner, which were often
+collected to answer the particular problem being addressed,
+and which are solely numeric.
+
+\begin{table}[h!]
+\centering
+\scriptsize % riduce la dimensione del font
+\renewcommand{\arraystretch}{1.1} % meno spazio tra le righe
+\begin{tabular}{p{2.5cm} p{5cm} p{5cm}}
+\hline
+\textbf{Dimension} & \textbf{Primary data} & \textbf{Secondary data} \\
+\hline
+Definition & Data you collect yourself for a specific, current purpose. & Data collected by others for a different (often past) purpose. \\
+Typical sources & Surveys, experiments, interviews, field measurements, sensors. & Government statistics, research papers, data portals, company databases, syndicated datasets, web-scraped corpora. \\
+Control over design & Full control (sampling, instruments, definitions, timing). & Little/no control; must accept others’ design choices. \\
+Fit to your question & High: tailored to your problem and target population. & Varies: often indirect or requires redefinition/derivations. \\
+Cost & Usually higher (money, time, staff, tooling). & Usually lower or free; licensing may apply. \\
+Time to obtain & Longer (planning → collection → cleaning). & Faster (download/access + cleaning/understanding). \\
+Timeliness/recency & Up-to-date by design. & May be outdated; release lags common. \\
+Granularity & Exactly what you need (variables, frequency, detail). & Fixed by source; may lack key variables or be too aggregated. \\
+\hline
+\end{tabular}
+\caption{Comparison between primary and secondary data.}
+\end{table}
+
+
+\vspace{20pt}
+
+Size of data set is also useful. If we have big datasets even tiny effects exists. They can be useless. Now we should ask if the effect is important or not. 
+
+\vspace{10pt}
+
+From statistical significance to substantive significance.
+
+\vspace{10pt}
+
+Since the datasets are very big we try to compute them in a adaptive or sequential way. Also we might have multiple and interrelated files
+
+\vspace{10pt}
+
+
+We have two main ways to process data
+
+\begin{itemize}
+    \item Incremental
+    \item Batch
+\end{itemize}
+
+Other characteristics of problems in data mining are
+
+\begin{itemize}
+    \item Nonstationarity and population drift
+    \item Selection bias
+    \item Spurious relationships
+\end{itemize}
+
+
+\vspace{10pt}
+
+Input variables should be causally related to the output. If we have a small number of observations we will have high correlation.
+
+Confounding variables will correlate both with dependent and independent variables. The confounding factor will estimate incorrectly the relation. A \textbf{Spurious relationship} happens when we perceive a relationship between two variables that actually doesn't exist. We ar not accounting for the confounding factor. 
+
+\vspace{10pt}
+
+Input variables must be causally related to the output to be meaningful.
+
+\vspace{10pt}
+
+We have to discriminate between \textbf{causality} and \textbf{correlation}:
+\begin{itemize}
+    \item Correlation -> two things co-occurs, changing one of them will not change the output
+    \item Causality -> a change on the input will cause a change on the output
+\end{itemize}
+
+Correlation is a pattern, causation a consequence
+
+
+\vspace{10pt}
+
+\textbf{Input Space} -> is the input feature vector, the algorithm will look for a solution
+
+\vspace{10pt}
+
+\textbf{Curse of dimensionality} -> bad effects can be caused by redundant features, bigger dimensionality means bigger and more sparse input. Clustering can be harder. Generalization is exponentially harder. Feature selection can be an answer.
+
+\vspace{10pt}
+
+\textbf{Input space coverage} -> representative training examples will improve our model quality. Test data outside the training input space will be bad for the performance.
+
+\vspace{10pt}
+
+\textbf{Interpolation} -> predictions in the range of data that we have
+
+\textbf{Extrapolation} predictions outside the range of data that we have, Time series
+
+\textbf{Separation} -> if we plot our data on a 2-D space we can be able to draw by hand the regions where the data are. ML models will try to do it mathematically. If we can use a linear hyperplane we have \textbf{Linearly separable data} if not they are not linearly separable. With separable classes we can get 0 errors. We want to minimize the error (finding the Bayes error). Simple algorithm like perceptron will solve problems with separables classes.
+
+\vspace{10pt}
+
+Kind of variables
+\begin{itemize}
+    \item Nominal
+    \item Ordinal
+    \item Discrete
+    \item Continuous
+    \item Interval
+    \item Ratio
+\end{itemize}
+
+\vspace{10pt}
+
+\textbf{Metadata} -> Information that provides information about data
+
+\begin{itemize}
+    \item Descriptive metadata
+    \item Structural metadata
+    \item Administrative metadata
+\end{itemize}
+
+\subsubsection{Lecture 4}
+
+Today visualization
+\vspace{10pt}
+Strong points of good visualization
+
+\begin{itemize}
+    \item Can show processes
+    \item Show comparisons between numbers
+    \item Can show differences and changes
+    \item Can use geography to show local data
+    \item Can show relationships
+    \item Can show density
+\end{itemize}
+
+\vspace{10pt}
+
+What not to do
+
+\begin{itemize}
+    \item Don't clog the graph
+    \item No 3-D
+    \item Don't use unfaithful charts
+\end{itemize}
+
+\vspace{10pt}
+
+Guidelines
+
+\begin{itemize}
+    \item Reduce chartjunk
+    \item Increase data-ink ration
+    \item Use similar structures in the same charts
+\end{itemize}
+
+\vspace{10pt}
+
+\textbf{Tufte lie factor} -> Measure of distortion in a graph
+
+\begin{equation}
+    \text{Lie Factor} = 
+    \frac{\text{Size of effect in graph}}
+         {\text{Size of effect in data}}
+\end{equation}
+
+\vspace{10pt}
+
+As rule of thumb we should have 0.95 < Lie Factor < 1.05
+
+\newpage
+
+\textbf{Suggestions}
+
+\begin{itemize}
+    \item White background
+    \item Don't use colors if not necessary, Charts should be like man suits (Prof, 2025)
+    \item Order the items in a smart way
+    \item Use a scale
+    \item Crisp borders
+    \item No smooth line
+    \item Simple is better
+    \item No 3-D
+    \item Discriminate clearly the clusters with shapes and colors
+    \item Spaghetti chart should highlight interesting patterns
+    \item Clutterplot should highlight interesting points
+    \item Use shadows to highlights interesting points
+\end{itemize}
+
+\vspace{10pt}
+
+\textbf{Charts that can be useful}
+
+\begin{itemize}
+    \item Bar charts, vertical and horizontal
+    \item Line charts
+    \item Mix of the previous
+    \item Stacked bar charts
+    \item Scatterplot, also with tendency lines, grids, bubbles
+    \item Pie charts, can mix them with histograms, we can label them, compare with others (same as paired column chart). They are like stacked bar charts. We also have part to whole mini pie charts. We can plot them on a graph.
+    \item  Radar plot, easy to compare more of them
+\end{itemize}
+
+\vspace{10pt}
+
+\textbf{Visualization for analysis}
+
+
+\begin{itemize}
+    \item Histogram, can be stacked and combined with scatterplots
+    \item Boxplot, can be combined with scatterplots, histograms
+\end{itemize}
+
+\vspace{10pt}
+
+\textbf{Correlation matrices}
+\begin{itemize}
+    \item Can be done with distributions, scatter plots and matrices
+\end{itemize}
+
+\textbf{Parallel coordinate}
+\begin{itemize}
+    \item Show patterns that can be compared easily
+\end{itemize}
+
+
+\vspace{10pt}
+
+\textbf{Small Multiples}
+
+\begin{itemize}
+
+\item Can show many graphs together, easy for comparisons
+   
+\item Basically we can have a lot of variables in a 2-D graph
+
+\end{itemize}
+
+\vspace{10pt}
+
+\textbf{Heat maps}
+\begin{itemize}
+    \item Can show quantities in the plane that we are visualizing
+\end{itemize}
+
+\vspace{10pt}
+
+\textbf{Tree maps}
+\begin{itemize}
+    \item We can see quantities with sizes and dividing them points based on certain characteristics
+\end{itemize}
+
+\vspace{10pt}
+
+\textbf{Geo-visualization}
+
+\begin{itemize}
+    \item We can aggregate data from different geographical point of view, we can use normal maps, bubbles and plot quantities of them. Cartograms are useful for quantities on and densities.
+\end{itemize}
+
+\vspace{10pt}
+
+\textbf{Linked Views}
+
+\begin{itemize}
+    \item We can put different vies of the dataset together. We can select different subsets to compare them
+\end{itemize}
+
+\subsubsection{Lecture 5}
+
+Today data preparation and pre-processing
+
+\textbf{Preparation}:
+\begin{enumerate}
+    \item Missing values
+    \item Outliers
+    \item Discretization and encoding
+    \item Imbalanced datasets
+\end{enumerate}
+
+\textbf{Pre processing}
+
+wirte roadmap
+
+
+\vspace{10pt}
+
+With data pre-processing and preparation we want to make our data useful for the model. All the datasets are made of signal and noise. We want to maximize the signal and reduce as much as possible the noise.
+
+Real data usually are:
+\begin{itemize}
+    \item Incomplete
+    \item Noisy
+    \item Inconsistent
+\end{itemize}
+
+\textbf{Treating missing data}
+
+Missing values are values that are not available, very common. 
+
+How to deal:
+\begin{itemize}
+    \item Delete records with missing data, biased
+    \item Delete columns with too many missing data, loose information
+    \item Imputing with central tendency metrics, for general and for subsets
+    \item Derive them in an objective way
+    \item Use a predictive model
+    \item Use similarity measures
+    
+\end{itemize}
+
+

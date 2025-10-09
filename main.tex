@@ -1,0 +1,113 @@
+\documentclass[a4paper,10pt]{article}
+
+% -----------------------------
+% Pacchetti base
+% -----------------------------
+\usepackage[utf8]{inputenc}      % codifica input
+\usepackage[T1]{fontenc}         % codifica font
+\usepackage{lmodern}             % font moderno
+\usepackage{xcolor}  
+             % colori
+\usepackage{geometry}             % margini comodi
+\usepackage{graphicx}
+
+
+\geometry{margin=2cm}
+\usepackage{float}                % per [H]
+\usepackage{graphicx}
+\graphicspath{{Courses/Images/}}
+
+\usepackage{tikz}                 % TikZ
+\usepackage{pgfplots}             % grafici
+\usetikzlibrary{pgfplots.statistics}
+\pgfplotsset{compat=1.18}
+\usepackage{amsmath, amssymb, amsfonts, amsthm} % matematica
+\usepackage{tocloft}              % sommario personalizzato
+\usepackage{listings}             % codice
+\usepackage[colorlinks=true, linkcolor=black]{hyperref} % link
+
+% -----------------------------
+% Codice con colori (senza minted)
+% -----------------------------
+\usepackage{xcolor}
+
+% Ambiente per Python
+\lstnewenvironment{pythoncode}[1][]
+{
+  \lstset{
+    language=Python,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    stringstyle=\color{red},
+    commentstyle=\color{green!60!black},
+    numbers=left,
+    numberstyle=\tiny,
+    stepnumber=1,
+    numbersep=5pt,
+    showstringspaces=false,
+    tabsize=4,
+    breaklines=true,
+    frame=single,
+    backgroundcolor=\color{gray!10},
+    #1
+  }
+}
+{}
+
+% Ambiente per R
+\lstnewenvironment{rcode}[1][]
+{
+  \lstset{
+    language=R,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    stringstyle=\color{red},
+    commentstyle=\color{green!60!black},
+    numbers=left,
+    numberstyle=\tiny,
+    stepnumber=1,
+    numbersep=5pt,
+    showstringspaces=false,
+    tabsize=4,
+    breaklines=true,
+    frame=single,
+    backgroundcolor=\color{blue!5},
+    #1
+  }
+}
+{}
+
+% -----------------------------
+% Comandi personalizzati
+% -----------------------------
+\newcommand{\ra}{\ensuremath{\rightarrow}}
+\newcommand{\la}{\ensuremath{\leftarrow}}
+\newcommand{\lra}{\ensuremath{\leftrightarrow}}
+\newcommand{\Ra}{\ensuremath{\Rightarrow}}
+\newcommand{\La}{\ensuremath{\Leftarrow}}
+\newcommand{\Lra}{\ensuremath{\Leftrightarrow}}
+
+% Highlight veloce
+\newcommand{\hl}[1]{\textbf{\textcolor{red}{#1}}}
+
+% -----------------------------
+\begin{document}
+
+\title{Cheatsheet}
+\author{Libero Biagi}
+
+\date{\today}
+\maketitle
+
+\section*{Intro}
+This is a general cheatsheet where I will try to put all the coding, the formulas, the terminology and the possible exercises that might be useful for the exams.
+
+\tableofcontents
+
+% Inclusione dei capitoli
+\include{Courses/data}
+\include{Courses/programming}
+\include{Courses/ML}
+\include{Courses/Stat}
+
+\end{document}
