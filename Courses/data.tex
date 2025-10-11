@@ -479,19 +479,6 @@ As rule of thumb we should have 0.95 < Lie Factor < 1.05
 
 Today data preparation and pre-processing
 
-\textbf{Preparation}:
-\begin{enumerate}
-    \item Missing values
-    \item Outliers
-    \item Discretization and encoding
-    \item Imbalanced datasets
-\end{enumerate}
-
-\textbf{Pre processing}
-
-wirte roadmap
-
-
 \vspace{10pt}
 
 With data pre-processing and preparation we want to make our data useful for the model. All the datasets are made of signal and noise. We want to maximize the signal and reduce as much as possible the noise.
@@ -503,6 +490,28 @@ Real data usually are:
     \item Inconsistent
 \end{itemize}
 
+\vspace{10pt}
+
+
+\textbf{Preparation}:
+\begin{enumerate}
+    \item Missing values
+    \item Outliers
+    \item Discretization and encoding
+    \item Imbalanced datasets
+\end{enumerate}
+
+\textbf{Pre processing}
+
+\begin{enumerate}
+    \item Feature selection \ra Relevance analysis and redundancy removale
+    \item Feature engineering
+    \item Feature scaling and normalization
+\end{enumerate}
+
+
+\vspace{10pt}
+
 \textbf{Treating missing data}
 
 Missing values are values that are not available, very common. 
@@ -511,11 +520,16 @@ How to deal:
 \begin{itemize}
     \item Delete records with missing data, biased
     \item Delete columns with too many missing data, loose information
+    \item Manually insert them
     \item Imputing with central tendency metrics, for general and for subsets
     \item Derive them in an objective way
     \item Use a predictive model
     \item Use similarity measures
-    
 \end{itemize}
+
+\vspace{10pt}
+
+Usually our go to is to use the quickest and simplest option, after we analyze the performance of the model.
+If the error is significantly higher on the subset with imputed values than on the one with non imputed we look for other options.
 
 

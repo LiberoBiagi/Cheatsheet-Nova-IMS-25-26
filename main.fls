@@ -397,6 +397,7 @@ INPUT C:\Users\liber\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmbx7.
 INPUT C:\Users\liber\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ts1-lmr7.tfm
 INPUT C:\Users\liber\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmr5.tfm
 INPUT C:\Users\liber\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\lm\lm-rm.enc
+INPUT C:\Users\liber\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\lm\lm-mathsy.enc
 INPUT .\Courses\programming.tex
 INPUT .\Courses\programming.tex
 OUTPUT Courses\programming.aux
@@ -412,7 +413,6 @@ INPUT C:\Users\liber\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmtt.fd
 INPUT C:\Users\liber\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmtt10.tfm
 INPUT C:\Users\liber\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmtt9.tfm
 INPUT C:\Users\liber\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmr9.tfm
-INPUT C:\Users\liber\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\lm\lm-mathsy.enc
 INPUT .\Courses\ML.tex
 INPUT .\Courses\ML.tex
 OUTPUT Courses\ML.aux
