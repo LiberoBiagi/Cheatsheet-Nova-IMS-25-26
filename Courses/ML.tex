@@ -422,7 +422,64 @@ In such cases we can't easily (or we straight up can't) linearly separate those 
     p = \frac{1}{1 + e^{-(\beta_0 +\beta_1x)}}
 \end{equation}
 
-As said we use MLE to estimate the parameters of the function.
+As said we use MLE to estimate the parameters of the function. Basically we maximise the 
+probability of observing the sample.
+
+\vspace{10pt}
+
+Since we want to get a probability between 0 and 1 we have to follow some passages.
+\begin{itemize}
+    \item We start from the probability \(p = P(Y=1 \mid X)\).
+    \item We convert it into \textbf{odds}: \(\dfrac{p}{1-p}\), which range from \(0\) to \(+\infty\).
+    \item We take the \textbf{log} of the odds (logit): \(\log\left(\dfrac{p}{1-p}\right)\), which can take any real value \((-\infty, +\infty)\).
+    \item We model the log-odds with a \textbf{linear function of the inputs}:  
+    \[
+    \log\left(\dfrac{p}{1-p}\right) = \beta_0 + \beta_1 x_1 + \dots + \beta_k x_k
+    \]
+    \item We estimate the parameters \(\beta_0, \beta_1, \dots, \beta_k\) using \textbf{Maximum Likelihood}:  
+    each observed \(y_i\) contributes a probability  
+    \[
+    p_i^{\,y_i} (1 - p_i)^{\,1 - y_i}
+    \]
+    and we choose the parameters that maximize the likelihood of all observations.
+    \item Once the parameters are learned, we plug the linear combination back and convert it to a probability:
+    \[
+    p = \frac{1}{1 + e^{-(\beta_0 + \beta_1 x_1 + \dots + \beta_k x_k)}}
+    \]
+    \item This final expression is the \textbf{sigmoid (logistic) function}, which always returns a value between 0 and 1.
+\end{itemize}
+
+\vspace{10pt}
+
+To estimate the parameters and how to interpret them:
+
+\begin{itemize}
+    \item Parameters are chosen to maximize the likelihood of observing the sample.
+    \item Unlike linear regression, there are no closed-form formulas.
+    \item We maximize the \textbf{log-likelihood} numerically.
+    \item ML estimates are obtained iteratively until the log-likelihood stabilizes.
+    \item Predicted log-odds:
+    \[
+        \hat{y}_i = \hat{\beta}_0 + \hat{\beta}_1 x_{1i} + \dots + \hat{\beta}_k x_{ki}
+    \]
+    \item Estimated probability:
+    \[
+        \hat{P}(Y_i=1|X_i) = \frac{e^{\hat{y}_i}}{1+e^{\hat{y}_i}}
+    \]
+    \item Sign of \(\hat{\beta}_k\) indicates direction of curve:
+    \begin{itemize}
+        \item \(\hat{\beta}_k > 0\) : probability increases with \(x_k\)
+        \item \(\hat{\beta}_k < 0\) : probability decreases with \(x_k\)
+    \end{itemize}
+    \item Rate of change increases with magnitude of \(\hat{\beta}_k\)
+    \item Example: \(\hat{malign}_i = -7.7836 + 0.6683 \cdot thickness + 0.5540 \cdot size + 0.6807 \cdot shape\)
+    \begin{itemize}
+        \item thickness=5, size=2, shape=2 \(\Rightarrow \hat{P} \approx 0.12\)
+        \item thickness=10, size=8, shape=9 \(\Rightarrow \hat{P} \approx 0.999\)
+    \end{itemize}
+\end{itemize}
+
+
 
 \vspace{10pt}
 
