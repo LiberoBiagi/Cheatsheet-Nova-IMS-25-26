@@ -465,7 +465,7 @@ We have two main ways
 
 \vspace{10pt}
 
-To start we need to define the \textbf{Parameter space}, the range of possible values of the parameter $\theta$ inside the oarameter space $\Omega$.
+To start we need to define the \textbf{Parameter space}, the range of possible values of the parameter $\theta$ inside the parameter space $\Omega$.
 Let $X_1, X_2, ..., X_n$ be n random variables that can take a value $x_1, x_2, ..., x_n$.
 The parameter space is bounded.
 
@@ -485,9 +485,95 @@ If T($x_1, ..., x_n$) we get the estimate.
 
 The first way is the \textbf{Method of moments}, we equate sample moments with theoretical moments.
 
-E($X^k$) is the kth theoretical moment of the distribution, k=1,2,3\dots.
+\begin{itemize}
+    \item E($X^k$) is the kth theoretical moment of the distribution, k=1,2,3\dots.
+    \item $m_k$ = $ \frac{1}{n} \Sigma X_i^k$
+\end{itemize}
 
-$m_k$ = $ \frac{1}{n} \Sigma X_i^k$
+We equate the first k sample moments to the corresponding k population moments until we have as many equations as se have
+parameters, then we solve the resultant system.
+
+\vspace{10pt}
+
+The second way is the so called \textbf{Maximum Likelihoodestimator}. We start from the
+assumption that in our sample the values follow a distribution based on an unknown 
+parameter $\theta$. We want to find a good point estimator and estimate for $\theta$ using
+the data from our sample. The idea is that we want to find the parameter that maximise
+the probability of getting those values. If $X_1, ..., X_2$ are identically independent 
+distributed  from a population with PDF f(x | $\theta_1, ..., \theta_k$) the likelihood 
+function is defined by
+
+\begin{equation}
+    L(\theta|x) = L(\theta_1, ..., \theta_k | x_1, ..., x_k) = \Pi f(x_i|\theta_1, ..., \theta_k)
+\end{equation}
+
+After we take the log of the likelihood to obtain the log-likelihood function. This is because the logarithm is
+a strictly increasing function so maximising the log of the likelihood is like maximising
+the likelihood itself. The candidates are the values that put the derivative with respectively
+to $\theta_i$ of the log-likelihood at 0. Also is easier to differentiate a log and working with sums
+
+\begin{equation}
+    logL(\theta|x) = \Sigma log(f(x_i | \theta_1, ..., \theta_k))
+\end{equation}
+
+\begin{equation}
+    \frac{d}{d\theta_i} logL(\theta|\text{X}) = 0
+\end{equation}
+
+\vspace{10pt}
+
+We want to assess how good are our estimates. To do it we want to look at the sampling distribution
+that we receive. Our estimators have some properties.
+
+\begin{itemize}
+    \item \textbf{Unbiasedness} \ra An estimator T is unbiased iff E(T) = $\theta$ for every $\theta$ in $\Omega$. Usually the population mean is an ubiased estimator.
+    \item \textbf{Efficiency} \ra We have two unbiased estimators T and T' for the same parameter $\theta$. T is more efficient than T' iff
+    \begin{equation}
+        Var(T) \le Var(T')
+    \end{equation}
+    T is the most efficient if the equation is true for any other unbiased estimator T'.
+    This is called absolute efficiency, before it was only relative efficiency.
+    To know that we have absolute efficiency we use the Frechet-Cramer-Rao inequality.
+
+    Let $(X_1, X_2, \dots, X_n)$ be a sample from a population with pdf $f(x \mid \theta)$ and let
+$T = T(X_1, X_2, \dots, X_n)$ be an unbiased estimator of $\theta$. Then
+
+\[
+\mathrm{Var}(T) \geq \frac{1}{n I(\theta)}
+\]
+
+where
+
+\[
+I(\theta) = \mathrm{E} \left[ \left( \frac{\partial \ln f(X \mid \theta)}{\partial \theta} \right)^2 \right]
+= - \mathrm{E} \left[ \frac{\partial^2 \ln f(X \mid \theta)}{\partial \theta^2} \right]
+\]
+
+and $I(\theta)$ is the Fisher information.
+\vspace{10pt}
+
+This inequality allows us to find a lower limit to compare our variance with. 
+
+\vspace{10pt}
+
+If we want to compare relative efficiency, we can use the mean squared error (MSE). 
+
+Let $T = T(X_1, \dots, X_n)$ be an unbiased estimator of the parameter $\theta$. The mean squared error is defined as
+
+\begin{equation}
+    \mathrm{MSE}(T) = \mathrm{E}[(T - \theta)^2].
+\end{equation}
+
+The estimator with the lower MSE is considered more efficient.
+
+\item \textbf{Consistency} \ra Final property, it tells us that if the sample increases the precision of the estimator will also do that. An estimator $T_n$ is said to be consistent in quadratic mean iff 
+\begin{equation}
+    lim_{n \ra + \infty} \mathrm{E}[(T - \theta)^2] = 0
+\end{equation}
+
+\end{itemize}
+
+
 
 
 
