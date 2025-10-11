@@ -810,7 +810,8 @@ To make queries (SQL style)
 For 1-Hot encoding
 
 \begin{pythoncode}
-    pd.get_dummies(df["key"], dtype=int) #to join with another df that has those columns we use
-
+    pd.get_dummies(df["key"], prefix="key", dtype=int) #to join with another df that has those columns we use
     df = df[["data"]].join(dummies)
 \end{pythoncode}
+
+Now example of a full work with Pandas, not gonna write it.
