@@ -525,7 +525,7 @@ How to deal:
     \item Manually insert them
     \item Imputing with central tendency metrics, for general and for subsets
     \item Derive them in an objective way
-    \item Use a predictive model
+    \item Use a predictive model, like KNN
     \item Use similarity measures
 \end{itemize}
 
@@ -535,3 +535,77 @@ Usually our go to is to use the quickest and simplest option, after we analyze t
 If the error is significantly higher on the subset with imputed values than on the one with non imputed we look for other options.
 
 
+\subsubsection{Lecture 6}
+
+
+Today treatment of missing data. Again.
+
+\vspace{10pt}
+
+\textbf{Outliers} \ra Data-points that is distant from the other observations.
+It can be from variability, experimental errors or extreme cases based on different causes. 
+They can come from
+\begin{enumerate}
+    \item Unusual but correct situations
+    \item Incorrecto measurements
+    \item Errors in data collection
+    \item Lack of code for missing data
+\end{enumerate}
+
+Outliers can have an effect on our training, \textbf{Leverage effect}.
+
+
+
+To deal with outliers:
+
+\begin{itemize}
+    \item Detect them
+    \begin{enumerate}
+        \item Automatic limitation using a threshold
+        \item If we have a standard distribution we do $3\sigma$ + and - Average
+        \item Boxplots
+        \item Scatterplots for 2-D cases
+        \item Multi-D outliers \ra KNN distance, isolation forest, cluster methods, self.organizing maps, dimensionality reduction 
+    \end{enumerate}
+
+    \item Treatment
+    \begin{enumerate}
+        \item Capping/Winsoring
+        \item Transformation methods \ra Log distribution
+    \end{enumerate}
+
+\end{itemize}
+
+
+\textbf{Discretization} \ra We pass from continuous values to discrete ones. 
+
+\vspace{10pt}
+
+Basically we bin our data, we can do supervised and unsupervised discretization.
+
+\begin{itemize}
+    \item Equal-width binning, unsupervised
+    \item Equal-depth binning, unsupervised
+\end{itemize}
+
+Choose the number of bins
+
+\begin{itemize}
+    \item Square root rule
+    \item Rice rule
+    \item Business common sense 
+\end{itemize}
+
+For supervised discretization
+\begin{itemize}
+    \item Entropy
+\end{itemize}
+
+\textbf{Encoding} \ra To be able to work with categorical variables we need to transform them into numerical ones.
+
+\begin{itemize}
+    \item 1-Hot encoding
+    \item Ordinal encoding
+\end{itemize}
+
+\textbf{Imbalanced Learning} \ra if our dataset is imbalanced.

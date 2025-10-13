@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.10.8)  11 OCT 2025 18:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.10.8)  13 OCT 2025 12:37
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -745,9 +745,11 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [6{C:/Users/liber/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}]
 
-[7])
+[7]
 
-[8{C:/Users/liber/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}]
+[8{C:/Users/liber/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}])
+
+[9{C:/Users/liber/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}]
 \openout2 = `Courses/programming.aux'.
 
  (Courses/programming.tex (C:\Users\liber\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
@@ -758,13 +760,11 @@ LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 7.
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 
-[9
+[10
 
 
 
 ]
-
-[10]
 
 [11]
 
@@ -780,61 +780,61 @@ File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 
 [17]
 
-[18])
+[18]
 
-[19]
+[19])
+
+[20]
 \openout2 = `Courses/ML.aux'.
 
  (Courses/ML.tex
 
-[20
+[21
 
 
 
-{C:/Users/liber/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}]
+]
 
-[21]
+[22]
 
-[22{C:/Users/liber/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}]
-<Courses/Images/L2.png, id=651, 380.622pt x 298.11375pt>
+[23{C:/Users/liber/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}]
+<Courses/Images/L2.png, id=671, 380.622pt x 298.11375pt>
 File: Courses/Images/L2.png Graphic file (type png)
 <use Courses/Images/L2.png>
 Package pdftex.def Info: Courses/Images/L2.png  used on input line 285.
 (pdftex.def)             Requested size: 380.62105pt x 298.11302pt.
 
 
-[23]
-<Courses/Images/L1.png, id=663, 368.577pt x 305.943pt>
+[24]
+<Courses/Images/L1.png, id=683, 368.577pt x 305.943pt>
 File: Courses/Images/L1.png Graphic file (type png)
 <use Courses/Images/L1.png>
 Package pdftex.def Info: Courses/Images/L1.png  used on input line 295.
 (pdftex.def)             Requested size: 368.57608pt x 305.94223pt.
 
 
-[24 <./Courses/Images/L2.png> <./Courses/Images/L1.png>]
-
-[25]
+[25 <./Courses/Images/L2.png> <./Courses/Images/L1.png>]
 
 [26]
 
 [27]
 
-[28])
+[28]
 
-[29]
+[29])
+
+[30]
 \openout2 = `Courses/Stat.aux'.
 
  (Courses/Stat.tex
 Package pgfplots info on input line 64: Using 'lua backend=false' for axis: x coord trafo unsupported.
 
 
-[30
+[31
 
 
 
 ]
-
-[31]
 
 [32]
 
@@ -844,28 +844,30 @@ Package pgfplots info on input line 64: Using 'lua backend=false' for axis: x co
 
 [35]
 
-[36])
+[36]
 
-[37] (main.aux (Courses/data.aux) (Courses/programming.aux) (Courses/ML.aux) (Courses/Stat.aux))
+[37])
+
+[38] (main.aux (Courses/data.aux) (Courses/programming.aux) (Courses/ML.aux) (Courses/Stat.aux))
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-09-02>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 93695E3FE499E3532057CFF978545AD2;4807.
+(rerunfilecheck)             Checksum: 55E36CB8296E962961D7D9E29985D941;4923.
  ) 
 Here is how much of TeX's memory you used:
- 34739 strings out of 468130
- 795975 string characters out of 5430633
- 1951627 words of memory out of 5000000
- 62304 multiletter control sequences out of 15000+600000
+ 34753 strings out of 468130
+ 796099 string characters out of 5430633
+ 1951629 words of memory out of 5000000
+ 62305 multiletter control sequences out of 15000+600000
  690473 words of font info for 88 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,12n,87p,776b,2231s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/liber/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/liber/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/liber/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx7.pfb><C:/Users/liber/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/liber/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/liber/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi5.pfb><C:/Users/liber/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi7.pfb><C:/Users/liber/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/liber/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/liber/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Users/liber/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr5.pfb><C:/Users/liber/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr7.pfb><C:/Users/liber/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Users/liber/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/liber/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy7.pfb><C:/Users/liber/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt10.pfb><C:/Users/liber/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt9.pfb>
-Output written on main.pdf (37 pages, 664641 bytes).
+Output written on main.pdf (38 pages, 668979 bytes).
 PDF statistics:
- 973 PDF objects out of 1000 (max. 8388607)
- 478 named destinations out of 1000 (max. 500000)
- 335 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 995 PDF objects out of 1000 (max. 8388607)
+ 491 named destinations out of 1000 (max. 500000)
+ 343 words of extra memory for PDF output out of 10000 (max. 10000000)
 
