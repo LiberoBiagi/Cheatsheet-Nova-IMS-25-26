@@ -491,67 +491,56 @@ To estimate the parameters and how to interpret them:
 
 Today we see model selection with Carina Albuquerque (breaking bad mentioned).
 
-\vspace{10pt}
-
 We want to find the best model from a set of possible ones. Either comparing different models or different hyperparameters and the same model.
 
 \vspace{10pt}
 
 We want to reduce overfitting, emphasize understanding vs memorizing the data.
 
+This step comes right before the Assessment, so how we check the effective quality of the model.
+The main idea of model selection is finding the model that generalizes better on unseen data. Based on the
+no free lunch theorem we know that we can't have a ML model that is perfect for every taks. Then we need to accept some trade-offs.
+
 \vspace{10pt}
 
-The Model selection follows these steps
+Since models rely on training data to learn we can encounter the risk that they will memorize those data, this is the case of \textbf{overfitting}.
+The other possibility is the one of \textbf{underfitting}, where the model is too rigid and won't learn enough.
 
+\vspace{10pt}
+
+To avoid overfitting we can use different strategies. One of them is splitting the training data into Train and Validation sets. The latter will be used to choose the optimal hyperparameters.
+The idea is to minimize the validation error as much as possible. Without a validation set we won't be able to have a good idea on the generalization on unseen data.
+
+\vspace{10pt}
+
+The usual methods employed are
 \begin{enumerate}
-    \item Split in Train (training the parameters, 70\%), Validation (best model and parameters, 15\%), Test (test the performance, 15\%)
-
-    \item Choose the metric
-
-    \item Choose the eval method
-
-    \item Run the models
-
-    \item Compare metrics
-
-    \item Pick the model
-    
+    \item \textbf{Hold-Out} \ra We take that validation set and we test the model on it
+    \item \textbf{K-fold Cross-Validation} \ra We repeat the hold-out k times on different validation sets, stratified version for imbalanced datasets. After the cross-validation we check the performance on the test set. K is usualy equal to 10.
+    \item \textbf{Repeated stratified Cross-Validation} \ra Further reduces variance
+    \item \textbf{Leave-One-Out Cross-Validation} \ra The cardinality of the validation set is 1
 \end{enumerate}
 
 
 \vspace{10pt}
 
-To avoid overfitting we should minimize the Validation error and the Training error. When both are minimized we find the best complexity for our model. The opposite of overfitting is called underfitting.
+To compare and choose between two models
 
-\vspace{10pt}
+\begin{enumerate}
+    \item Choose a metric
+    \item Choose an evaluation method
+    \item Run the mathod for each model
+    \item Compare the metrics
+    \item Pick the model with the best performance
+\end{enumerate}
 
-If the dataset is imbalanced we apply stratification. Or use SMOTE.
-
-\vspace{10pt}
-
-Use k-fold CrossValidation to get the more realistic performance and improve training, usually 10 folds. We can also have Leave-One-out cross val.
-
-\vspace{10pt}
-
-Usually the best model is the one with better performance. We have a trade off between simpler models and their accuracy. Interpretable models are usually the simple ones. This is also true for time needed for the training.
-
-
-\vspace{10pt}
-
-Test set and hold out \ra Big data
-
-Cross-val \ra Middle data
-
-\textbf{Model Assessment} is a way to quantify the strength of the model.
-
-The usual metrics are
-
-\begin{itemize}
-    \item 
-\end{itemize}
+The best model usually is the simplest, the less prone to error and the one the has the simplest knowledge representation.
 
 
 \subsubsection{Lecture 6}
+
+
+
 
 
 
