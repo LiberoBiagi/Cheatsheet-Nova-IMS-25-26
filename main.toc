@@ -31,6 +31,7 @@
 \contentsline {subsubsection}{\numberline {3.3.1}ML process}{30}{subsubsection.3.3.1}%
 \contentsline {subsubsection}{\numberline {3.3.2}Feature selection}{30}{subsubsection.3.3.2}%
 \contentsline {subsubsection}{\numberline {3.3.3}Models}{31}{subsubsection.3.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.4}Metrics}{31}{subsubsection.3.3.4}%
 \contentsline {section}{\numberline {4}Statistic for data science}{32}{section.4}%
 \contentsline {subsection}{\numberline {4.1}Theory}{32}{subsection.4.1}%
 \contentsline {subsubsection}{\numberline {4.1.1}Lecture 1}{32}{subsubsection.4.1.1}%
