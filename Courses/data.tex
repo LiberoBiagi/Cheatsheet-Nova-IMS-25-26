@@ -605,7 +605,35 @@ For supervised discretization
 
 \begin{itemize}
     \item 1-Hot encoding
+    \item Binary encoding
     \item Ordinal encoding
 \end{itemize}
 
-\textbf{Imbalanced Learning} \ra if our dataset is imbalanced
+\textbf{Imbalanced Learning} \ra if our dataset is imbalanced, we have much more instances for a certain class than for another.
+
+\vspace{10pt}
+
+In an imbalanced dataset usually we have \textbf{majority} and \textbf{minority} classes. We use the \textbf{IR} imbalance ratio to consider it. 
+We can't use standard learning ethods, they will introduce a bias in favor of the majority class during training (the minority class will contribute less to the maximisation of the objective function).
+Accuracy in this setting becomes almost useless. The problems arise when most algorithms assume a balanced class distribution and uniformity of misclassification costs.
+
+\vspace{10pt}
+
+The usual solutions are
+
+\begin{itemize}
+    \item Undersampling
+    \item Oversampling
+    \item Hybrid approaches
+\end{itemize}
+
+One of the most used solution is \textbf{SMOTE} (Synthetic Minority Oversampling TEchnique). 
+
+\begin{enumerate}
+    \item Randomly selecting a minority class instance
+    \item Define the set of k-nearest neighbors
+    \item Randomly select another minority class sample in that KNN set
+    \item Generate new samples using linear Interpolation
+\end{enumerate}
+
+It's important to remember that we should always use real data instead of synthetic ones. The generated ones should be as realsitica as possible and they will always introduce some noise.
