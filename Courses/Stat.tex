@@ -2,7 +2,7 @@
 
 \subsection{Theory}
 
-\subsubsection{Lecture 1}
+\subsubsection{Data exploration and basic concepts}
 
 Statistics is the approach of answering questions using data. We aim to find rules that are true for a certain population basing our findings on a smaller subset of the mentioned population (sample)
 
@@ -205,7 +205,7 @@ To visualize correlation we use a \textbf{Scatterplot}
 
 \hrule
 
-\subsubsection{Lecture 2}
+\subsubsection{Statistical Distributions}
 
 \vspace{10pt}
 
@@ -328,7 +328,6 @@ With
     \item E[X] = Var[X] = $\lambda$
 \end{itemize}
 
-\subsubsection{Lecture 3}
 
 \textbf{Continuous distributions}
 
@@ -446,11 +445,13 @@ To summarize
 
 
 
-\subsubsection{Lecture 4}
+\subsubsection{Point Estimation, Hypothesis Testing and Confidence Intervals}
 
 Today point estimation, hypothesis testing and confidence interval, from a sample we try to generate a good models
 
 \vspace{10pt}
+
+\textbf{Point Estimation}
 
 Suppose that we have a population distributed with certain parameters. Like $\mu$ as mean or p as proportion.
 Since we can't check the full population (usually), we start from a sample and we try to see if the estimate can be good enough.
@@ -573,19 +574,165 @@ The estimator with the lower MSE is considered more efficient.
 
 \end{itemize}
 
+\vspace{10pt}
+
+\textbf{Hypothesis Testing}
+
+\vspace{10pt}
+
+Since we are doing inferential statistics we want to make inferences about our parameters.
+As said we can't check the whole population but we need to consider a sample of it.
+We use hypothesis testing to see if the value of a certain parameter can be ok with respect to the distribution of our population.
+
+\vspace{10pt}
+
+Hypothesis testing is done in 5 main steps
+
+\begin{enumerate}
+    \item Write the hypothesis
+    \item Calculate the test statistic
+    \item Determine the p-value
+    \item Make a decision
+    \item State a conclusion
+\end{enumerate}
+
+\vspace{10pt}
+
+Let's delve into this list
+
+\vspace{10pt}
+
+The first step is to write the hypothesis, specifically the \textbf{Null} and the \textbf{Alternative}. The Null is denoted as $H_0$ while the Alternative as $H_1$.
+The Null is always the statement that there is no difference in the population. The Alternative is always that we have differences.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{3cm}|p{3.5cm}|p{3.5cm}|p{3.5cm}|}
+\hline
+\textbf{Research question} & Is the population mean \newline different from $\mu_0$ & Is the population mean \newline greater than $\mu_0$ & Is the population mean \newline less than $\mu_0$ \\
+\hline
+\textbf{Null Hypothesis ($H_0$)} & $\mu = \mu_0$ & $\mu = \mu_0$ & $\mu = \mu_0$ \\
+\hline
+\textbf{Alternative Hypothesis ($H_1$)} & $\mu \neq \mu_0$ & $\mu > \mu_0$ & $\mu < \mu_0$ \\
+\hline
+\textbf{Type of Hypothesis Test} & Two-tailed, \newline non-directional & Right-tailed, \newline directional & Left-tailed, \newline directional \\
+\hline
+\end{tabular}
+\caption{Types of hypothesis tests for population mean, $mu_0$ is the hypothesized population mean}
+\end{table}
+
+\vspace{10pt}
+
+The successive step is to calculate the test statistic. A value that tells us how much different are the values from the Null hypothesis.
+
+For tests on the $\mu$ we use the following
+
+\begin{equation*}
+    t = \frac{\bar{X}-\mu_0}{\frac{\hat{\sigma}}{\sqrt{n}}} \sim t(n-1)
+\end{equation*}
 
 
+\vspace{10pt}
+
+To estimate the sampling distribution for samples > 30 or with an unknown $\sigma$ we use a T-Student distribution with n-1 degrees of freedom.
+
+If the standard deviation is known we use the normal distribution.
+
+\vspace{10pt}
+
+Now we want to calculate the p-value, or the probability that a population with the specified parameter would produce a sample statistic as extreme or more extreme to the one we observed in our sample. 
+A test is significant if the p-value is less than or equal to the level of significance $\alpha$. If the p-value is greater we fail to reject the Null, if is less or equal we reject the Null.
+
+To calculate a p-value for a T distribution on a two-tailed test we use
+
+\begin{verbatim}
+    2 * (1 - pt(test_statistic, df))
+\end{verbatim}
+
+\vspace{10pt}
+
+Another approach is to use the \textbf{Critical region method}. In our case we get the critical region with
+
+\begin{equation*}
+    |t_obs| \geq t_{\frac{1-\alpha}{2};n-k-1}
+\end{equation*}
+ 
+Where the rightmost term is the quantile of the distribution. $\alpha$ is divided by 2 since is a two-tailed test.
+
+If our test statistic is more extreme than the quantile we reject the Null.
+
+To get the quantiles
+
+\[
+\texttt{qt(alpha/2, df)}
+\]
+
+\vspace{10pt}
+
+We state the conclusion based on the results of the test.
+
+\vspace{20pt}
+
+Another possible kind of test is done to the proportions of the population.
+We want to see if the proportion between different classes is realistic.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|p{3cm}|p{3.5cm}|p{3.5cm}|p{3.5cm}|}
+\hline
+\textbf{Research question} & Is the population \newline proportion different from $p_0$ & Is the population \newline proportion greater than $p_0$ & Is the population \newline proportion less than $p_0$ \\
+\hline
+\textbf{Null Hypothesis ($H_0$)} & $p = p_0$ & $p = p_0$ & $p = p_0$ \\
+\hline
+\textbf{Alternative Hypothesis ($H_1$)} & $p \neq p_0$ & $p > p_0$ & $p < p_0$ \\
+\hline
+\textbf{Type of Hypothesis Test} & Two-tailed, \newline non-directional & Right-tailed, \newline directional & Left-tailed, \newline directional \\
+\hline
+\end{tabular}
+\caption{Types of hypothesis tests for population proportion, $p_0$ is our hypothesized proportion}
+\end{table}
+
+\vspace{10pt}
+
+Usually we define the Null as p equal to a number
+
+\vspace{10pt}
+
+The test statistic is
+
+\begin{equation*}
+    Z_{obs} = \frac{\hat{p}- p_0}{\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}} \sim N(0,1)
+\end{equation*}
+
+With critical region
+
+\begin{equation*}
+    Z_{obs} \geq Z_{1 - \alpha}
+\end{equation*}
+
+Where 1 - $\alpha$ is the percentile of a standard normal distribution
 
 
+\vspace{10pt}
+
+When conducting a test we can make 2 possible decisions, either reject or fail to reject the null hypothesis. In most cases we can't be sure about our inference. If it's correct or not.
 
 
+\vspace{10pt}
 
+When we reject the Null we can make a \textbf{Type I} error. Also known as false positive.
 
+When we fail to reject the Null we can make a \textbf{Type II} error. Also known as false negative.
 
+\vspace{10pt}
 
+The probability of rejecting a false Null hypothesis is known as power. 
 
+\begin{equation*}
+    \text{Power} = 1 - \beta
+\end{equation*}
 
-
+Where $\beta$ is the probability of committing a Type II error.
 
 
 
