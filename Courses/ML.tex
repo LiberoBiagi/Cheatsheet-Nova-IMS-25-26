@@ -1,7 +1,7 @@
 \section{Machine Learning}
 \subsection{Theory}
 
-\subsubsection{Lecture 1}
+\subsubsection{Introduction}
 
 Machine Learning differs from traditional programming, we want to model a function to predict data or patterns. Machine Learning has many applications in multiple fields. Since we are using data is important to notice that those can have biases like people. Some biases related to people can be confirmation, falalcy of centrality or survivorship.
 
@@ -67,7 +67,7 @@ This is the most basic linear case. We want to estimate the parameters a and b t
 
 \hrule
 
-\subsubsection{Lecture 2}
+\subsubsection{Machine Learning tribes}
 
 Machine learning implies that the machine will learn something, there are different approaches for that. They can be applied to different tasks for better performances.
 
@@ -152,7 +152,7 @@ If we cross together the tribes and the components seen in the previous class we
 \end{itemize}
 
 
-\subsubsection{Lecture 3}
+\subsubsection{Feature Selection}
 
 The most important part of a machine learning model is the dataset, sometimes the data aren't good enough on their own so we must account for that. Some ways are
 
@@ -302,7 +302,7 @@ Lasso Regression on the other hand tries to minimize the magnitudes. It can lead
 
 
 
-\subsubsection{Lecture 4}
+\subsubsection{Linear and Logistic Regression}
 
 Today we look at our first algorithms, we start with \textbf{Linear Regression}.
 
@@ -487,7 +487,7 @@ To estimate the parameters and how to interpret them:
 
 \vspace{10pt}
 
-\subsubsection{Lecture 5}
+\subsubsection{Model Selection and Assessment}
 
 Today we see model selection with Carina Albuquerque (breaking bad mentioned).
 
@@ -536,8 +536,274 @@ To compare and choose between two models
 
 The best model usually is the simplest, the less prone to error and the one the has the simplest knowledge representation.
 
+\vspace{10pt}
 
-\subsubsection{Lecture 6}
+Remember that
+
+\begin{itemize}
+    \item Use the test set and hold out for large data
+    \item Use cross-validation for middle sized data
+    \item Use leave one out for small data
+    \item Use stratified sampling
+    \item Use the validation data for the parameter tuning
+\end{itemize}
+
+\vspace{10pt}
+
+We still need to understand how a model is better than another. To do that we use 
+different possible metrics. This process is called \textbf{Model Assessment}.
+
+\vspace{10pt}
+
+An evaluation metric quantifies the performance of a predictive model. The metric
+depends on the nature of our task. For now we will focus on classification tasks.
+
+\vspace{10pt}
+
+All of our metrics will start from a confusion matrix, a matrix where we plot the predictions made by our model.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c|c|c|c}
+\multicolumn{2}{c}{} & \multicolumn{2}{c}{\textbf{Predicted}} \\
+\cline{3-4}
+\multicolumn{2}{c|}{} & Positive & Negative \\ \hline
+\multirow{2}{*}{\textbf{Actual}} 
+& Positive & TP & FN \\ 
+& Negative & FP & TN \\ 
+\hline
+\end{tabular}
+\caption{Confusion Matrix}
+\end{table}
+
+
+A confusion matrix can also be made for multiclass classifiers.
+
+\vspace{10pt}
+
+From statistics
+
+\begin{itemize}
+    \item \textbf{Type 1 error} \ra False positive
+    \item \textbf{Type 2 error} \ra False negative
+\end{itemize}
+
+To be clear
+
+\begin{itemize}
+    \item True positive \ra We predict True for a True class
+    \item False positive \ra We predict True for a False class
+    \item False negative \ra We predict False for a True class
+    \item True negative \ra We predict False for a False class
+\end{itemize}
+
+
+From these we get the following metrics:
+
+\begin{itemize}
+
+  \item \textbf{Accuracy} \\
+  $\displaystyle \text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}$
+
+  \item \textbf{Error Rate} \\
+  $\displaystyle \text{Error Rate} = \frac{FP + FN}{TP + TN + FP + FN}$
+
+  \item \textbf{Precision} \\
+  $\displaystyle \text{Precision} = \frac{TP}{TP + FP}$
+
+  \item \textbf{Recall (Sensitivity, True Positive Rate)} \\
+  $\displaystyle \text{Recall} = \frac{TP}{TP + FN}$
+
+  \item \textbf{Specificity (True Negative Rate)} \\
+  $\displaystyle \text{Specificity} = \frac{TN}{TN + FP}$
+
+  \item \textbf{Balanced Accuracy} \\
+  $\displaystyle \text{Balanced Accuracy} = \frac{1}{2} \left( \frac{TP}{TP + FN} + \frac{TN}{TN + FP} \right)$
+
+  \item \textbf{F1 Score} \\
+  $\displaystyle F1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}} = \frac{2TP}{2TP + FP + FN}$
+
+\end{itemize}
+
+\vspace{10pt}
+
+
+Remember that \textbf{Balanced Accuracy} and \textbf{F1 Score} are better for imbalanced datasets.
+
+\vspace{10pt}
+
+Use them accordingly to the task
+
+\begin{itemize}
+    \item Precision if the cost for False Positive is high
+    \item Recall if the cost for False Negative is high
+    \item F1 for a balance between the previous two
+    \item Accuracy only if the cost for False Positive and False Negative is equal and the dataset is balanced
+\end{itemize}
+
+\vspace{20pt}
+
+Most binary algorithms work in a 2-step process
+\begin{enumerate}
+    \item Compute the probability of being of class 1
+    \item Compare this probability to the chosen cut-off value and classify
+\end{enumerate}
+
+Usually the chosen cut-off is 0.5, probabilities under that will be considered 0. 
+
+If we measure the area under the following graph of a \textbf{ROC curve} we will get the \textbf{AUC} and as near to 1 it is the better the model is. 
+
+\begin{tikzpicture}
+\begin{axis}[
+    width=10cm,
+    height=10cm,
+    xlabel={False Positive Rate (FPR)},
+    ylabel={True Positive Rate (TPR / Recall)},
+    xmin=0, xmax=1,
+    ymin=0, ymax=1,
+    grid=both,
+    legend style={at={(0.65,0.2)}, anchor=south west},
+    legend cell align={left},
+]
+
+% Perfect classifier
+\addplot[
+    ultra thick,
+    blue
+]
+coordinates {
+    (0,0)
+    (0,1)
+    (1,1)
+};
+\addlegendentry{Perfect classifier}
+
+% Good classifier
+\addplot[
+    thick,
+    green!60!black
+]
+coordinates {
+    (0,0)
+    (0.1,0.6)
+    (0.3,0.8)
+    (0.6,0.9)
+    (1,1)
+};
+\addlegendentry{Good classifier}
+
+% Meh classifier
+\addplot[
+    thick,
+    orange
+]
+coordinates {
+    (0,0)
+    (0.2,0.4)
+    (0.4,0.6)
+    (0.7,0.8)
+    (1,1)
+};
+\addlegendentry{Meh classifier}
+
+% Random classifier
+\addplot[
+    thick,
+    dashed,
+    red
+]
+coordinates {
+    (0,0)
+    (1,1)
+};
+\addlegendentry{Random (baseline)}
+
+\end{axis}
+\end{tikzpicture}
+
+
+\vspace{10pt}
+
+Another useful curve is the \textbf{Precision-Recall Curve}. We can find the best threshold for the F1 maximization.
+
+\begin{tikzpicture}
+\begin{axis}[
+    width=12cm,
+    height=10cm,
+    xlabel={Recall (TPR)},
+    ylabel={Precision},
+    xmin=0, xmax=1,
+    ymin=0, ymax=1,
+    grid=both,
+    legend style={at={(0.5,0.3)}, anchor=south west},
+    legend cell align={left},
+]
+
+% Realistic PR curve
+\addplot[
+    thick,
+    blue,
+    mark=*,
+]
+coordinates {
+    (0.0, 1.0)
+    (0.15, 0.95)
+    (0.40, 0.89)
+    (0.75, 0.75)
+    (0.90, 0.60)
+    (1.0, 0.50)
+};
+\addlegendentry{Model PR curve}
+
+% Random baseline (precision = prevalence)
+\addplot[
+    thick,
+    dashed,
+    red
+]
+coordinates {
+    (0,0.4)
+    (1,0.4)
+};
+\addlegendentry{Random baseline}
+
+\end{axis}
+\end{tikzpicture}
+
+
+\vspace{20pt}
+
+For regression tasks we can use the following metrics
+
+\begin{itemize}
+
+  \item \textbf{Mean Absolute Error (MAE)} \\
+  $\displaystyle \text{MAE} = \frac{1}{n} \sum_{i=1}^{n} |y_i - \hat{y}_i|$
+
+  \item \textbf{Mean Squared Error (MSE)} \\
+  $\displaystyle \text{MSE} = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2$
+
+  \item \textbf{Coefficient of Determination ($R^2$)} \\
+  $\displaystyle R^2 = 1 - \frac{\sum_{i=1}^{n} (y_i - \hat{y}_i)^2}{\sum_{i=1}^{n} (y_i - \bar{y})^2}$
+
+  \item \textbf{Adjusted $R^2$} \\
+  $\displaystyle R^2_{\text{adj}} = 1 - \left(1-R^2\right)\frac{n-1}{n-p-1}$
+
+\end{itemize}
+
+\vspace{10pt}
+
+Remember that
+
+\begin{itemize}
+    \item MSE and RMSE penalize large errors
+    \item If we don't care use MAE
+    \item If we have different numbers of predictors use Adjusted $R^2$
+\end{itemize}
+
+
+
+\subsubsection{Bayesians classifiers}
 
 
 
