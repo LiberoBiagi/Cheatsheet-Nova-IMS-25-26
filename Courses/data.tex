@@ -635,3 +635,59 @@ One of the most used solution is \textbf{SMOTE} (Synthetic Minority Oversampling
 \end{enumerate}
 
 It's important to remember that we should always use real data instead of synthetic ones. The generated ones should be as realsitica as possible and they will always introduce some noise.
+
+\vspace{10pt}
+
+Now we start with \textbf{Data Preprocessing}, we want to reduce the noise and increase the signal.
+The idea is to reduce the size of the dataset in terms of the number of features. 
+We want to beat the curse of dimensionality since in high dimensions distance metrics will lose meaning.
+
+\vspace{10pt}
+
+To decide what to keep and what to remove we check two principles
+
+\begin{itemize}
+    \item Redundancy \ra features that give us the same information about the dataset
+    \item Irrelevance \ra do not affect the target
+\end{itemize}
+
+To reduce the input space we can
+\begin{itemize}
+    \item Feature engineering \ra Derive new features from the existent ones
+    \item Heuristic feature selection
+    \item Correlation matrices
+    \item PCA
+\end{itemize}
+
+\vspace{10pt}
+
+Since we care about distances we should also aim at having standardized data.
+The main ways are
+
+\begin{itemize}
+    \item Normalization
+    \item Standardization
+\end{itemize}
+
+
+\subsubsection{Cluster analysis}
+
+
+Cluster analysis is basically classify different objects in a finite and smaller subspace, basically binning with extra-steps.
+We want to use their differences and similarities to group or separate them.
+The objective is to minimize the intraclusters distances while maximising the distances between clusters.
+
+\vspace{10pt}
+
+The difference from classification is that we do not know to which cluster each example is part of, we want to derive those clusters and analyze them.
+
+In clustering we will have a solution, we define a fixed number of clusters. It's different from A Priori grouping since in the latter we define only the rules.
+
+\vspace{10pt}
+
+An example of A Priori grouping is Cohort analysis \ra group observations based on certain characteristics. 
+
+\vspace{10pt}
+
+\textbf{Cell based segmentation} is based on the quantiles and we try to segment our observations on those. 
+We can do that using just one variable using the \textbf{Migration matrix}.
