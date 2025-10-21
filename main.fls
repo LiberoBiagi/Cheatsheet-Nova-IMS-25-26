@@ -379,11 +379,11 @@ INPUT C:\Users\liber\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\sym
 INPUT C:\Users\liber\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
 INPUT C:\Users\liber\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm7.tfm
 INPUT C:\Users\liber\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm5.tfm
+INPUT C:\Users\liber\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
+INPUT C:\Users\liber\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\lm\lm-ec.enc
 OUTPUT main.toc
 INPUT .\Courses\data.tex
 INPUT .\Courses\data.tex
-INPUT C:\Users\liber\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
-INPUT C:\Users\liber\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\lm\lm-ec.enc
 OUTPUT Courses\data.aux
 INPUT .\Courses\data.tex
 INPUT .\Courses\data.tex
