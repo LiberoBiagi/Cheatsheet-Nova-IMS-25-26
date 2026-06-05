@@ -232,8 +232,7 @@ The typical transformations include normalization, errors cleaning, outliers rem
 
 \vspace{10pt}
 
-We can also get the validation set to find the best possible parameters and to assess overfitting. One way to have a more general partition of our data is obtained by using the so-called cross-validation
-
+We can also get the validation set to find the best possible parameters and to assess overfitting. One way to have a more general partition of our data is obtained by using the so-called cross-validation. We can have different kinds of cross-validation like simple k-fold, nested and Monte Carlo.
 
 \subsection{Genetic programming}
 
@@ -386,9 +385,6 @@ We still have some problems that might arise
 
 We can incorporate genetic programming into machine learning pipelines for our algorithms. 
 
-
-
-
 \subsection{Geometric semantic genetic programming}
 
 Like Pokémon, we have evolutions with new operators. New crossovers and mutations that supposedly are better. 
@@ -445,7 +441,6 @@ The operator that is related to the neighborhood structure is called ball mutati
 \subsubsection{Genetic algorithms}
 
 Genetic algorithms are related to solutions where our individuals are strings of prefixed length. We can apply the usual crossover and mutation. We are not obliged to work with bits, but we can also use vectors of continuous values. We have many operators like Geometric ones. 
-\vspace{10pt}
 Geometric crossover for example differs from the normal one. The coordinates of the offspring are the weighted average of the corresponding coordinates of the parents. In this case the offspring can't be worse than the parents. 
 
 \vspace{10pt}
@@ -600,7 +595,7 @@ These crossovers sometimes can enhance the predictive power of SLIM.
 
 \subsection{Neural networks}
 
-\subsection{Introduction}
+\subsubsection{Introduction}
 
 ANNs are computational techniques that belong to the field of Machine Learning. The aim of these architectures is to mimic in a very simplified way the human brain. As we know the brain is composed by a set of simpler elements called neurons. The power of the brain is obtained by how these neurons interact and communicate between themselves. 
 
@@ -902,13 +897,133 @@ To have a good result for our network we have to avoid both underfitting and ove
 
 An improvement on normal feed-forward networks can be obtained by using cyclic neural networks. Some example can be Jordan, Elman, Hopfield and Bolzman machines. In Jordan networks we have a state unit that helps the learning phase by combining input and state units. Backpropagation is the learning rule. 
 
-
-
 \subsection{Neuroevolution and NEAT}
 
 We call Neuroevolution the artificial evolution of neural networks using evolutionary algorithms. 
 
+In traditional Neuroevolution we decide the topology structure for the evolving network before the experiment begins. Usually the starting topology is a single, hidden and fully connected layer of neurons. The evolution process will look for the weights to optimize the problem. Since we can set the weights as vectors we can apply things such as genetic algorithms and PSO. 
 
+\vspace{10pt}
+
+Some variants can be obtained by:
+
+\begin{itemize}
+    \item Having a dynamic size for our strings
+    \item Use different ways to represent our chromosomes
+    \item Use genetic programming to evolve the network (as topology, weights and activation functions)
+\end{itemize}
+
+One possible algorithm based on PSO is Greedy Iterative Layered PSO.
+
+\vspace{10pt}
+
+We can represent the connection matrix of a network with a bit string and the relative weight can be obtained via means of Backpropagation. The topology can be evolved using genetic algorithms and the fitness can be considered as the final performance of our network. 
+
+\vspace{10pt}
+
+Even though is a very simple approach we also have some drawbacks like:
+
+\begin{itemize}
+    \item The size of the connectivity matrix is huge
+    \item The maximum number of nodes must be decided by a human
+    \item A linear string of bits makes crossover difficult to be applied to get good results
+\end{itemize}
+
+It's known that modifying both topology and weights of a network is beneficial, then we want to use an evolutionary algorithm to do it. Even though we can approximate any function using one hidden layer we would like to minimize the size of our network as much possible. Another aspect is that if we minimize topologies while growing our structures incrementally we can speed up our learning. 
+
+\subsubsection{NEAT}
+
+The main algorithm for this is called NeuroEvolution of Augmenting Topologies (NEAT). Everything is good, but we have some additional challenges to tackle:
+
+\begin{itemize}
+    \item How to represent crossover in a good way
+    \item How to protect a topological innovation
+    \item How to optimize the size without resorting to a specific fitness
+\end{itemize}
+
+The basic idea of NEAT is to represent entire networks (topology and weights) by means of a linear representation. We also have ad hoc crossover and mutations over these linear structures (we recombine and mutate the networks). The basic idea of NEAT is that we start with an initial population of small individuals, and we let them grow during the evolution.
+
+\vspace{10pt}
+
+Since new structures are introduced incrementally we only save structures that are useful for our problem. Also since our initial population is minimal we have a minimal search space. Then we have a performance advantage over other approaches. 
+
+\vspace{10pt}
+
+One of the main problem that we have is the one of Competing Conventions or Permutation problem, where the same network can be represented with a permutated string while being considered a new one. The consequence is that our crossover may produce damaged offspring with the loss of information as consequence. 
+
+\vspace{10pt}
+
+The solution is gene alignment before sexual reproduction: the genes of the parents are aligned if they share the same information (homologous genes). This is done by using a unique ID called Global Innovation Number. With this ID we can also track how the gene was created. The ID is incremental. 
+
+\subsubsection{Mutations}
+
+Mutations in NEAT are done on the weights (perturbation) and on the structure (add connection or add node). 
+
+\begin{itemize}
+    \item Add connection \ra a single new connection with a random weight is added to connect two previously unconnected nodes
+    \item Add node \ra an existing connection is split, and a new node is placed inside it. The old connection is then disabled. 
+\end{itemize}
+
+The innovation ID is inherited, and the new connections receive a new ID, so that we can track the changes. By keeping track of the innovations occurred in a certain generation we can give be sure that every innovation number is unique, and so we won't have any explosion of IDs. 
+
+\subsubsection{Crossover}
+
+When we apply crossover we have already our genes lined up (matching genes). Genes that do not match are either disjoint or excess. In composing a new offspring, genes are randomly chosen from either parents at matching genes while all excess or disjoint are taken from the most fit parent. 
+
+\vspace{10pt}
+
+In NEAT the crossover is asymmetric and directed, and we have a dominant parent. We always get one child from the crossover. This is for two main reasons:
+
+\begin{itemize}
+    \item Fitness Bias \ra emphasizing the fitness parent promotes steady evolutionary progress
+    \item Structural compatibility and diversity \ra producing two children can cause too similar structures 
+\end{itemize}
+
+Even though NEAT tries to build small children the application of crossover will augment the size. Necessarily our starting individuals are really similar between themselves, but NEAT tries to diversify them as the evolution goes on. The idea is to protect the diversity. 
+
+\subsubsection{Maintaining diversity in the population}
+
+One problem that can arise from NEAT is that smaller structures will be optimized faster than bigger ones, then the second will probably be removed easily from the population. To solve this we should protect the innovation by speciating the population. 
+
+\vspace{10pt}
+
+This is done to allow our organisms to compete within their own niches and so the topological innovations are done inside a niche (implying that similar topologies are considered as a sort of similar species). 
+
+\vspace{10pt}
+
+The number of excess and disjoint genes between a pair of genomes is a measure of their compatibility distance. The more different two genomes are the less compatible they will be. We can calculate this distance using the number of excess E, disjoint D and the average weight differences of matching genes $\bar{W}$, including the disabled genes, with the following formula
+
+\[
+\delta = \frac{c_1E}{N} + \frac{c_2D}{N}+c_3 \bar{W}
+\]
+
+
+Where the coefficients $c_1, c_2 and c_3$ allow us to adjust the importance of the three factors. N is the number of genes in the larger genome. 
+
+\vspace{10pt}
+
+With $\delta$ we can speciate using a compatibility threshold $\delta_t$. An ordered list of species is maintained. In each generation genomes are sequentially placed into species. Each existing species is represented by a random genome inside the species from the previous generation. A given genome g in the current generation is placed in the first species in which g is compatible with the representative genome of that species. In this way species do not overlap. If g is not compatible with any existing species, a new species is created with g as its representative
+
+\subsubsection{NEAT Speciation}
+
+NEAT also uses fitness sharing. This mechanism imposes that each individual has to share the fitness with the other individuals in the same niche. So, niches cannot become too big (i.e., containing too many individuals).
+
+Fitness is calculated as:
+\begin{equation}
+    f'_i = \frac{f_i}{\sum_{j=1}^{n} \text{sh}(\delta(i, j))}
+\end{equation}
+
+Where $f'_i$ is the adjusted fitness of individual $i$. It is calculated according to its distance $\delta$ to every other individual $j$ in the population. The sharing function $\text{sh}$ is set to 0 when the distance $\delta(i, j)$ is above the threshold $\delta_t$; otherwise $\text{sh}(\delta(i, j))$ is set to 1.
+
+\vspace{1em}
+
+In practice, since species are already clustered by compatibility using the threshold $\delta_t$, the denominator of the previous equation is equal to the number of individuals of the same species as $i$.
+
+So, for each individual in a given niche, its fitness is divided by the number of individuals that belong to the same niche.
+
+The smaller the niche (i.e., the smaller the number of individuals it contains), the better the fitness of its individuals.
+
+So, niches cannot get too big, otherwise its individuals will have a bad fitness.
 
 
 
