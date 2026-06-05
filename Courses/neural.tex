@@ -233,3 +233,683 @@ The typical transformations include normalization, errors cleaning, outliers rem
 \vspace{10pt}
 
 We can also get the validation set to find the best possible parameters and to assess overfitting. One way to have a more general partition of our data is obtained by using the so-called cross-validation
+
+
+\subsection{Genetic programming}
+
+Genetic algorithms are inspired from natures, they are not the only ones since we also have ANNs, particle swarm intelligence, fuzzy systems and evolutionary algorithms.
+
+\vspace{10pt}
+
+\subsubsection{Evolutionary algorithms}
+
+We have two big hypotheses
+\begin{itemize}
+    \item We have a problem that has a huge amount of possible solutions, among which we want to find the best one
+    \item For each existing solution we are able to quantify its quality by means of a function called fitness (usually we associate a real-valued number to each solution)
+\end{itemize}
+
+The evolutionary process starts from a population to which we select some parents (ability of adapting, competition). These parents will then reproduce with some sort of variation (given by our genetic operators, usually crossover and mutation are applied). After this we will have our offspring population that will go into our original population (survival selection). At the reaching of a certain stopping condition we will select our final solution, the one with the highest fitness.
+
+\vspace{10pt}
+
+The two most common forms of evolutionary algorithms are \begin{itemize}
+    \item Genetic algorithms \ra Our individuals are strings of constant length, and we usually try to use them for optimization
+    \item Genetic programming \ra Individuals are computer programs, we can use this approach for machine learning. 
+\end{itemize}
+
+The selection mechanism is similar since for both cases is done using fitness values. So we have things like fitness proportionate selection, ranking selection and tournament selection. The simplest one is fitness proportionate selection that takes the name of roulette wheel. 
+
+\vspace{10pt}
+
+In genetic programming our representation is done by using trees. We can express a mathematical expression with this data-structure. We can define a tree using internal (F) and terminal nodes (T). We have many more ways. 
+
+\vspace{10pt}
+
+Our fitness is a measure of the deviation between our expected target and the calculated output. So for regression we have RMSE, MAE or correlation while for classification we can have accuracy or F1. 
+
+\vspace{10pt}
+
+With trees crossover can be done by moving around branches into the other tree. Mutation can be done by adding a branch randomly. 
+
+\vspace{10pt}
+
+Genetic programming pseudocode
+
+
+\begin{algorithm}
+\caption{Genetic Programming Algorithm}
+\begin{algorithmic}[1]
+\State 1. Initialize a population $P$ of $N$ programs (individuals) (typically at random)
+\State 2. Repeat until termination condition:
+\State 2.1 Execute each program in $P$ and assign it a fitness according to how well it solves the problem
+\State 2.2 Create an empty population $P'$
+\State 2.3 Repeat until $P'$ contains $N$ individuals:
+\State 2.3.1 Choose a genetic operator among crossover (with probability $p_c$), mutation (with probability $p_m$) and replication (with probability $p_r$). Remark that $p_c + p_m + p_r = 1$
+\State 2.3.2 If the operator chosen in 2.3.1 was either mutation or replication, then select one individual from $P$ (using one of the selection algorithms), apply the operator and insert the resulting individual in $P'$
+\State 2.3.3 If the operator chosen in 2.3.1 was crossover, then select two individuals from $P$ (using one of the selection algorithms), apply the operator and insert the resulting individuals in $P'$
+\State 2.4 Selection of survivors: Extract one new current population $P$ from $P$ and $P'$ (typically $P := P'$)
+\State 3. Return the best individual in $P$
+\end{algorithmic}
+\end{algorithm}
+\subsubsection{Symbolic regression}
+
+Symbolic regression is a task for which given a set of input-output pairs ${I_i, O_i}$ we want to find (or approximate) a function that maps those points ($f(I_i) = O_i$) for any i.  
+
+\vspace{10pt}
+
+Given a matrix with 2 input columns and 1 output column we have a regression in 2 variables. We will apply the following operators ${+, -, *, //}$ randomly in a tree and run our data. By calculating our fitness we have our first idea of how good our solution is. After building our population we will find the fitness of each point, we will select the parents with the roulette wheel, crossover and mutation will be applied, and our new population is there. We will re-run the algorithm until our stopping condition is met. 
+
+\subsubsection{Why do evolutionary algorithms work?}
+
+Let 
+
+\begin{itemize}
+    \item $s_t$ be the best individual in the population at generation t
+    \item $S_O$ be the set of all globally optimal solutions in the search space
+\end{itemize}
+
+\[
+\lim_{t \to \infty} P(s_t \in S_O) = 1
+\]
+
+
+\subsubsection{Peculiarities of genetic programming}
+
+The initialization of the population is the first step of the evolution process. It consists in the creation of the program structures that will later be evolved. The most common initialization methods in tree-based GP are 
+
+\begin{itemize}
+    \item Grow
+    \item Full
+    \item Ramped half-and-half
+\end{itemize}
+
+\vspace{10pt}
+
+\textbf{Grow}
+When the "Grow" method is employed each tree of the initial population is built using the following algorithm
+
+\begin{itemize}
+    \item A random symbol is selected with uniform probability from $\mathcal{F}$ to be the root of the tree. 
+    \item Let n be the arity of the selected function symbol. Then n nodes are selected with uniform probability from the set $\mathcal{F} \cup \mathcal{T}$ to be its sons
+    \item For each function symbol between these n nodes, the method is recursively applied (its sons are selected from the set $\mathcal{F} \cup \mathcal{T}$), unless this symbol has a depth equal to d - 1. In the latter case its sons are selected from $\mathcal{T}$
+\end{itemize}
+
+Basically we avoid having single node trees at the starting point. Nodes with depths between 1 and d - 1 are selected with uniform probability from $\mathcal{F} \cup \mathcal{T}$, but once a branch contains a terminal node, that branch has ended, even if the maximum depth d has not been reached. Finally, nodes at depth d are chosen with uniform probability from $\mathcal{T}$. Since the incidence of choosing terminals from $\mathcal{F} \cup \mathcal{T}$ is random throughout initialization, trees initialized using this method are likely to have irregular shape (branches of various different shape).
+
+\vspace{10pt}
+
+\textbf{Full Initialization}
+
+\vspace{10pt}
+
+Instead of selecting nodes from $\mathcal{F} \cup \mathcal{T}$, the full method chooses only function symbols until a node is at the maximum depth. Then it chooses only terminals. The resulting tree has  maximum depth for every branch. 
+
+\vspace{10pt}
+
+\textbf{Ramped Half-and-Half}
+
+\vspace{10pt}
+
+Populations initialized with the above two methods might be built with trees that are too similar between them. In genetic programming diversity is really important, then to enhance the diversity of the population we can use this other technique. We start from d (maximum depth parameter) and the population is divided equally among individuals to be initialized with trees having depths equal to 1, 2, ..., d - 1, d. For each depth group, half of the trees are initialized with the full technique and half with the grow one.  
+
+\vspace{10pt}
+
+\textbf{Parameters}
+
+\vspace{10pt}
+
+Once the set of functions and terminals are set, and we have the exact implementation for the genetic operators we have to select the parameters to use. Some are:
+
+\begin{itemize}
+    \item Population size
+    \item Stopping criterion
+    \item Initialization technique
+    \item Selection algorithm
+    \item Crossover type and rate
+    \item Mutation type and rate
+    \item Maximum tree depth
+    \item Presence or absence of steady state
+    \item Presence or absence of ADFs or other modular structures
+    \item Presence of absence of elitism
+\end{itemize}
+
+\subsubsection{Weak points of genetic programming}
+
+We still have some problems that might arise
+
+\begin{itemize}
+    \item Bloat \ra solvable with dynamic limits, tarpeian method or operator equalization
+    \item Premature convergence (loss of diversity) \ra solvable with early stop/restart or with parallel and distributed genetic programming
+    \item Overfitting \ra solvable with early stop/restart or multi-objective optimization
+\end{itemize}
+
+We can incorporate genetic programming into machine learning pipelines for our algorithms. 
+
+
+
+
+\subsection{Geometric semantic genetic programming}
+
+Like Pokémon, we have evolutions with new operators. New crossovers and mutations that supposedly are better. 
+
+
+
+\subsubsection{Optimization problems}
+
+Informally solving an optimization problem means to find the best solution(s) in a typically huge set of other candidate solutions. Formally a pair (S, f) where S is the set of all possible solutions (search space) and f is a function such that f = S \ra $\mathbb{R}$. This function f quantifies the quality of the solutions in S and is called cost or fitness function. 
+
+\vspace{10pt}
+
+An optimization problem is a minimization problem if it consists in looking for a solution o $\in$ S such that $f(o) \leq f(i), \forall i \in S$.
+
+An optimization problem is a maximization one if it consists in looking for a solution o $\in$ S such that $f(o) \geq f(i), \forall i \in S$.
+
+Such a solution is called global optimum (minimum or maximum).
+
+\vspace{10pt}
+
+The most natural and immediate method to solve an optimization problem is Hill climbing. It consists in trying to improve fitness step by step (stepwise improvement) by means of the concept of neighborhood. A solution $j \in S$ is called local optimum if
+
+\begin{itemize}
+    \item for minimization problems $f(j) \leq f(i) \forall i \in N_j$
+    \item for maximization problems $f(j) \geq f(i) \forall i \in N_j$
+\end{itemize}
+
+With hill climbing we will always have a local optimum that is not necessarily the global one. 
+
+
+\subsubsection{Fitness Landscapes}
+
+If we want to represent the evolution of our fitness with respect to our solutions we can plot the fitness landscape. Formally defined as
+
+\begin{itemize}
+    \item The fitness landscape can be represented as (S, V, f)
+    \item S: set of potential solutions
+    \item V: S \ra $2^S$, neighborhood function
+    \item f: S \ra $\mathbb{R}$, fitness function
+\end{itemize}
+
+Given our neighborhood function $ \forall x \in S$
+
+\begin{itemize}
+    \item $V(x) = \{y \in S | y = op(x) \}$
+    \item $V(x) = \{y \in S | d(x, y) \leq 1 \}$
+\end{itemize}
+
+The fitness landscape will give us a visual intuition of the facility or difficulty of a search agent to find the global optimum. A smooth landscape will imply an easy problem, while a rugged one will have many local optima and so a harder problem. In reality is impossible to draw a fitness landscape since our search spaces and neighborhoods will be huge. 
+
+\vspace{10pt}
+The operator that is related to the neighborhood structure is called ball mutation. If we have a continuous fitness with a known optimum we have a CONO (continuous optimization with notorious optimum). 
+
+\subsubsection{Genetic algorithms}
+
+Genetic algorithms are related to solutions where our individuals are strings of prefixed length. We can apply the usual crossover and mutation. We are not obliged to work with bits, but we can also use vectors of continuous values. We have many operators like Geometric ones. 
+\vspace{10pt}
+Geometric crossover for example differs from the normal one. The coordinates of the offspring are the weighted average of the corresponding coordinates of the parents. In this case the offspring can't be worse than the parents. 
+
+\vspace{10pt}
+
+Mutation is implemented by applying ball mutation, we move our points inside a radius. 
+
+
+\subsubsection{Genetic programming}
+
+If in our evolutionary algorithms the individuals are computer programs we entered the setting of genetic programming. One example is Symbolic Regression where given a matrix we try to approximate the function that built it. 
+
+\vspace{10pt}
+
+Genetic programming can be used as a machine learning method. 
+
+\begin{itemize}
+    \item Known: the correct output for a fixed given set of inputs \{$I_i, O_i$\}. 
+    \item Sought: a function belonging to a certain class that interpolates those points, so $f(I_i) = O_i \forall i$
+    \item Output vector: the vector of the outputs of f is f(I) = f($I_i$)
+    \item Fitness: a measure of the error on the training set. Basically the distance between the output vectors of f and the target output vector $F(f) = D(f(I), O)$
+\end{itemize}
+
+We can apply this in a context of supervised learning. 
+
+\subsubsection{Implementation of geometric semantic operators}
+
+We can save genetic information by applying the concept of semantics, two programs can have a very different structure but if the produced results are always the same they share the semantics. 
+
+Let $X = [\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n]$ be the set of input data (fitness cases) of a supervised learning problem and $\mathbf{t} = [t_1, t_2, \ldots, t_n]$ the vector of the respective expected output or target values.
+
+A GP individual (or program) $P$ can be seen as a function that, for each input vector $\mathbf{x}_i$, returns the scalar value $P(\mathbf{x}_i)$.
+
+We define the semantics of an individual $P$ as the vector
+
+\[
+\mathbf{s}_P = [P(\mathbf{x}_1), P(\mathbf{x}_2), \ldots, P(\mathbf{x}_n)]
+\]
+
+This is a point in an $n$-dimensional space.
+
+\vspace{10pt}
+
+We can map our programs into a semantic space (output) and visualize how far from the target they are. Traditional genetic operators will produce offspring by blindly manipulating the parents without caring about the semantics. We want to preserve this syntactic genetic material and define transformations that make sense from a semantic point of view. 
+
+\vspace{10pt}
+
+If we are able to find a transformation on the syntax of the individual whose effect is ball mutation on the semantic space we induce an unimodal fitness landscape on every problem consisting in matching input data into known targets. Genetic programming should have a good evolvability on those problems.  
+
+
+\subsubsection{Discussion}
+
+Ongoing research is being done to create the aforementioned operators
+
+\begin{itemize}
+    \item Geometric semantic crossover \ra The only offspring generated by this crossover has a semantic vector that is a linear combination of the semantics of the parents with random coefficients included in [0, 1] and whose sum is equal to 1. 
+    \item Geometric semantic mutation \ra Each element of the semantic vector of the offspring is a weak perturbation of the corresponding element in the parent's semantic. We can tune its importance. It's basically a ball mutation in the semantic space, so we induce an unimodal fitness landscape.   
+\end{itemize}
+
+These semantic operators can have some drawbacks, for example at each generation the offspring will be larger than the parents causing a fast growth in sizes. This makes the basically useless. One solution can be simplifying these individuals during the evolution.
+
+\subsubsection{Open issues}
+
+We still have some issues, one of them is that reconstructing the best individual can be impossible after too many generations. Also, these models are basically black boxes. 
+
+\newpage
+
+\subsection{Semantic Learning algorithm based on inflate and deflate mutations}
+
+We left the last class with one problem, the genetic operators always create offspring bigger than their parents. Then our final model is huge and very difficult to interpret. We have now SLIM-GSGP (Semantic Learning algorithm based on Inflate and deflate Mutations). 
+
+\vspace{10pt}
+
+We redefine Geometric Semantic Mutation as \ra given a parent function $T:R^n \ra R$, GSM with mutation step ms returns the function $GSM(T)=T+\Delta T$. Where
+
+\begin{itemize}
+    \item $\Delta T = ms (T_{R1} - T_{R2})$
+    \item $T_{R1}$ and $T_{R2}$ are random functions. 
+    \item $\Delta T \in $[-ms, ms]
+\end{itemize}
+
+
+
+Note that the expression $T_{R1} - T_{R2}$ is used as a zero-centered random expression. $T_{R1}$ and $T_{R2}$ are normalized in the range [0, 1] applying a sigmoid. Then no crossover is needed in GSGP. 
+
+\vspace{10pt}
+
+SLIM-GSGP follows two main steps
+
+\begin{itemize}
+    \item If in the definition of GSM $\Delta T$ was subtracted, instead of added, the resulting operator would be equivalent to GSM. 
+    \item Given that the GSM uses + and the one that uses - are equivalent, we can alternate them without modifying the GSGP dynamics
+\end{itemize}
+
+The last step is called deflated mutation if the offspring is smaller than the parent. This is opposed to traditional GSM where we have inflated mutation. We can implement this by removing a term that was previously added. 
+
+Notice that
+
+\begin{itemize}
+    \item Deflate mutation is a geometric semantic mutation
+    \item Deflate mutation is not a backtracking operator
+\end{itemize}
+
+We need then to define a function with values in [-ms, ms] and one to obtain ball mutation on the semantic space.
+
+\vspace{10pt}
+
+Let $GSM(T)=T+\Delta T$, and S the sigmoid, then we can have the following ways of defining that $\Delta T$. How to build a function in [-ms, ms]
+
+\begin{enumerate}
+    \item $SIG2 = ms(S(T_{R1})-S(T_{R2}))$
+    \item $ABS = ms(1- \frac{2}{1 + |T_R|})$
+    \item $SIG1 = ms(2S(T_R)-1)$
+\end{enumerate}
+
+
+How to get a ball mutation on semantic space
+
+\begin{enumerate}
+    \item Summing a quantity close to 0, as in traditional GSM
+    \item Multiplying by a quantity close to 1, this can be done with
+    \begin{itemize}
+        \item 1 + SIG2
+        \item 1 + ABS
+        \item 1 + SIG1
+    \end{itemize}
+\end{enumerate}
+
+Then we have the following six variants of SLIM-GSGP
+
+\begin{itemize}
+    \item SLIM + SIG2
+    \item SLIM + ABS
+    \item SLIM + SIG1
+    \item SLIM * SIG2
+    \item SLIM * ABS
+    \item SLIM * SIG1
+\end{itemize}
+
+One very easy implementation of SLIM-GSGP can be done using a linked list. 
+
+\vspace{10pt}
+
+The crossover can be implemented in different ways
+
+\begin{itemize}
+    \item Swap crossover \ra swaps items of the linked list between parents, allowing recombination of genetic material while keeping offspring the same size as the parents
+    \item Donor crossover \ra one parent donates a block to the other parent
+\end{itemize}
+
+
+These crossovers sometimes can enhance the predictive power of SLIM. 
+
+\subsection{Neural networks}
+
+\subsection{Introduction}
+
+ANNs are computational techniques that belong to the field of Machine Learning. The aim of these architectures is to mimic in a very simplified way the human brain. As we know the brain is composed by a set of simpler elements called neurons. The power of the brain is obtained by how these neurons interact and communicate between themselves. 
+
+\vspace{10pt}
+
+Every neuron can do very simple computations but by combining a lot of them we can emulate more complex functions. The base structure in the field of neural networks is the so-called Perceptron
+
+
+\subsubsection{Perceptron}
+
+A Perceptron ca be considered the most basic neural network possible. By putting more of them together we can get more layer and so a multilayer Perceptron. One limitation of the perceptron is that the flow of information inside it is uni-directional (feed-forward neural network). The Perceptron is composed by one or more output neurons, each of
+which is connected to several input units by means of connections that are
+characterized by weights.
+In analogy with biology, these connections are called synapsis.
+
+\vspace{10pt}
+
+As we said the simplest structure is composed by just one neuron. The output of a perceptron can be calculated as
+
+\[
+y = f(\sum_{i=1}^{n}w_ix_i+\theta)
+\]
+
+The function f is called activation function. One of the most simple activations function is called Threshold function
+\[
+f(s)\begin{cases}
+    1 &\text{if s > 0} \\
+    -1 & \text{else}
+    
+\end{cases} \]
+
+This activation function is useful for classification problems. With this setup we can easily classify between 2 classes by projecting a line on a plane (binary classification). The Perceptron will classify one or the class based on the output that the function gives. 
+
+\vspace{10pt}
+
+We should define two phases for our neural networks
+
+\begin{itemize}
+    \item Learning \ra The network modifies the weights
+    \item Generalization \ra We can use the network on new data for our purposes
+\end{itemize}
+
+During the learning phase the network receives the training data and with the use of certain algorithms it will change the weights to adjust the classification outputs. If we know our target we are doing obviously supervised learning. 
+
+\vspace{10pt}
+
+The algorithm used by the perceptron to modify the weights is the following
+
+\begin{enumerate}
+    \item  Initialize the connections with a set of weights generated at random.
+    \item Select an input vector $\bar{x}$ from the training set. Let y be the output
+value returned by Perceptron for this input value and d the correct
+answer (target), that is associated to $\bar{x}$ in the dataset.
+    \item If $y \ne d$ (the calculated output is wrong), then the weights ($w_i$)of all connections are modified as follows
+    \begin{itemize}
+        \item if y > d $w_i :=w_i-\eta x_i$
+        \item if y < d $w_i := w_i + \eta x_i$
+    \end{itemize}
+    \item Back to 2
+\end{enumerate}
+
+The algorithm terminates when all vectors in the training set are classified in a correct way or after a certain prefixed number of iterations. Remember that also the value of the threshold $\theta$ needs to be changed (but the input will always be 1). The parameter $\eta$ is called learning rate and indicates by how much we need to adjust our changes, it can be fixed or variable (but always positive).
+
+\vspace{10pt}
+
+As we said we want to find a line that separates the 2 classes. The right term that will allow the generalization entering the realm of networks is hyperplane. With 2 inputs we have 
+
+\[
+w_1x_1 + w_2x_2 + \theta = 0 \\
+x_2 = - \frac{w_1}{w_2}x_1 - \frac{\theta}{w_2}
+\]
+
+The straight line that we get allows us to graphically separate the two classes.
+
+This straight line has the following properties
+
+\begin{itemize}
+    \item All the points that belong to class 1 are "above" the line and all the ones of class 2 are "below"
+    \item The weights vector is perpendicular to the separating line
+    \item $\theta$ allows us to calculate the distance of the straight line to the origin
+\end{itemize}
+
+If a weight vector that allows us to obtain y = d for all training instances exists than the Perceptron will converge to a solution in a finite number of steps without caring about the initial choice of the weights. And if this vector exists then the classes are linearly separable. 
+
+\vspace{10pt}
+
+If our data can be partitioned in more than two classes we are in the realm of multiclass classification. Given a problem in which data must be classified into more than two classes, more than two neurons are needed. We simply connect our input layer to an output layer made of a number of neurons equal to the number of classes. The Perceptron is able to separate data into $2^m$ classes depending on the binary output values of its output. 
+
+\vspace{10pt}
+
+During training each single neuron is trained independently with the Perceptron learning rule. At the end then we will get a weight vector for each neuron. Using this vector we can define the needed hyperplane.
+
+\vspace{10pt}
+
+The class of problems that we saw is the one of linearly solvable ones. But if we have a XOR problem we can't really use a linear function since no set of straight line will be able to separate the two classes. Then for this particular problem we have to add a new layer that will correct the predictions. Our new network will have a hidden neuron between the input and the output layer (hidden layer). In order to solve non-linear problems we must use neural networks with at least one hidden neuron.
+
+
+\vspace{10pt}
+
+So far we only looked at neurons that use the threshold (step) function as activation. But we can have many more 
+
+\begin{itemize}
+    \item Logistic or sigmoid $f(x)= \frac{1}{1+e^{-ax}}$
+    \item Hyperbolic tangent $f(x) = \frac{e^x - e^{-x}}{e^x+e^{-x}}$
+    \item Gaussian $f(x) = e^{-x^2}$
+\end{itemize}
+
+\subsubsection{ADALINE}
+
+An evolution based on the normal perceptron is ADALINE, the difference is that the learning rule is called Delta Rule and can be seen as a generalization of the Perceptron learning rule. The difference is given on how the output is managed. The Perceptron uses as output the result of an activation function to learn while the Delta Rule uses the result of the summation to which it can, or can not, be applied an activation function, so:
+
+\[
+y = \sum_{i=1}^{m}w_ix_i + \theta
+\]
+or
+\[
+y = f\left(\sum_{i=1}^{m}w_ix_i + \theta\right)
+\]
+
+The main difference between Perceptron and Delta Rule is that the latter compares this calculated output with the desired output by using an error. The error function can be defined either as mean square error $ E = \frac{1}{n}\sum_{i=1}^{n}
+(d_i - y_i)^2$ or as absolute error $E = \sum_{i=1}^{n} |d_i -y_i|$. The Delta Rule looks for the vector of weights that minimizes the error function using the method of gradient descent (then we arrive at an optimization problem). We can visualize this error as a surface where we look for the point that minimizes our function looking for the minimum. 
+
+\vspace{10pt}
+
+If the problem is linearly separable then our surface is unimodal, and so we have only one global minimum and no local minimum. Delta Rule will try to minimize at each step the error. If the problem is not unimodal then ADALINE will probably fall into a local minimum. 
+
+\vspace{10pt}
+
+To decrease the error E at each step the weights are modified by a quantity $\Delta$w which is proportional to the derivative of the function E \ra  $\Delta w = - \eta \frac{\partial E}{\partial w}$. The weights are modified in the negative direction of the gradient of E. At the minimum the derivative is 0 and so the algorithm stops. 
+
+\begin{itemize}
+    \item Initialize all connections with random weights;
+    \item Repeat until (termination condition):
+    \begin{itemize}
+        \item Select a training observation $j$
+        \item Calculate the output of the neuron for this observation:
+        \[
+        y_j = f \left( \sum_{i=0}^{m} w_i x_{ji} \right)
+        \]
+        \item If $y_j$ approximates $d_j$ in a satisfactory way, then do nothing, else, for each connection $i = 1, 2, \dots, m$:
+        \begin{itemize}
+            \item if $y_j < d_j$ then $w_i = w_i + \eta y_j (1 - y_j) x_{ji}$
+            \item else $w_i = w_i - \eta y_j (1 - y_j) x_{ji}$
+        \end{itemize}
+    \end{itemize}
+    \item end repeat
+\end{itemize}
+
+As said we stop when we converge, but we can also decide a maximum number of iterations. Here we have an example of the derivative of the sigmoid
+
+
+\[
+f(x) = \frac{1}{1 + \exp(-x)}
+\]
+
+Its derivative $f'(x)$ can be calculated as follows:
+\begin{align*}
+f'(x) &= \frac{\partial}{\partial x} \big(1 + \exp(-x)\big)^{-1} \\[1ex]
+&= -1 \cdot \big(1 + \exp(-x)\big)^{-2} \cdot \big(-\exp(-x)\big) \\[1ex]
+&= \frac{\exp(-x)}{\big(1 + \exp(-x)\big)^2} \\[1ex]
+&= \frac{1}{1 + \exp(-x)} \cdot \frac{\exp(-x)}{1 + \exp(-x)} \\[1ex]
+&= \frac{1}{1 + \exp(-x)} \cdot \left( \frac{1 + \exp(-x) - 1}{1 + \exp(-x)} \right) \\[1ex]
+&= \frac{1}{1 + \exp(-x)} \cdot \left( 1 - \frac{1}{1 + \exp(-x)} \right) \\[1ex]
+&= f(x)\big(1 - f(x)\big)
+\end{align*}
+
+Therefore, the derivative of the sigmoid can be expressed as a function of the sigmoid itself
+
+\subsubsection{Non-linearly separable problems}
+
+In general, non-linearly separable problems can be solved using multi-layer
+Neural Networks, i.e. Neural Networks in which one or more neurons are
+not directly linked to the output of the network (we call these neurons
+hidden neurons, and given that they are generally organized into layers, we
+call these layers hidden layers).
+
+
+\subsubsection{Backpropagation}
+
+Backpropagation is an algorithm that can be applied to a multi-layer perceptron in order to change its weights and optimize them. The main characteristics of a feed-forward neural network are:
+
+\begin{itemize}
+    \item The neurons in a given layer receive as input the outputs of the neurons of the previous level
+    \item There are no inter-level connections
+    \item All the possible intra-level connections exist between two any subsequent layers
+\end{itemize}
+
+The Backpropagation is the most common learning rule for multi-layer
+Neural Networks (sometimes also called multi-layer Perceptron or
+Feed-Forward Neural Networks).
+The Backpropagation can be seen as a generalization of the Delta-Rule to
+multi-layer Neural Networks.
+The Delta-Rule modifies the weights of each neuron on the basis of the
+error committed by that neuron.
+To be able to extend the Delta-Rule to multi-layer networks is how to
+modify the weights of the neurons that belong to the hidden layers.
+In fact, the correct output for these neurons is not known, and thus
+we cannot directly calculate the error.
+
+\vspace{10pt}
+
+The basic idea of the Backpropagation is the following:
+the errors of the output neurons are propagated backwards to the hidden
+neurons.
+In other words:
+the error of a hidden neuron is defined as the sum of all the errors of all
+the output neurons to which it is directly connected.
+
+The Backpropagation can be applied to networks with any number of layers, but
+the following theorem holds:
+Universal Approximation Theorem (Hartman, Keeler, Kowalski, 1990)
+Only one level of hidden neurons is sufficient to approximate any function
+(with a finite number of discontinuities) with arbitrary precision, provided
+that the activation functions of the hidden neurons are non-linear.
+This is one of the reasons why one of the most used configurations of a
+Feed-Forward multi-layer Neural Network is with only one layer of hidden units
+that use a sigmoidal activation function
+
+
+\vspace{10pt}
+
+The Backpropagation is composed by one forward step and one backward step.
+In the forward step, the weights of the connections remain unchanged and the
+outputs of the network are calculated propagating the inputs through all the
+neurons of the network.
+At this point, the error of each output neuron is calculated.
+The backward step consists in the modification of the weights of each connection.
+This calculation is made in the following way:
+
+\begin{itemize}
+    \item  For the output neurons, the modification is done by means of the Delta Rule
+    \item for the hidden neurons, the modification is done by propagating backwards
+the error of the output neurons: the error of each hidden neuron is
+considered as being equal to the sum of all the errors of the neurons of the
+subsequent layer.
+\end{itemize}
+
+The weights of the connection that enter each neuron are updated using the formula:
+\begin{equation*}
+w_{ij} = w_{ij} + \Delta w_{ij}
+\end{equation*}
+where $w_{ij}$ is the weight of the connection between neuron $i$ and neuron $j$, and:
+\begin{equation*}
+\Delta w_{ij} = -\eta \frac{\partial E}{\partial w_{ij}}
+\end{equation*}
+Now the problem is how to calculate $\Delta w_{ij}$ without having to calculate every time the derivative of the error function $E$.
+
+
+\begin{enumerate}
+    \item Initialize all the weights in the network with random values.
+    
+    \item Select a vector $\mathbf{x}$ of the training set (let $\mathbf{d}$ be the correct output -- or target -- that can be found in the dataset, corresponding to vector $\mathbf{x}$). Calculate the output of the network $\mathbf{y}$ for input $\mathbf{x}$.
+    
+    \item If $\mathbf{y}$ is satisfactory (i.e., $\mathbf{y}$ approximates $\mathbf{d}$ in a sufficient way), then \textbf{go to} step 2. Else:
+    \begin{itemize}
+        \item[\textbf{3.1.}] For each output neuron $j$, calculate:
+        \[
+        \delta_j = (d_j - y_j) \cdot y_j \cdot (1 - y_j)
+        \]
+        and modify the weight of the connections that enter into neuron $j$ as follows:
+        \[
+        w_{ij} = w_{ij} + \eta \delta_j y_i
+        \]
+        
+        \item[\textbf{3.2.}] For each hidden neuron $j$, calculate:
+        \[
+        \delta_j = y_j (1 - y_j) \sum_{k} \delta_k w_{jk}
+        \]
+        (where the sum is calculated over all output neurons $k$), and modify the weight of the connections that enter into neuron $j$ as follows:
+        \[
+        w_{ij} = w_{ij} + \eta \delta_j y_i
+        \]
+    \end{itemize}
+    \textit{(In both cases, $y_i$ is the value entering in neuron $j$ from source $i$)}
+    
+    \item \textbf{go to} step 2.
+\end{enumerate}
+
+The algorithm terminates when one of the following conditions is satisfied:
+\begin{itemize}
+    \item The correct outputs $\mathbf{d}$ are approximated from the outputs $\mathbf{y}$ of the network in a ``satisfactory'' way for every vector $\mathbf{x}$ of the training set.
+    \item A prefixed number of maximum iterations has been executed.
+\end{itemize}
+
+\vspace{10pt}
+
+As for other algorithms we can improve Backpropagation by selecting the right kind of parameters, the main ones are
+
+\begin{itemize}
+    \item Learning rate $\eta$ \ra if is too small the learning will be slow, if is too big the network will be unstable
+    \item Momentum $\alpha$ \ra we can use it to reduce the risk of staying too much inside a local minimum
+    \item Number of hidden neurons \ra Usually based on experience, we risk to fall inside a local minimum
+\end{itemize}
+
+To have a good result for our network we have to avoid both underfitting and overfitting. We can find the sweet spot by selecting an appropriate size for our network. 
+
+
+\subsubsection{Cyclic (or Recursive) Neural networks}
+
+An improvement on normal feed-forward networks can be obtained by using cyclic neural networks. Some example can be Jordan, Elman, Hopfield and Bolzman machines. In Jordan networks we have a state unit that helps the learning phase by combining input and state units. Backpropagation is the learning rule. 
+
+
+
+\subsection{Neuroevolution and NEAT}
+
+We call Neuroevolution the artificial evolution of neural networks using evolutionary algorithms. 
+
+
+
+
+
+

@@ -1027,3 +1027,637 @@ Some points
 \end{itemize}
 
 
+
+
+\subsection{Why genetic algorithms work}
+
+To answer we have to have another question \ra Will genetic algorithms lead to the discovery of a global optimum or an approximation of it?
+
+To answer we have to have another question \ra How do genetic algorithms work?
+
+To answer we have to have another question \ra What is the information that is maintained and processed in the population?
+
+\vspace{10pt}
+
+The hypothesis that we want to verify is that there are some syntactic features that give a boost to fitness. We would like to maintain these features through generations. To do this we would like to formalize a mechanism to identify structural similarities between individuals. We can call it \textbf{Schema} (set of individuals that have in common the fact of having the same characters in some positions). 
+
+\vspace{10pt}
+A schema can be represented using strings composed by all admissible characters + 1 special character (don't care symbol, here is *). For example in the binary case, a schema is a string built using characters coming from the set \{0, 1, *\}.
+
+\vspace{10pt}
+Example
+
+\{*0000\} represents both \{00000\} and \{10000\}.
+
+\vspace{10pt}
+
+Hypothesis \ra implicitly genetic algorithms work on schemata. 
+
+\vspace{10pt}
+
+\begin{itemize}
+    \item Order of a schema \ra The number of characters different from *, o(\{011*1**\}) = 4
+    \item Length of a schema \ra The difference between the rightmost and leftmost positions that do not have an *, $\delta$(011*1**) = 5 - 1 = 4
+\end{itemize}
+
+Now we want to know what schemata will survive in the population over the evolution of a genetic algorithm. 
+
+\vspace{10pt}
+
+At generation t, m(H, t) is the number of individuals in the population that belong to the schema H. Given this we want to know what is m(H, t + 1). To solve this we need to know how selection, crossover and mutation change m(H, t). 
+
+\vspace{10pt}
+
+\subsubsection{Effect of selection on schemata}
+
+We will study the case of fitness proportionate selection. 
+
+$m(H, t +1 ) = m(H, t) n \frac{f(H)}{\sum_{j}^{}f_j}$
+
+Where f(H) is the average fitness of the individuals in the population that belong to schema H. In the denominator we have the average probability of selecting an individual belonging to schema H. We apply selection n times.
+
+\vspace{10pt}
+\[
+\begin{aligned}
+&\text{AVG. FIT. OF INDIVS IN POP} = \tilde{f} = \frac{\sum_{j} f_j}{n} \\
+&\frac{1}{\tilde{f}} = \frac{n}{\sum_{j} f_j} \\
+&m(H, t+1) = m(H, t) \frac{f(H)}{\tilde{f}}
+\end{aligned}\]
+
+
+\vspace{10pt}
+
+Schemata with an average fitness that is better than the average population fitness will increment the number of representatives and the others will decrement. 
+At what speed? 
+\[
+\begin{aligned}
+&\text{Assume } f(H) = \tilde{f} + c\tilde{f} \\
+m(H, t+1) &= m(H, t) \frac{\tilde{f} + c\tilde{f}}{\tilde{f}} = m(H, t) \frac{\tilde{f}(1+c)}{\tilde{f}} \\
+&= m(H, t)(1+c)
+\end{aligned}
+\]
+
+\[
+\begin{aligned}
+m(H, 1) &= m(H, 0)(1+c) \\
+m(H, 2) &= m(H, 1)(1+c) = m(H, 0)(1+c)^2 \\
+m(H, 3) &= m(H, 2)(1+c) = m(H, 0)(1+c)^3 \\
+&\vdots \\
+m(H, t) &= m(H, 0)(1+c)^t
+\end{aligned} \]
+
+\bigskip
+
+\noindent \text{The growth of the number of representatives}
+\text{of schema } H \text{ in the population is exponential} \\
+\text{with } t.
+
+\subsubsection{Effect of crossover on schemata}
+
+\textbf{EXAMPLE}
+
+\[
+\begin{aligned}
+A &= 0 \ 1 \ 1 \ | \ 1 \ 0 \ 0 \ 0 \\
+H_1 &= * \ 1 \ * \ | \ * \ * \ * \ 0 \\
+H_2 &= * \ * \ * \ | \ 1 \ 0 \ * \ *
+\end{aligned}
+\]
+
+\bigskip
+
+\noindent \textbf{FOR ANY SCHEMA} \quad \( P_s(H) = 1 - \frac{\delta(H)}{L-1} \)
+
+\bigskip
+
+\[
+\begin{aligned}
+P_d(H_1) &= \frac{5}{6} = \frac{\delta(H_1)}{L-1} \\
+P_s(H_1) &= 1 - \frac{5}{6} = \frac{1}{6} \implies 1 - \frac{\delta(H_1)}{L-1}
+\end{aligned}
+\]
+
+\noindent \textbf{IN GENERAL}
+\[
+P_s(H) \geq 1 - p_c \frac{\delta(H)}{L-1}
+\]
+
+\vspace{1em}
+
+\subsubsection{Combined effect of selection and crossover}
+\[
+m(H, t+1) \geq m(H, t) \frac{f(H)}{\tilde{f}} \left[ 1 - p_c \frac{\delta(H)}{L-1} \right]
+\]
+
+\vspace{1em}
+
+\noindent \textbf{Schemata with:} \\
+$-$ The average fitness is better the population average  \\
+$-$ The small length will increment the number of representatives exponentially
+
+
+\subsubsection{Effect of mutation}
+
+\noindent \text{The probability that 1 bit will not be changed} = 1 - $p_m$
+
+\vspace{1em}
+
+\noindent \text{The probability of a schema surviving mutation} =
+\[
+\underbrace{(1 - p_m)(1 - p_m)(1 - p_m) \dots (1 - p_m)}_{o(H) \text{ times}}
+\]
+
+\vspace{1em}
+
+\[
+P_s(H) = (1 - p_m)^{o(H)} \quad \quad 
+\begin{aligned}
+&\text{if } p_m \ll 1, \text{ then} \\
+&P_s(H) \approx 1 - o(H) p_m
+\end{aligned}
+\]
+
+\noindent \textbf{Schema theorem}
+\[
+m(H, t+1) \geq m(H, t) \frac{f(H)}{\tilde{f}} \left[ 1 - p_c \frac{\delta(H)}{L-1} \right] \left[ 1 - o(H) p_m \right]
+\]
+
+\vspace{1.5em}
+
+\noindent \text{We have schemata that:}
+\begin{itemize}
+    \item[$-$] \text{Have an average fitness better than population average}
+    \item[$-$] \text{Are short (small} $\delta(H)$\text{)}
+    \item[$-$] \text{Have a small order (small} $o(H)$\text{)}
+\end{itemize}
+
+
+\noindent \text{will increase the number of representatives exponentially}
+
+
+\subsubsection{Building blocks' hypothesis}
+
+This hypothesis tells us that maintaining the building blocks in the population and making them increment exponentially will
+\begin{itemize}
+    \item Maximize our chances of finding a global optimum
+    \item Make the probability of finding a global optimum tend to 1 with time
+\end{itemize}
+
+
+\subsubsection{K-armed bandit problem}
+
+This looks like something random but apparently is related to genetic algorithms.
+
+\vspace{10pt}
+
+Vanneschi just trashed Samuel in real time.
+
+\vspace{10pt}
+
+
+\begin{itemize}
+    \item Given N slot machines
+    \item Every slot machine j has a number of arms $K_j$
+    \item We assume that we already played t times and for each of this t games we know 
+    \begin{itemize}
+        \item The slot machine in which we played 
+        \item The result of the game (win or lose)
+    \end{itemize}
+    \item We want to find to which slot machine we should allocate our next attempts to maximize our probability of winning 
+\end{itemize}
+
+Given the slot machine j, we call $S_j$ the probability of winning using the slot machine j estimated using all the past t attempts. So $S_j = \frac{\text{Number of games where we used slot machine j and we won}}{\text{Total number of game}}$
+
+\vspace{10pt}
+
+Theorem time \ra If in the next game we allocate a number of attempts to slot j such that
+
+\begin{itemize}
+    \item $S_j $ > average ($S_j > \frac{\sum_{i}S_i}{N}$)
+    \item j has a small number of arms
+\end{itemize}
+
+Then \begin{itemize}
+    \item We maximize our probability of winning
+    \item The probability of winning tends to 1 with the number of attempts tending to infinity
+\end{itemize}
+
+The consequence is the theorem of asymptotic convergence of genetic algorithms.
+
+Let i(t) be the best individual in the population at generation t and $S_o$ be the best set of global optima. Then \[\lim_{t\ra \infty} P(i(t) \in S_o) = 1\]
+
+\subsection{Problems with genetic algorithms}
+
+The main drawbacks of standard genetic algorithms are
+
+\begin{enumerate}
+    \item Premature convergence \ra also known as loss of diversity. For any possible problem our algorithm will produce individuals that are similar to each other. If they are not similar to the global optimum we might never reach it. 
+    \item Position problem \ra typical of standard crossover. We risk splitting our good chromosomes if they are at different ends. 
+    \item Unicity of the fitness
+\end{enumerate}
+
+
+We can solve them with the following methods
+
+\subsubsection{Premature convergence}
+
+We have ways to measure the diversity of our population and to see if we have this problem
+
+\begin{itemize}
+    \item Entropy \ra $\sum_{j = 1}^{N} F_j \log(F_j)$
+    \item Variance \ra  $\frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2$
+\end{itemize}
+
+Both can be measured on genotypic (within the individual) and phenotypic (fitness) dimensions. 
+
+\begin{itemize}
+    \item Phenotypic entropy \ra N is the number of different fitness values in the population and $F_j$ fraction of individuals with a specific fitness value in the population. For continuous fitness we usually define bins. 
+    \item Genotypic entropy \ra N is the number of different genotypes while (strings) and $F_j$ the fraction of individuals with that genotype. 
+    \item Phenotypic variance \ra n is the number of individuals in the population, $x_i$ is the fitness of individual i and $\bar{x}$ is the average fitness of the individuals in P. 
+    \item Genotypic variance \ra n is the number of individuals in the population, $x_i$ (given a distance measure) is the distance of the individual i from the origin and $\bar{x}$ is the average distance to origin of the individuals in the population. 
+\end{itemize}
+
+As origin, we can choose any individual (usually a string of zeroes). These methods are just monitoring systems (not a way to solve the problems).
+
+
+\vspace{10pt}
+
+How to maintain diversity?
+
+\vspace{10pt}
+
+We can do
+\begin{enumerate}
+    \item Fitness sharing
+    \item Restricted mating
+\end{enumerate}
+
+With fitness sharing we will give more fitness to individuals that are very diverse. Then similar individuals will be penalized. This approach doesn't change the representation of our individuals.
+
+\vspace{10pt}
+
+Restricted mating acts in the opposite way. 
+
+\vspace{10pt}
+\textbf{Fitness Sharing}
+\vspace{10pt}
+
+For all individuals i in the population:
+
+\begin{itemize}
+    \item Given a predefined distance measure calculate the distance from i to all the other individuals in the population
+    \item Normalize all these distances in the interval [0, 1]
+    \item Invert these distances (for instance calculating $S(i, j) = 1-d(i,j)$)
+    \item Calculate the sharing coefficient the sharing coefficient of i \ra ($S(i) = \sum_{j}S(i,j)$)
+    \item  Redefine the fitness as $f_{s}(i) = \frac{f(i)}{S(i)}$
+\end{itemize}
+
+We can do this given:
+
+\begin{enumerate}
+    \item A distance measure
+    \item A normalization method
+    \item A way to invert the distances
+\end{enumerate}
+
+\begin{center}
+    \textbf{EXAMPLE}
+\end{center}
+
+\textbf{POPULATION} \\
+$i_1: \quad 11111 \quad f(i_1) = 50$ \\
+$i_2: \quad 01111 \quad f(i_2) = 40$ \\
+$i_3: \quad 10111 \quad f(i_3) = 30$ \\
+$i_4: \quad 00000 \quad f(i_4) = 10$
+
+\vspace{1em}
+\textbf{DISTANCE:} Hamming Distance \\
+\textbf{NORMALIZATION:} $d_N = \frac{d}{L}$ \\
+\textbf{INVERSION:} $1 - d_N$
+
+\vspace{1em}
+\textbf{MAXIMIZATION} \\
+New fitness $i_4$:
+\begin{align*}
+    d(i_4, i_1) = 5 &\longrightarrow d_N = 1 \longrightarrow S = 0 \\
+    d(i_4, i_2) = 4 &\longrightarrow d_N = \frac{4}{5} \longrightarrow S = \frac{1}{5} \\
+    d(i_4, i_3) = 4 &\longrightarrow d_N = \frac{4}{5} \longrightarrow S = \frac{1}{5}
+\end{align*}
+
+\[ S(i_4) = 0 + \frac{1}{5} + \frac{1}{5} = \frac{2}{5} \]
+
+The result is that we have implicit speciation.
+
+
+
+\vspace{10pt}
+\textbf{Restricted mating}
+\vspace{10pt}
+
+Starting from an arbitrary schema we divide it in two parts, template and functional. In the template we are basically coding what the individual will like from the mating point of view. We get that we can do cross over in a restricted way. 
+
+The model are
+\begin{itemize}
+    \item Bi-directional match
+    \item Uni-directional match
+    \item Best partial match
+\end{itemize}
+
+\begin{center}
+    \underline{\large \textbf{RESTRICTED MATING}}
+\end{center}
+
+\vspace{1em}
+
+\begin{center}
+    \begin{tabular}{r c l}
+        & \textbf{$\langle$TEMPLATE$\rangle$} & \textbf{$\langle$FUNCTIONAL$\rangle$} \\
+        $i_1:$ & $* \ 1 \ 0 \ *$ & $: \ 1 \ 0 \ 1 \ 0$ \\
+        $i_2:$ & $* \ 0 \ 1 \ *$ & $: \ 1 \ 1 \ 0 \ 1$ \\
+        $i_3:$ & $0 \ * \ * \ 0$ & $: \ 0 \ 0 \ 0 \ 0$ \\
+    \end{tabular}
+\end{center}
+
+\subsubsection{Position problem}
+
+Crossover tends to destroy good individuals if the good genomes are on different sides after the cut. If we want to save those genomes we would like to reorder the indexes, but we will have problems in doing it. Our objective is to take two parents with indexes in different orders and create children that have all indexes (once). We can do something called \textbf{Cycle Crossover}
+
+\begin{center}
+    \underline{\Large \textbf{CYCLE CROSSOVER}}
+\end{center}
+
+\vspace{1em}
+
+\textbf{PARENTS} \\
+\begin{tabular}{r cccccccccc}
+    & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\
+    $P_1:$ & 1 & 1 & 0 & 0 & 0 & 1 & 1 & 0 & 0 & 1 \\
+    $P_2:$ & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 1 & 0 & 0 \\
+\end{tabular}
+
+\vspace{1em}
+$\xrightarrow{\text{INVERSION}}$
+\vspace{1em}
+
+\begin{tabular}{r cccccccccc}
+    Indices: & 9 & 8 & 2 & 1 & 7 & 4 & 5 & 10 & 6 & 3 \\
+    Values $P_1$: & 0 & 0 & 1 & 1 & 1 & 0 & 0 & 1 & 1 & 0 \\
+    Values $P_2$: & 0 & 1 & 0 & 0 & 1 & 1 & 1 & 0 & 1 & 0 \\
+\end{tabular}
+
+\vspace{1em}
+$\xleftarrow{\text{REORDER}}$
+\vspace{1em}
+
+\textbf{OFFSPRING} \\
+\begin{center}
+    \fbox{
+        \begin{minipage}{0.4\textwidth}
+            1 0 0 0 1 1 1 1 0 0 \\
+            0 1 0 1 0 1 1 0 0 1
+        \end{minipage}
+    }
+\end{center}
+
+\begin{itemize}
+    \item \textbf{Step 1: Identifying a Cycle} 
+    Start with the first gene of Parent 1 ($P_1$) and look at the gene in the same position in Parent 2 ($P_2$). You then find where that value from $P_2$ is located in $P_1$[cite: 1]. Repeat this process until you return to the starting value, which completes one "cycle"[cite: 1].
+    
+    \item \textbf{Step 2: Mapping (Inversion)} 
+    In the example, the "Inversion" section shows the indices (1--10) rearranged to group them according to the cycles found[cite: 1]. For example, if indices 1, 4, and 5 form a cycle, they are analyzed together in this step[cite: 1].
+    
+    \item \textbf{Step 3: Selection and Swapping} 
+    \begin{itemize}
+        \item For the first cycle, the offspring inherit the genes directly from their respective parents in those positions[cite: 1].
+        \item For the next cycle, the genes are "swapped": Offspring 1 gets genes from Parent 2, and Offspring 2 gets genes from Parent 1[cite: 1].
+    \end{itemize}
+    
+    \item \textbf{Step 4: Reconstruction (Reorder)} 
+    Finally, the genes are moved back into their original numerical positions (1 through 10)[cite: 1]. The values highlighted in \textbf{red} in the image represent the specific genes that were either swapped or kept as part of a cycle to create the final \textit{Offspring}[cite: 1].
+\end{itemize}
+
+
+Another way is to use \textbf{Partially matched crossover}
+
+\begin{center}
+    \underline{\Large \textbf{PARTIALLY MATCHED (MAPPED) CROSSOVER}}
+\end{center}
+
+\vspace{1em}
+
+\textbf{PARENT 1} \\
+\begin{tabular}{ccc|ccc|cccc}
+    9 & 8 & 4 & \textbf{5} & \textbf{6} & \textbf{7} & 1 & 3 & 2 & 10 \\
+    1 & 0 & 1 & \textbf{1} & \textbf{0} & \textbf{1} & 0 & 0 & 0 & 1 \\
+\end{tabular}
+
+\vspace{1em}
+
+\textbf{PARENT 2} \\
+\begin{tabular}{ccc|ccc|cccc}
+    8 & 7 & 1 & \textbf{2} & \textbf{3} & \textbf{10} & 9 & 5 & 4 & 6 \\
+    0 & 0 & 1 & \textbf{0} & \textbf{1} & \textbf{1} & 1 & 1 & 0 & 0 \\
+\end{tabular}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\textbf{OFFSPRING (Result)} \\
+\begin{tabular}{ccc|ccc|cccc}
+    9 & 8 & 4 & \textbf{2} & \textbf{3} & \textbf{10} & 1 & 6 & 5 & 7 \\
+    1 & 0 & 1 & \textbf{0} & \textbf{1} & \textbf{1} & 0 & 0 & 1 & 1 \\
+    \hline
+    8 & 10 & 1 & \textbf{5} & \textbf{6} & \textbf{7} & 9 & 2 & 4 & 3 \\
+    0 & 1 & 1 & \textbf{1} & \textbf{0} & \textbf{1} & 1 & 0 & 0 & 1 \\
+\end{tabular}
+
+\vspace{1em}
+
+Sometimes we have to use the repair algorithm if some problems are coming.
+
+We can have a new kind of mutation where we swap the character's order inside the window. 
+
+% --- COPIA DA QUI ---
+\begin{center}
+\begin{tabular}{rrc}
+    \textbf{Initial:} & $9 \quad 8 \quad \underline{\mathbf{4} \quad 5 \quad 6 \quad 7 \quad \mathbf{1}} \quad 3 \quad 2 \quad 10$ & \\[0.8em]
+    & $\Downarrow$ & \\[0.8em]
+    \textbf{mut1 (swap):} & $9 \quad 8 \quad \mathbf{1} \quad 5 \quad 6 \quad 7 \quad \mathbf{4} \quad 3 \quad 2 \quad 10$ & (swap) \\
+    \textbf{mut2:} & $9 \quad 8 \quad \mathbf{1} \quad \mathbf{7} \quad \mathbf{6} \quad \mathbf{5} \quad \mathbf{4} \quad 3 \quad 2 \quad 10$ & 
+\end{tabular}
+\end{center}
+% --- A QUI ---
+
+\subsection{Multi-objective optimization}
+
+We might have more than one fitness to optimize, then we need a way to optimize for all of them. 
+
+% --- COPIA DA QUI ---
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{l @{\hspace{1cm}} l}
+    \multicolumn{2}{l}{\textbf{MULTI-OBJECTIVE OPTIMIZATION (MULTI-FITNESS)}} \\[0.2em]
+    \multicolumn{2}{l}{$\text{Fitness} = (\text{cost}, \text{avg. Numb. Of accidents})$} \\[1.5em]
+    
+    \textbf{Numeric Cases:} & \textbf{Global Pareto Optimal Set} = $\{A, B, C\}$ \\
+    $A = (2, 10)$ & \small{(Set of the optima)} \\
+    $B = (4, 6)$  & \\
+    $C = (8, 4)$  & \textit{A, B, C are NON-DOMINATED:} \\
+    $D = (9, 5)$  & There is no other global solution in the \\
+    $E = (7, 8)$  & search space better in all criteria. \\
+\end{tabular}
+
+\vspace{1cm}
+
+% GRAFICO IN PURO LATEX
+\setlength{\unitlength}{4.5mm} % Scala del grafico leggermente aumentata
+\begin{picture}(14,13)(-2,-1)
+    % Assi cartesiani
+    \put(0,0){\vector(1,0){12}}
+    \put(0,0){\vector(0,1){12}}
+    
+    % Etichette Assi
+    \put(12.2,-0.3){\makebox(0,0)[l]{\small cost (f1)}}
+    \put(-0.5,12.2){\makebox(0,0)[b]{\small avg \#acc (f2)}}
+    
+    % Punto Ideale (Origine di riferimento per minimizzazione)
+    \put(1,1){\circle{0.5}}
+    \put(1.5,-0.8){\makebox(0,0)[l]{\tiny Ideal Point}}
+    
+    % Punti del grafico
+    \put(1,9){\circle*{0.5}} \put(1.4,9.4){\makebox(0,0){\textbf{A}}}
+    \put(2,5){\circle*{0.5}}  \put(3.4,5.4){\makebox(0,0){\textbf{B}}}
+    \put(7,3){\circle*{0.5}}  \put(7.4,2.4){\makebox(0,0){\textbf{C}}}
+    \put(9,5){\circle*{0.5}}  \put(9.5,5.5){\makebox(0,0){\textbf{D}}}
+    \put(7,8){\circle*{0.5}}  \put(7.4,8.4){\makebox(0,0){\textbf{E}}}
+    
+    % Tratteggi di Dominanza (Esempio per mostrare che D ed E sono dominati)
+    % Linee che mostrano visivamente la frontiera di Pareto globale
+    \put(2,11){\line(0,-1){1}}
+    \put(2,10){\line(1,-2){2}}
+    \put(4,6){\line(2,-1){4}}
+    \put(8,4){\line(1,0){3}}
+    
+    % Etichetta per la frontiera
+    \put(6,6.5){\makebox(0,0)[l]{\tiny \textbf{Global Pareto Frontier}}}
+\end{picture}
+\end{center}
+% --- A QUI ---
+
+\vspace{10pt}
+
+If our solutions are not the best in all the criteria they are called non dominated. The set of non dominated solutions is called the Pareto optimal set. If all of our possible solutions are non dominated then all of them can be used, then we want to find the Pareto optimal set. But how can we choose the solution in our set? 
+
+\vspace{10pt}
+
+We can plot a theoretical point to look for our preferred solution (Global optimum that doesn't exist). Since it doesn't exist then we look for the point that minimizes the distance from this preferred point. Then now we want to find an algorithm that find the closest point. 
+
+
+
+\vspace{10pt}
+
+In genetic algorithms we can have multi optimization, changing selection as follows:
+
+\begin{enumerate}
+    \item Copy all the individuals of the population into a set S
+    \item Find all non dominated individuals that are in S, assign a flag (1)
+    \item Remove these individuals from S
+    \item Find all non dominated individuals in S, assign a flag (2)
+    \item Remove them from the population and so on until S is empty
+    \item The flags now are proportional to the value of dominance/importance of the individuals
+    \item For each individual in the population the probability of selecting that individual is inversely proportional to its flag. 
+\end{enumerate}
+
+To implement a way to find the non dominated individuals we just look for the dominated ones.
+We can also have Pareto based optimization
+
+
+\subsection{Continuous optimization}
+
+In this setting in every position of our string we have continuous values and not integers. In this setting individuals are m-dimensional vectors of real numbers where each element is part of a given interval (optional). We can have many crossovers and mutations for this kind of algorithm. The main one are called geometric crossover and geometric mutation. 
+
+\vspace{10pt}
+
+An individual can be considered as a point in an m-dimensional Cartesian space. 
+
+\subsubsection{Geometric crossover}
+
+Given two parents [$x_1, x_2, ..., x_m$] and [$y_1, y_2, ..., y_m$] they will generate one child [$R_1 x_1 + (1-R_1)y_1, R_2x_2+(1-R_2y_2,...,R_m x_m+(1-R_m)y_m)$] where $\forall i = 1,2,...m$ $R_i$ is a random number $\in$  [0,1].
+
+\vspace{10pt}
+
+We call it geometric because if we plot the two parents we will notice that the kind lies in the middle of them (is a linear combination). The kid will not be better than the parents but for sure better than the worse one. But it can be better than both in certain situations.
+
+\subsubsection{Geometric mutation}
+
+Also known as box, or ball, mutation.
+
+Given one individual [$x_1, x_2,...,n_m$] this mutation creates one individual [$x_1 + R_1, x_2 + R_2, ..., X_m + R_m$] where $\forall i = 1,2,..., m$ $ R_i$ is a random number $\in [-m_s, m_s]$ where $m_s$ is a parameter called mutation step. Geometrically we can get any element inside a given square or circle of a certain radius centered on our original point. 
+
+\vspace{10pt}
+
+In the case that fitness is proportionate to a distance to a certain point (the global optimum) it is always possible to improve by creating a child that is closer to the global optimum while being inside the box. In this case we say that the fitness landscape is unimodal. 
+
+
+
+\subsection{Particle Swarm Optimization}
+
+It's still a population based algorithm but is not inspired by the theory of evolution. It mimics as flocks of birds moves. It belongs to the field of swarm intelligence (when animals work together they are able to solve problems that they aren't able to if they are alone). 
+
+\vspace{10pt}
+
+This algorithm is based on two laws of attraction on the single animal level
+
+\begin{itemize}
+    \item The single animal has memory, it wants to go back to a point where it was comfortable
+    \item There is a leader that will be followed by the rest of the animals
+\end{itemize}
+
+The individuals (particles) are m-dimensional vectors of real numbers while the population (swarm) is an n-dimensional vector of particles (a matrix).
+
+We use the following notation
+
+\begin{itemize}
+    \item $\vec{x_i}$ is the $i^{th}$ individual (or position) in the swarm (i = 1, 2, ..., n)
+    \item $\vec{v_i}$ is the velocity of particle i (m-dimensional vector of real numbers)
+    \item $\vec{b_i}$ is the local best position of particle i (i $\in \mathbb{R}^m$)
+    \item $\vec{g}$ is the global best position of any particle in the swarm (best so far)
+\end{itemize}
+The algorithm follows the following pipeline
+
+\begin{enumerate}
+    \item For all i = 1, 2, ..., n: we initialize $\vec{x_i} \text{and} \vec{v_i}$
+    \item For all i = 1, 2, ..., n: we initialize $\vec{b_i} = \vec{x_i}$
+    \item $\vec{g} = \text{argmin}_{\vec{x_i}} f(\vec{x_i})$ (for minimization problems)
+    \item While not termination condition, for all i = 1, 2, ..., n
+    \begin{enumerate}
+        \item $\vec{x_i} = \vec{x_i} + \vec{v_i}$
+        \item Update $\vec{v_i}$
+        \item If $f(\vec{x_i})$ better than $f(\vec{b_i})$ then $ \vec{b_i} = \vec{x_i}$
+        \item If $f(\vec{x_i})$ better than $f(\vec{g_i})$ then $ \vec{g_i} = \vec{x_i}$
+    \end{enumerate}
+    \item Return $\vec{g}$
+\end{enumerate}
+
+
+The update of the velocity is done using the following formula:
+
+\[
+\vec{v_i} = w\vec{v_i} + C_1 \vec{R_1}(\vec{b_i} - \vec{x_i}) + C_2 \vec{R_2}(\vec{g}- \vec{x_i})
+\]
+
+Where
+
+\begin{itemize}
+    \item w is the inertia constant, how a movement is similar to a previous one
+    \item $C_1$ is the cognitive component
+    \item $C_2$ is the social component
+    \item $\vec{R_1}$ and $\vec{R_2}$ are vectors of random numbers $\in$ [0, 1]
+\end{itemize}
+
+
+
+
+
+

@@ -1,5 +1,7 @@
 \section{Big data analytics}
 
+
+
 \subsection{Introduction}
 
 \subsubsection{What is Big data}
@@ -15,7 +17,7 @@ Big data is a buzzword used to characterize certain kind of data. Those data wer
     \item Visualization
 \end{enumerate}
 
-Usually these datasets are very huge and traditional tools can't process them efficiently. 
+Usually these datasets are very huge and traditional tools can't process them efficiently. This part involves not just size but also variety, speed and complexity.
 
 \vspace{10pt}
 
@@ -34,7 +36,7 @@ Big data
     \item Requires new technology
 \end{itemize}
 
-With traditional data the best way to manage them is by vertically scaling the requirements, with big data we have to grow horizontally. 
+With traditional data the best way to manage them is by vertically scaling the requirements, with big data we have to grow horizontally. Basically from using big CPUs to many small ones. 
 
 \subsubsection{Data sources}
 
@@ -46,6 +48,10 @@ The majority of big data come from the web revolution with drivers that are ever
     \item Social media
     \item Sensors
 \end{itemize}
+
+Big data matters because we can discover patterns and insights and so supporting decision-making and training for machine learning models.
+
+\vspace{10pt}
 
 The data can be considered by their origins
 
@@ -75,6 +81,8 @@ The 3 Vs
     \item Visualization
 \end{enumerate}
 
+The most common 5 Vs are Volume, Velocity, Veracity, Value and Variety. 
+
 
 \subsubsection{The Big data ecosystem}
 
@@ -97,7 +105,7 @@ The ecosystem is characterized by 4 layers
     \item Analytics layer
 \end{enumerate}
 
-We use many tools to visualise these data and 3 main kinds of people act in the ecosystem
+We use many tools to visualise these data (Tableau, Power BI, QlikView or Python based ones) and 3 main kinds of people act in the ecosystem
 
 \begin{enumerate}
     \item Data engineers
@@ -118,7 +126,6 @@ Big data analytics as many possible fields of application
     \item Smart cities
     \item Science and research
 \end{enumerate}
-
 
 \subsection{Distributed storage, ecosystems and programming paradigms}
 
@@ -151,7 +158,24 @@ HDFS cons
     \item Multiple writers/edits
 \end{itemize}
 
-Another way to store data is using object storage (Cloud). The data are stored as objects in a bucket. Good for elastic scaling but we have higher latency. 
+Another way to store data is using object storage (Cloud). The data are stored as objects in a bucket. Good for elastic scaling, but we have higher latency and lower throughput.  Some examples are AWS and Azure Blob. This is a cost-effective way to handle many files. Replication is used as always. The advantages of this approach are
+
+\begin{itemize}
+    \item Can deal with many files
+    \item Small files are used
+    \item We can scale elastically up and down
+    \item Cheap
+\end{itemize}
+
+We also have cons
+
+\begin{itemize}
+    \item Atomic replacement of full objects
+    \item Lower throughput
+    \item High latency
+    \item Lack of query engine 
+    \item Off premises
+\end{itemize}
 
 \subsubsection{Distributed computing models}
 
@@ -163,7 +187,7 @@ Formed by a web of interconnected tools for storage, processing, analytics and v
 
 \vspace{10pt}
 
-Hadoop ecosystem
+\textbf{Hadoop ecosystem}
 \begin{itemize}
     \item HDFS for storage
     \item YARN to manage resources
@@ -171,7 +195,7 @@ Hadoop ecosystem
     \item Hive, Pig, Sqoop, Flume for analytics
 \end{itemize}
 
-Apache Spark
+\textbf{Apache Spark}
 
 \begin{itemize}
     \item Unifier engine for multiple tools
@@ -205,7 +229,6 @@ MapReduce paradigm
     \item Group by Key (Shuffle step)
     \item Aggregate results (Reduce step)
 \end{itemize}
-
 
 \subsection{Distributed parallel processing and the map reduce paradigm}
 
@@ -273,7 +296,7 @@ Hadoop has two main pillars
 
 \begin{enumerate}
     \item HDFS \ra Hadoop distributed file system (stores data across multiple machines and replicates blocks for reliability)
-    \item MapReduce \ra processing engine (splits computation between map and reduce, extended with yarn to manage cluster resources)
+    \item MapReduce \ra processing engine (splits computation between map and reduce, extended with YARN to manage cluster resources)
 \end{enumerate}
 
 Before Hadoop, we had to fit our data into one machine (limited scalability). Hadoop allowed big data storage and parallel computation.
@@ -290,7 +313,8 @@ Terms of Filesystems
     \item \textbf{Shard/Partition} terms for splitting datasets
 \end{itemize}
 
-Filesystems can be local (one disk, not fault-tolerant) or distributed (replicates blocks across many nodes). HDFS stores large files and is optimized for throughput, write once and read many times.
+Filesystems can be local (one disk, not fault-tolerant) or distributed (replicates blocks across many nodes). HDFS stores large files and is optimized for throughput (not latency), write once and read many times.
+
 
 \vspace{10pt}
 
@@ -424,17 +448,6 @@ sqoop import --connect jdbc:mysql://localhost/db --table orders
 \end{itemize}
 
 Hadoop it's still foundational but has been partially replaced by Spark for faster analytics
-
-
-
-
-
-
-
-
-
-
-
 
 \subsection{Introduction to Spark}
 
@@ -731,7 +744,6 @@ The integration is done
     \item With HDFS
 \end{itemize}
 
-
 \subsection{Spark in Cloud-based computational environments}
 
 The main use of Cloud computing in the context of big data is given by the fact that is elastic and can be used with on-demand options. It's the ideal way to work with distributed data processing. It also removes hardware management overload and some models support pay-as-you-go models. 
@@ -919,8 +931,6 @@ Load data from S3 or GCS \ra Use Spark to preprocess \ra Lightning AI trains mod
 
 Lightning AI supports GPU acceleration, auto-scaling and monitoring and Jupyter-like notebooks
 
-
-
 \subsection{Performance and data engineering in Spark}
 
 \subsubsection{Why Spark jobs are slow}
@@ -1035,6 +1045,14 @@ Common mistakes
     \item No partitioning
     \item Ignoring skew
 \end{itemize}
+
+
+
+
+
+
+
+
 
 
 \subsection{Big data storage technologies and relation with Spark}
@@ -1208,8 +1226,369 @@ We also have additional kinds of databases like
 
 
 
+\subsection{Machine Learning in Spark}
+
+\subsubsection{Introduction}
+
+As we know machine learning is the process of extracting pattern from data using statistics, linear algebra and numerical optimization. It can be applied to many problems. We have the following types of machine learning
+
+\begin{itemize}
+    \item Supervised
+    \item Unsupervised
+    \item Reinforcement learning
+    \item Semi-supervised 
+    \item Self-supervised
+\end{itemize}
+
+Here we will see mainly supervised and unsupervised. Then we will talk about classification, regression, clustering, dimensionality reduction and association rules. Some algorithms in Spark MLlib for unsupervised learning are
+
+\begin{itemize}
+    \item K-means
+    \item Latent Dirichlet Allocation 
+    \item Gaussian mixture models
+\end{itemize}
+
+We want to use machine learning in Spark because our big data are too large for single machine machine learning. Spark MLlib is a scalable ML library built on top of Spark. Some key features are 
+\begin{itemize}
+    \item It works on distributed DataFrames
+    \item Supports both supervised and unsupervised machine learning
+    \item Integrates with pipelines
+\end{itemize}
+
+Originally it worked with RDDs, now is dataframe based. This library provides
+\begin{itemize}
+    \item Transformers
+    \item Estimators
+    \item Pipelines
+\end{itemize}
+
+The advantages of MLlib are
+\begin{itemize}
+    \item Distributed training on clusters
+    \item Compatible with Spark SQL and DataFrames
+    \item Integration with streaming and GraphX
+    \item Used in production
+\end{itemize}
+
+\subsubsection{Spark MLlib concepts}
+
+\textbf{Transformers}
+
+These are functions that transform DataFrames using fixed rules. They do not learn from the data and implement the transform(). We get input\ra output columns. These functions are usually used in preprocessing. Some examples are Tokenizer, VectorAssembler, HashingTF, StandardScalerModel.
+
+\vspace{10pt}
+
+\textbf{Estimators}
+
+These are algorithms that fit models and learn from the data. Implement the fit() method that in return gives us a model. Some examples are LogisticRegression, Kmeans and LinearRegression.
+
+\vspace{10pt}
+
+A special case is the one of estimators that learn transformations. They basically learn on how to transform data for feature engineering. They implement with fit() and produce a Transformer. Some examples are StringIndexer, OneHotEncoder and StandardScaler. 
+
+\vspace{10pt}
+
+\textbf{Pipelines}
+
+Pipelines are chains of transformations and estimators used to standardize the ML workflows. For example preprocessing \ra model training \ra evaluation. 
+
+\vspace{10pt}
+
+\textbf{Feature engineering}
+
+In Spark MLlib we use feature engineering to transform raw data into meaningful numerical features via indexing, encoding, scaling and assembling in order to improve our model performance in distributed ML pipelines. Some common transformers are 
+
+\begin{itemize}
+    \item StringIndexer \ra Categorical encoding
+    \item VectorAssembler \ra Combine features
+    \item StandardScaler \ra Normalize data
+\end{itemize}
+
+
+\subsubsection{Algorithms}
+
+For classification
+\begin{itemize}
+    \item Logistic regression
+    \item Decision trees
+    \item Random forests
+\end{itemize}
+
+For regression
+\begin{itemize}
+    \item Linear regression
+    \item Gradient boosted trees
+\end{itemize}
+
+For clustering
+\begin{itemize}
+    \item KMeans
+    \item Gaussian mixture
+\end{itemize}
+
+Spark MLlib includes ALS (Alternating Least Squares)
+
+\subsubsection{Evaluation}
+
+In MLlib we have the following metrics
+
+\begin{itemize}
+    \item Accuracy
+    \item Precision
+    \item Recall
+    \item RMSE
+    \item $R^2$
+    \item Silhouette score 
+\end{itemize}
+
+Recall that we have to split our dataset into train, test and validation and evaluate the model with the right transformations avoiding leakage. We can apply cross-validation.
+
+\subsubsection{Advanced Topics}
+
+Spark MLlib is mainly for classical machine learning, to perform deep learning tasks we can integrate TensorFlow and PyTorch using 
+
+\begin{itemize}
+    \item BigDL \ra run DL models directly in Spark clusters
+    \item Horovod \ra enables distributed training of TensorFlow and PyTorch models using Spark for data preprocessing and coordination.
+\end{itemize}
+
+We can apply these models on real-time data to work with streaming. 
+
+\vspace{10pt}
+
+MLlib has some limitations on the side of deep learning support, the algorithms are not flexible and debugging on distributed nodes can be tricky. 
+
+\subsection{Pipelines in Spark}
+
+
+\subsubsection{Introduction}
+
+As we know the ML workflows involve multiple steps like cleaning, engineering training and evaluation. Without pipelines the code can be messy, with them, we can standardize it by using modular workflows. The key idea is that a pipeline is a sequence of stages, mainly transformers (to process data) and estimators (to learn from these data). The idea is similar to the one present is Scikit-learn but applied to big data.
+
+
+\subsubsection{Spark pipeline API}
+
+
+The transformers stage include taking a dataframe as input and to output a transformed version of it. We want to apply fixed rules to implement to transform function. We are not learning from the data. 
+
+\vspace{10pt}
+
+The estimators phase on the other hand is made of algorithms that learn from data. They implement the fit function (it produces a model). We also have some special cases of estimators that learn transformations, their fitted models are the transformers used in pipelines. These estimators will learn rules to do feature transformation but not to do predictive tasks. We must fit them before the use. 
+
+
+\vspace{10pt}
+
+As we know a pipeline is an ordered list of stages where the data flows through each one in order. Pipelines are good because they are
+
+\begin{itemize}
+    \item Modular and reusable
+    \item Automates repetitive steps
+    \item Scales across distributed Spark clusters
+    \item Encourage clean ML engineering practices
+\end{itemize}
+
+
+\subsubsection{Feature engineering pipelines}
+
+Some useful pipelines can be
+
+\begin{enumerate}
+    \item \textbf{StringIndexer + OneHotEncoder} \ra To convert categorical values to numbers or to binary encode them 
+    \item \textbf{VectorAssembler} \ra Combines multiple feature columns into a single one
+    \item \textbf{StandardScaler} \ra Standardizes the feature into an N(0, 1) fashion to help our algorithms converging faster  
+\end{enumerate}
+
+
+\subsubsection{Model training and evaluation}
+
+To train a pipeline we use the fit method, it will create a pipeline. To apply it we use the transform method. The evaluators provided by Spark MLlib are for classification, regression and clustering. We can evaluate a model using the usual metrics. 
+
+
+\subsubsection{Hyperparameter tuning}
+
+To improve our models we can use some built-in functions such as grid search, cross validation and the split in validation and training. 
+
+
+
+\subsection{Graph Analytics}
+
+\subsubsection{Introduction}
+
+As we know many real-world problems involve networks and traditional databases are not optimized for this kind of relationships. Using graph analytics we can get insights from nodes and edges. The basic terms of graphs are the following:
+\begin{itemize}
+    \item Node (or vertex) \ra entity
+    \item Edge \ra relationship between nodes
+    \item Directed/Undirected, Weighted/Unweighted
+\end{itemize}
+
+We can apply graph analytics to do tasks like
+\begin{itemize}
+    \item Community detection
+    \item Suspicious pattern detection
+    \item Link prediction
+    \item Path optimization
+    \item Interaction network
+\end{itemize}
+
+
+\subsubsection{Spark GraphX}
+
+One native Spark graph analytics library is GraphX. It's built on top of RDDs, and it combines both ETL and graph computation. 
+
+We consider a graph as a pair of RDDs and with this library we can use graph operators and algorithms. Some common operations are
+
+\begin{itemize}
+    \item mapVertices/mapEdges \ra transform attributes
+    \item joinVertices \ra enrich data
+    \item subgraph \ra filter
+    \item triplets \ra combine vertices + edges
+\end{itemize}
+
+In GraphX we have some built-in algorithms that can be used, like:
+\begin{itemize}
+    \item PageRank
+    \item Connected Components
+    \item Triangle counting
+    \item The Shortest Paths
+    \item Label propagation (communities)
+\end{itemize}
+
+\subsubsection{GraphFrames}
+
+Since we can use GraphX only with Scala and since it's mainly RDD based we would like to have a framework to work with DataFrames and Python. Luckily we have GraphFrames. It also integrates well ML and SQL. 
+
+\vspace{10pt}
+
+We can explore our graph using graph queries. If we want to do some pattern matching operation we can use something called motif finding. Additional operations are for computation of degrees, aggregations, page rank (node importance), connected components (find group of nodes), label propagation (find communities) and breadth first search (the shortest path, reachability and relationship discovery). 
+
+
+\subsubsection{Advanced topics}
+
+Graph features can be used inside ML pipelines for different tasks. These graphs can be used for streaming of data since they can evolve dynamically. 
+
+The storage options are usually:
+\begin{itemize}
+    \item HDFS
+    \item Cassandra
+    \item Neo4j
+\end{itemize}
+
+With these structures we can encounter problems if our graphs are huge since we can fall inside problems with our partitions. Also, the algorithms might not parallelize well. Some useful ways to solve the problems are partitioning, caching, check pointing and query optimization. 
+
+
+
+\subsection{Streaming}
+
+\subsubsection{Introduction}
+
+Traditional batch processing is done on bins of hours or days, but many modern apps require insights done in real time. In this setting streaming analytics allow us to process events as they arrive. 
+
+\vspace{10pt}
+
+Before Spark most engines used a record-at-a-time model, one by one. This approach is fast but difficult to operate at scale. Spark then introduced a new model to simplify scaling and reliability. This approach is based on micro-batch processing where data is grouped into small batches. Each batch is processed using deterministic and parallel tasks. The key advantages are that we have a strong fault tolerance, exactly once semantics and deterministic compute are ensured and operations are simplified. Latency is a bit higher but still suitable. 
+
+
+\subsubsection{Structured streaming overview}
+
+Structured streaming is built on Spark SQL and DataFrame API. The key idea is that we consider streaming as incremental batch, so developers write queries as if static while Spark run them continuously. 
+
+\vspace{10pt}
+
+Structured streaming treats a data stream as an unbounded table (a new event is a new row appended to this table). The developer will write a normal DataFrame or SQL query on that table (as for batch) while Spark incrementalizes the query, each micro-batch updates the result table. The triggers decide when to update the result and sinks decide where it is written.
+
+
+\subsubsection{Streaming concepts}
+
+Some useful concepts about streaming
+
+\begin{itemize}
+    \item \textbf{Micro-Batch model} \ra Spark processes small batches of data, we want a balance between throughput and latency. This is transparent to developers
+    \item \textbf{Event time vs Processing time} \ra Event (when the event occurs) or processing (when Spark processes it). Structured Streaming handles late data with watermarks
+    \item \textbf{Windowing} \ra Data are grouped into time windows
+    \item \textbf{Exactly-one semantics} \ra Spark guarantees no duplicate processing even when failures happen, this is important for finance and transactions. We have it when we have replayable source, deterministic transformations, idempotent or transactional sink and a stable checkpoint directory
+    \item \textbf{Checkpointing and fault tolerance} \ra States are stored in checkpoints, this allows recovery after failure. Key for production streaming jobs
+\end{itemize}
+
+
+\subsubsection{Spark structured streaming API}
+
+Usual input sources are Kafka, Socket, files and cloud storage. Output sinks usually are console, files, Kafka and databases. 
+
+\vspace{10pt}
+\textbf{Kafka}
+\vspace{10pt}
+
+Kafka is a distributed publishing/subscribe platform designed for horizontal scalability. It's often used as a scalable buffer for streaming data into and out of Hadoop storage systems. Acts as middleware that guarantees durable ingestion from diverse data sources. Distributed sequential logs are used to store messages allowing clients or consumer groups to read from any position via simple numerical offsets. Output modes can be append, complete and update. 
+
+\vspace{10pt}
+
+As we know structured streaming keeps a result table that is updated every trigger. The output mode controls which rows from that table get written to the sink. 
+
+\vspace{10pt}
+
+Append
+
+\begin{itemize}
+    \item Writes only new rows to the result table since last trigger
+    \item It requires that those rows will never change later
+    \item Typical queries are stateless transforms and event-time window aggregations with watermark
+    \item Good for append-only sinks like files or data lakes
+\end{itemize}
+
+Update
+\begin{itemize}
+    \item Writes only rows whose values changed since the last trigger
+    \item Can output the same key multiple times as aggregates evolve
+    \item Typical queries are stateful ones
+    \item It's good for sinks that can handle upserts and overwrites
+\end{itemize}
+
+Complete
+\begin{itemize}
+    \item It writes the entire result table every trigger
+    \item Only practical when the resultant table is small
+    \item Typically used for debugging, dashboards or in-memory tables where a full refresh is cheap
+    \item Not ideal for file sinks
+\end{itemize}
+
+With this information we should use append for immutable and append only results (files), update for changing aggregates with updatable sinks and complete only when the result is small, and we want a full refresh each time. 
+
+\vspace{10pt}
+
+A structured streaming recipe follows this pipeline
+
+\begin{enumerate}
+    \item Define the source
+    \item Transform the DataFrame
+    \item Choose sink + output mode
+    \item Configure trigger + checkpoint
+    \item Start and monitor the query
+\end{enumerate}
 
 
 
 
+\subsubsection{Advanced streaming}
 
+Some ways to improve our streaming can be using triggers (control how often the streaming query processes new data), use stateless (no stored history) or stateful (keeps running state) transformations, use the right aggregations and joins, use ML models and graph analytics. For performance and scaling we can tune batch interval, use state TTLs, prefer append mode, compress checkpoints and monitor latency. 
+
+
+\subsubsection{Challenges and best practices}
+
+Some challenges in Streaming can be
+\begin{itemize}
+    \item Out-of-order events
+    \item Late arrivals
+    \item Fault tolerance at scale
+    \item Cost of always-on clusters
+\end{itemize}
+
+Best practices
+\begin{itemize}
+    \item Use watermarks for late data
+    \item Keep stateless when possible
+    \item Monitor with Spark UI and logs
+    \item Test with small replayable streams
+\end{itemize}
+
+To monitor our streaming apps we can use metrics embedded in Spark UI, do some latency monitoring and integrate with Prometheus or Grafana

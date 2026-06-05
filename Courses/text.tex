@@ -6,7 +6,7 @@ Natural language processing is an area of computer science and artificial intell
 
 Some applications of NLP can be machine translation, dialog systems, search engines and predictive keyboards with autocorrectors. 
 
-\subsection{Challenges of natural language}
+\subsubsection{Challenges of natural language}
 
 Natural language is made of two main elements:
 \begin{enumerate}
@@ -19,7 +19,7 @@ Natural language is made of two main elements:
 Some problems in its analysis can arise from the variability of it. Different sentences can have the same meaning (paraphrases) or a single sentence can have multiple meanings (ambiguity). NLP systems should also be able to generalize as much as possible (work in different languages), to achieve this we train it on a corpus. Since the system can encounter inputs that it never encountered (Out-of-Domain or Out-of-Vocabulary) we want to extend its knowledge to these new words or meanings.
 
 
-\subsection{The NLP pipeline}
+\subsubsection{The NLP pipeline}
 
 A typical NLP pipeline follows these steps: Corpus \ra Feature engineering \ra Task.
 
@@ -30,7 +30,7 @@ A typical NLP pipeline follows these steps: Corpus \ra Feature engineering \ra T
 \end{itemize}
 
 
-\subsection{Text preprocessing methods}
+\subsubsection{Text preprocessing methods}
 
 Before applying BoW we need to define what's a word, this process is called \textbf{Tokenization}. We want to identify tokens (features in text), but it's not a trivial task. Some problems can arise from composed words and punctuation. It's also clear that with this kind of sparse representation we can encounter problems like the usual curse of dimensionality and the fact that we lose semantic relationships.
 
@@ -58,6 +58,647 @@ Some ways are
 We can also just consider certain type of words like verbs, nouns, adjectives and adverbs. 
 
 
+\subsection{Word representation}
 
+\subsubsection{Classification with BoW}
+
+We just throw our binary vectors inside a neural network. 
+
+\subsubsection{Word representations}
+
+BoW is the baseline for every text mining task since it has a lot of limitations like curse of dimensionality, no semantic relationship, all words will have the same importance and the context is ignored even though it changes the meaning.
+
+To solve these problems we want to use vectors to represent our words. From words to tokens to embeddings. Using embeddings for words is better than embed full documents since we can have a more granular and precise representation. One of the breakpoints was the creation of Word2Vec in 2013. 
+
+\vspace{10pt}
+
+We want that our word representations will be able to capture semantic relationships in a mathematical way. Some ways to generate our word vectors are
+\begin{itemize}
+    \item Term-Term matrix
+    \item Point-Wise mutual information (PMI)
+    \item Skip-gram(Word2Vec)
+\end{itemize}
+
+
+\vspace{10pt}
+
+In more details
+
+\vspace{10pt}
+\textbf{Term-Term matrix}
+\vspace{10pt}
+
+Term-term matrix is of dimensionality |V|x|V| and each cell records the number
+of times the row word (target) and the column word (context) co-occur in the
+training corpus
+\vspace{10pt}
+
+\[
+\begin{array}{c|cccc}
+    & \text{data} & \text{model} & \text{learning} & \text{algorithm} \\
+\hline
+\text{data}      & 25 & 12 & 9  & 7  \\
+\text{model}     & 12 & 30 & 15 & 18 \\
+\text{learning}  & 9  & 15 & 28 & 14 \\
+\text{algorithm} & 7  & 18 & 14 & 26 \\
+\end{array}
+\]
+
+\vspace{10pt}
+\textbf{PMI}
+\vspace{10pt}
+
+Point-wise Mutual Information (PMI) is a measure of how often two
+events x and y occur, compared with what we would expect if they
+were independent:
+
+\[
+I(x, y) = \log_2 \frac{P(x, y)}{P(x)P(y)}
+\]
+
+The point-wise mutual information between a target word w and a
+context word c is then defined as
+
+\[
+PMI(w, c) = \log_2 \frac{P(w, c)}{P(w)P(c)}
+\]
+
+It is common to use Positive PMI (called PPMI) which replaces all negative
+PMI values with zero
+
+\[
+PPMI(w, c) = max(\log_2 \frac{P(w, c)}{P(w), P(c)}, 0 )
+\]
+
+To build our PMI between information and data
+
+\begin{itemize}
+    \item Calculate co-occurence matrix
+    \item Calculate word probability
+    \item Calculate co-occurence probability
+    \item Create probabilities matrix
+    \item Calculate PPMI
+\end{itemize}
+
+With this approach we solve the problems of semantic relationships and the one of the words having the same importance. We still have the curse of dimensionality and the fact that context is not accounted for.
+
+
+\subsubsection{Vector embeddings (Word2Vec)}
+
+We can use another strategy to solve also the curse of dimensionality problem. Using an approach called Skip-gram (or Word2Vec) we can create short and dense word vectors. This approach works in the following way
+
+\begin{enumerate}
+    \item We start from the idea that similar words will tend to appear together
+    \item We train a classifier, a simple neural network with one hidden layer, to perform a binary prediction of the kind \ra Is word w likely to show up near c?
+    \item We learn the weights of the hidden layer, aka the word vectors that we are trying to learn
+\end{enumerate}
+
+More in details
+\begin{enumerate}
+    \item Define word and context, for each word in our corpus select the context window
+    \item Add negative samples for words that do not appear in the same context window
+    \item Define the task, usually if word w and c appeared in the corpus
+    \item Train the model
+    \item Retrieve the embeddings
+\end{enumerate}
+
+After this pipeline we have the possibility to extract semantic relationships between words
+
+\subsubsection{Classification with Word2Vec}
+
+To make predictions using our embeddings we need to find a way to give the vectors as input. Some ideas can be to use the mean of the vector or apply an RNN since we consider the input as a varying one. 
+
+
+\subsection{Sequential models}
+
+
+\subsubsection{Review of word embeddings}
+
+From the previous class we know that some problems are present with Bow representation. To solve them we can use Word2Vec, but we still have the problem of having to input a sequence inside our neural network. We can average our vectors into one scalar, but we will lose a lot of semantic information. To solve this problem we can use recurrent neural networks (RNNs).
+
+
+\subsubsection{RNNs}
+
+To process sequential input we can use some models like RNNs and LSTMs. Some common tasks can be next word prediction, sequence labeling, sequence classification and machine translation. 
+
+\vspace{10pt}
+
+A recurrent neural network is a network that contains a cycle within its network connections, meaning that the value of some unit is directly, or indirectly, dependent on its own earlier outputs as an input. 
+
+In a standard RNN architecture, three main matrices are involved:
+
+\begin{itemize}
+    \item $U$: the input-to-hidden weight matrix, responsible for processing the current input.
+    
+    \item $W$: the hidden-to-hidden recurrent weight matrix, which propagates information
+    from the previous hidden state to the current one.
+    
+    \item $V$: the hidden-to-output weight matrix, used to generate the network output.
+\end{itemize}
+
+These matrices are shared across all time steps, meaning that the same parameters
+are reused throughout the sequence. This parameter sharing allows the network to
+generalize across sequences of different lengths and reduces the total number of
+trainable parameters.
+
+At each time step $t$, the network computes:
+
+\[
+h_t = f(Ux_t + Wh_{t-1})
+\]
+
+where:
+
+\begin{itemize}
+    \item $x_t$ is the input vector at time step $t$,
+    \item $h_{t-1}$ is the hidden state from the previous time step,
+    \item $h_t$ is the updated hidden state,
+    \item $f(\cdot)$ is a nonlinear activation function such as $\tanh$ or ReLU.
+\end{itemize}
+
+The output of the network is then computed as:
+
+\[
+y_t = g(Vh_t)
+\]
+
+where:
+
+\begin{itemize}
+    \item $y_t$ is the output at time step $t$,
+    \item $g(\cdot)$ is typically a softmax or another activation function depending
+    on the task.
+\end{itemize}
+
+Because the hidden state carries information across time, RNNs are particularly useful
+for sequential learning problems where context and order are important. 
+
+\vspace{10pt}
+
+For a sentence/document, each word (embedding) is processed through the network one step at the time. In parallel, the hidden vector of the previous word, moves in the network and is used to calculate the hidden vector of the next word. The main problem with RNNs is related to long dependencies, The final hidden state reflects more information about the end of the sentence than it beginning. 
+
+\vspace{10pt}
+
+Another problem is the one of vanishing gradient, during the backward pass of training, the hidden layers are subject to repeated multiplications, as determined by the length of the sequence. A frequent result of this process is that the gradients are eventually driven to zero, which means that the initial weights cannot be updated properly. 
+
+\vspace{10pt}
+
+The long dependencies' problem can be solved by using bidirectional models. 
+
+
+\subsubsection{LSTM}
+
+As said we can use bidirectional models to solve some problems related to RNNs. LSTMs models are explicitly designed to avoid the long term dependency problems. The context management is divided into two subproblems:
+\begin{itemize}
+    \item Removing information no longer needed from the context
+    \item Adding information likely to be needed for later decision-making
+\end{itemize}
+
+To accomplish this LSTMs use:
+\begin{itemize}
+    \item Context layer (cell state)
+    \item A specialized neural unit that work as gates to control the flow of information into and out of the units that comprise the network layers. 
+\end{itemize}
+
+The cell state is the horizontal line that runs through the top of the diagram. It acts as a transport highway that transfers relative information all the way down the sequence chain. Is like the memory of the network. 
+
+\vspace{10pt}
+
+The main gates in LSTMs are
+\begin{itemize}
+    \item \textbf{Forget gate} \ra This gate decides what information should be thrown away or kept in the cell state. Information from
+the previous hidden state and information from the current input is passed through the sigmoid
+function. Values come out between 0 and 1. The closer to 0 means to forget, and the closer to 1 means
+to keep.
+    \item \textbf{Input gate} \ra This gate decides what information should be used to update the cell state: first, the previous hidden state and the current input are passed through a sigmoid function, which produces values between 0 and 1 to determine which information is important to keep; simultaneously, the same inputs are passed through a $\tanh$ activation function to squash values between $-1$ and $1$, helping regulate the network; finally, the outputs of the sigmoid and $\tanh$ functions are multiplied together so that the sigmoid gate controls which information from the $\tanh$ output should be retained. Next, the cell state is pointwise multiplied by the forget vector, allowing the network to discard information associated with values close to 0; afterward, the output of the input gate is added pointwise to the cell state, updating it with new information considered relevant by the neural network.
+    \item \textbf{Output gate} \ra  This gate determines the next hidden state or, at the final time step, the prediction of the network: first, the previous hidden state and the current input are passed through a sigmoid activation function; then, the updated cell state is passed through a $\tanh$ function; afterward, the outputs of the sigmoid and $\tanh$ functions are multiplied together to determine which information should be carried forward in the hidden state; the resulting vector becomes the new hidden state, while both the updated cell state and hidden state are propagated to the next time step or forwarded to an output activation layer to produce the final prediction.
+\end{itemize}
+
+
+\subsubsection{Seq-to-seq models}
+
+We already cited the task of machine translation, but we also have another one that enters the realm of sequence to sequence, chatbots. 
+
+Sequence-to-sequence (Seq2Seq) models are a class of neural network architectures
+designed to transform one sequence into another sequence. They are widely used in
+tasks such as machine translation, text summarization, speech recognition, and
+question answering.
+
+In Seq2Seq models, both the input and the output are sequences of variable length.
+For example, in a machine translation task, the input sequence may be a sentence in
+English, while the output sequence is the translated sentence in another language.
+
+A Seq2Seq architecture is generally composed of two main components:
+
+\begin{itemize}
+    \item An \textbf{encoder},
+    \item A \textbf{decoder}.
+\end{itemize}
+
+The encoder processes the input sequence and converts it into a fixed-length vector
+representation commonly called the \textbf{context vector}. This vector summarizes
+the semantic information contained in the entire input sequence.
+
+The encoder is typically implemented using a recurrent neural network (RNN), such as
+a Long Short-Term Memory (LSTM) network or a Gated Recurrent Unit (GRU). At each
+time step, the encoder receives an input token and updates its hidden state according
+to the sequential information processed so far.
+
+Given an input sequence:
+
+\[
+x_1, x_2, x_3, \dots, x_T
+\]
+
+the encoder updates its hidden state recursively as:
+
+\[
+h_t = f(x_t, h_{t-1})
+\]
+
+where:
+
+\begin{itemize}
+    \item $x_t$ is the input token at time step $t$,
+    \item $h_{t-1}$ is the previous hidden state,
+    \item $h_t$ is the current hidden state.
+\end{itemize}
+
+After the final input token has been processed, the last hidden state of the encoder
+is used as the context vector:
+
+\[
+c = h_T
+\]
+
+This context vector is then passed to the decoder as its initial hidden state.
+
+The decoder is another recurrent neural network responsible for generating the output
+sequence one element at a time. At each time step, the decoder receives:
+
+\begin{itemize}
+    \item The previous output token,
+    \item The previous hidden state,
+    \item The context vector.
+\end{itemize}
+
+The decoder hidden state is computed as:
+
+\[
+s_t = f(y_{t-1}, s_{t-1}, c)
+\]
+
+where:
+
+\begin{itemize}
+    \item $y_{t-1}$ is the previously generated output token,
+    \item $s_{t-1}$ is the previous decoder hidden state,
+    \item $c$ is the context vector generated by the encoder.
+\end{itemize}
+
+The decoder output is obtained through a linear transformation followed by a softmax
+activation function:
+
+\[
+y_t = \text{softmax}(Ws_t)
+\]
+
+Where $W$ is the output weight matrix.
+
+The softmax function converts the decoder output into a probability distribution over
+the vocabulary. The token with the highest probability is selected as the generated
+word for the current time step.
+
+During training, the decoder often receives the true previous target word as input,
+a technique known as \textbf{teacher forcing}. During inference, instead, the decoder
+uses the word generated at the previous time step.
+
+As an example, consider the sentence:
+
+\[
+\text{``Great movie''}
+\]
+
+which must be translated into Portuguese:
+
+\[
+\text{``Ótimo filme''}
+\]
+
+The encoder first converts the input words into embedding vectors:
+
+\[
+\text{great} \rightarrow [0.03,\ 0.98]
+\]
+
+\[
+\text{movie} \rightarrow [0.76,\ 0.85]
+\]
+
+The encoder processes these embeddings sequentially and generates the context vector.
+The decoder then uses this context vector to produce the translated sequence token by
+token:
+
+\[
+<s> \rightarrow \text{ótimo} \rightarrow \text{filme} \rightarrow </s>
+\]
+
+At every decoding step, the softmax layer produces a probability distribution over
+all words in the vocabulary, allowing the model to determine the most likely next
+word.
+
+Seq2Seq architectures represented one of the first successful approaches for neural
+machine translation and sequence generation tasks. However, traditional Seq2Seq
+models may struggle with long sequences because the entire input information must be
+compressed into a single context vector. This limitation motivated the development of
+attention mechanisms and Transformer architectures.
+
+
+\subsection{Attention and transformers}
+
+
+\subsubsection{Attention mechanisms}
+
+In the previous class we saw how RNNs work but with modern LLMs we need to add some elements. For example, we need to talk about attention mechanisms. As we know classical encoder-decoder methods have to encode all the information about a sentence inside a vector while the decoder must create the translation using only that vector. 
+
+\vspace{10pt}
+
+The final hidden state is like a bottleneck where all the information is represented in a smaller representation with respect to the original. The decoder if trained well should be able to recreate the original input using only the context vector. One problem is that languages behave differently from the syntactic point of view, so the model should remember the semantic information as much as possible. 
+
+\vspace{10pt}
+
+A way to solve this problem is using the mechanism of attention. We allow the decoder to get information from all the hidden states of the encoder, not just the last one. The first idea of attention is to create a fixed-length vector by taking a weighted sum of all the encoder hidden states. At each step, the decoder does an extra step before producing it's output. The pipeline is the following:
+
+\begin{itemize}
+    \item Look at the sets of hidden states, each encoder hidden state is most associated with a certain word in the input sentence
+    \item Give to each hidden state a score
+    \item Multiply each hidden state by its softmaxed score, thus amplifying hidden states with high scores, and drowning out hidden states with low scores
+\end{itemize}
+
+
+\textbf{Add formulas}
+
+
+\subsubsection{Transformer architecture}
+
+Some stories on GPU and why generating cat videos is making a shitty 12mb GPU cost like 9000 dollars. Anyway we can't use GPUs for RNNs because parallelization is basically impossible. To solve this problem Self-attention was created.
+
+\vspace{10pt}
+
+Self-attention allows each token to directly attend to all other tokens in the
+sequence at the same time, capturing dependencies regardless of distance. Here we have the first important building block of transformers. 
+
+The standard architecture for building modern large language models is the
+Transformer.
+Like LSTMs, Transformers can capture long-distance relationships between words in a
+sequence. However, unlike LSTMs, Transformers do not rely on recurrent connections
+that process tokens step by step.
+Instead, Transformers use self-attention, a mechanism that allows each token to
+directly attend to all other tokens in the sequence. This makes it possible to compute
+token representations in parallel, improving training efficiency and making much
+better use of GPUs.
+
+\vspace{10pt}
+
+Transformers are made of two main types of blocks: encoders and decoders.
+The Encoder reads the input sequence and transforms each token into a contextual
+representation.
+The Decoder uses these representations to generate the output sequence, one token at
+a time.
+In the original Transformer architecture, the encoder and decoder work together: the
+encoder represents the input, and the decoder produces the output based on both the
+previous generated tokens and the encoder's representations.
+
+
+\vspace{10pt}
+
+Each transformer will have many encoders and many decoders
+Inside each Encoder, we will find a layer of self-attention and a standard
+Neural Network - information moves forward through the encoders
+Decoders receive the output from the Encoder and move them through two
+attention layers (self-attention and encoder-decoder attention) and a
+(feed-forward) neural network. The last decoder layer produces an output.
+
+
+
+\subsubsection{Transformer encoders}
+
+Some Transformers use only the encoder, because the goal is to understand text
+rather than generate new text.
+Encoder-only models read the full sentence at once, capturing context from both
+previous and following words.
+They produce rich, context-aware word and sentence representations, usually stronger
+than static embeddings like Word2Vec or GloVe.
+These representations can be reused in downstream tasks such as classification,
+sentiment analysis, NER, similarity, clustering, and retrieval (Transfer Learning).
+
+\vspace{10pt}
+
+BERT (Bidirectional Encoder Representations from Transformers),
+developed by Google, is probably the most famous Encoder-only
+Transformer model.
+BERT (BERTLarge) model uses 24 encoder layers, referred to in the paper as
+Transformer blocks.
+BERT uses 16 self-attention heads, allowing the model to capture multiple
+contextual relationships in parallel.
+It has a hidden size of 1024 units, making its internal representations larger
+and more expressive. This means that each token is represented by a 1024-
+dimensional contextual embedding produced by the final encoder layer.
+The representations generated by BERT can then be fed to another model
+as word embeddings
+
+\vspace{10pt}
+
+Transfer learning is the process of reusing knowledge learned from one task to improve
+performance on another task.
+In NLP, models such as BERT are first pre-trained on massive text corpora to learn general
+language patterns. They are called Pre-trained Language Models (PLMs)
+This models can be called Foundation models - very large pre-trained models trained on
+broad and diverse datasets at massive scale.
+The pre-trained model is then adapted (fine-tuned) to a specific downstream task using a
+smaller labeled dataset
+
+
+\noindent BERT was pre-trained on large unlabeled datasets, including English Wikipedia and the Bookworm's collection of books. The model learns language patterns using self-supervised tasks such as Masked Language Modeling (MLM) and Next Sentence Prediction (NSP).
+
+\begin{itemize}
+    \item In MLM, during training, random words are masked, and BERT learns to predict them using context from both directions of the sentence.
+    \item In NSP, BERT receives two sentences as input and predicts whether the second sentence logically follows the first.
+\end{itemize}
+
+\noindent The original BERT Large model contains approximately 340 million parameters, with 24 encoder layers, 16 attention heads, and 1024 hidden dimensions. BERT training is a two-step process: first pre-training a model (which is already done when we use it) and then fine-tuning it for a particular task. Finally, we can fine-tune it for tasks like sentiment analysis or predicting movie reviews.
+
+\vspace{1em}
+
+\noindent \textbf{Word and Sentence Embeddings}
+
+\vspace{1em}
+
+\noindent Since BERT produces multiple representations for the same word across layers, we must choose how to extract the final embedding. To extract embeddings for each word instead of a sentence level one, we can aggregate information from all token embeddings using pooling strategies. Common approaches include:
+
+\begin{itemize}
+    \item Last Layer: use the final hidden representation of each token.
+    \item Sum all layers: sum the token representations from all Transformer layers.
+    \item Sum last four: sum the token representations from the final four layers.
+    \item Concat last four: join the final four token representations into one larger embedding vector.
+\end{itemize}
+
+\noindent BERT adds a special token called [CLS] at the beginning of every input sequence. Across multiple Transformer layers, the [CLS] embedding gradually becomes a contextual summary of the entire sequence. During pre-training objectives such as Next Sentence Prediction, but also during fine-tuning, we can explicitly force [CLS] to capture sentence-level information. After the final encoder layer, BERT outputs one contextual embedding per token. For sequence classification tasks, the final embedding corresponding to [CLS] is usually selected as the sentence representation. This vector is then fed into a simple classifier, typically a linear layer followed by Soft max or a Logistic Regression.
+
+\vspace{1em}
+
+\noindent \textbf{Classification and Variations}
+
+\vspace{1em}
+
+\noindent We can perform classification directly with a task-specific model or indirectly with general-purpose embeddings. A task-specific model is a representation model, such as BERT, trained for a specific task like sentiment analysis. Alternatively, BERT can be used to generate general-purpose context embeddings that can be used for a variety of tasks not limited to classification, like semantic search. Over the years, many variations of BERT have been developed, including:
+
+\begin{itemize}
+    \item RoBERTa
+    \item DistilBERT
+    \item ALBERT
+    \item DeBERTa
+\end{itemize}
+
+
+\subsection{LLMs}
+
+
+\subsubsection{Transformer architecture}
+
+We recall that deep learning relies a lot on GPUs since we can parallelize computation. However, RNNs process tokens one word at a time, with each hidden state depending on the previous one, so computation must proceed sequentially. This implies that GPUs cannot use their cores at full potential. 
+
+\vspace{10pt}
+
+The sequential nature of attention based RNNs prevents parallelization during training of the model, making this process less efficient and not well-optimized. This issue was solved using the mechanism of self-attention. It allows each token to directly attend to all other tokens in the sequence at the same time, capturing dependencies regardless of distance. The creator of self-attention proposed a new model called Transformer, that uses self-attention and Feed-forward networks eliminating sequential computation, and enabling fast and efficient training on modern hardware. 
+
+\vspace{10pt}
+
+This is the standard architecture for building modern LLMs. Like LSTMs it can capture long-distance relationships between words in a sequence. But unlike LSTMs, transformers do not rely on recurrent connections that process tokens step by step. Using self-attention transformers can compute token representations in parallel, improving training efficiency and making much better use of GPUs. 
+
+\vspace{10pt}
+
+Transformers are made of two main types of blocks
+
+\begin{itemize}
+    \item Encoder \ra Reads the input sequence and transforms each token into a contextual representation
+    \item Decoder \ra Uses representations to generate the output sequence, one toke at a time
+\end{itemize}
+
+In the original architecture they worked together.
+
+Each transformer will have many encoders and decoders. 
+
+\begin{itemize}
+    \item Inside each encoder we have a layer of self-attention and a standard neural network, information moves forward through the encoders
+    \item The decoders receive the output from the encoder and move them through two attention layers and a neural network. The last decoder layer produces an output. We might also find a layer of encoder-decoder attention. 
+\end{itemize}
+
+
+\subsubsection{Transform encoders}
+
+Some transformers use only the encoder, because the goal is to understand text rather than generate it. These models read the full sentence at once, capturing context from both previous and following words. With this they can produce context aware word and sentence representation. We can reuse them in downstream tasks in a context of transfer-learning. 
+
+\vspace{10pt}
+
+Generating Word Representations with Transformers and Transformer Encoders introduces BERT (Bidirectional Encoder Representations from Transformers), developed by Google, which is probably the most famous Encoder-only Transformer model. The BERT (BERTLarge) model uses 24 encoder layers, referred to in the paper as Transformer blocks. BERT uses 16 self-attention heads, allowing the model to capture multiple contextual relationships in parallel. It has a hidden size of 1024 units, making its internal representations larger and more expressive. This means that each token is represented by a 1024-dimensional contextual embedding produced by the final encoder layer. The representations generated by BERT can then be fed to another model as word embeddings.
+
+Regarding the training of BERT and Transformer Encoders, transfer learning is the process of reusing knowledge learned from one task to improve performance on another task. In NLP, models such as BERT are first pre-trained on massive text corpora to learn general language patterns. They are called Pre-trained Language Models (PLMs). This models can be called Foundation models - very large pre-trained models trained on broad and diverse datasets at massive scale. The pre-trained model is then adapted (fine-tuned) to a specific downstream task using a smaller labeled dataset.
+
+Continuing with Training BERT and Transformer Encoders, BERT was pre-trained on large unlabeled datasets, including English Wikipedia and the BookCorpus collection of books. The model learns language patterns using self-supervised tasks such as Masked Language Modeling (MLM) and Next Sentence Prediction (NSP). In MLM, during training, random words are masked, and BERT learns to predict them using context from both directions of the sentence. In NSP, BERT receives two sentences as input and predicts whether the second sentence logically follows the first. The original BERT Large model contains approximately 340 million parameters, with 24 encoder layers, 16 attention heads, and 1024 hidden dimensions.
+
+The stages of Training BERT and Transformer Encoders follow a specific training process:
+\begin{enumerate}
+    \item First pre-training a model (which is already done when we use it)
+    \item And then fine-tuning it for a particular task (there are a lot of models already fine-tuned in hugging face for ex.)
+    \item Finally, we can fine-tune it for a particular task, like sentiment analysis or predicting movie reviews
+\end{enumerate}
+
+In the context of Training BERT and Transformer Encoders, over the years, many variations of BERT have been developed, including RoBERTa, DistilBERT, ALBERT, and XLM-RoBERTa, each trained in various contexts.
+
+\subsubsection{Classification with encoders}
+
+To extract embeddings for each word instead of a sentence level one we can aggregate information from all token embeddings using pooling strategies like:
+
+\begin{itemize}
+    \item Last layer
+    \item Sum all layers
+    \item Sum last four
+    \item Concat last four
+\end{itemize}
+
+
+BERT adds a special token called [CLS] at the beginning of every input sequence. This token during self-attention can attend to all words in the sentence to help the making the context. After it BERT will output one contextual embedding per token. This will then be sent into a simple classifier.
+
+\vspace{10pt}
+
+We can perform classification directly with a task specific model or indirectly with a general-purpose one. In this setting a task-specific model is one model that is built to support one specific work, like sentiment analysis. The embeddings can be used also for semantic search. 
+
+\vspace{10pt}
+
+To use BERT we have to
+
+\begin{itemize}
+    \item Tokenize the input sequence
+    \item Embed our sentences
+    \item Use the embeddings as features
+    \item Train a classification model
+\end{itemize}
+
+
+
+
+\subsubsection{Self-attention}
+
+Recall that like LSTMs, transformers can capture long-distance relationships between words in a sequence. However, the work for the seconds use self-attention and not recurrent connections. This mechanism will allow each token to directly attend to all other tokens in the sequence.
+
+\vspace{10pt}
+
+Self- attention is different from attention, first is made of two steps
+
+\begin{itemize}
+    \item Relevance scoring for each position
+    \item Combine the information based on those scores
+\end{itemize}
+
+In the encoder we have to generate as always a hidden state, using self attention we have to consider 3 main elements
+
+\begin{itemize}
+    \item Query \ra current focus of attention
+    \item Key \ra context input being compared to the current focus
+    \item Value \ra used to compute the output for the current focus of attention
+\end{itemize}
+
+The three of them have different roles, to capture them we use weight matrices to project each input vector $x_i$ into a representation of its role as a key (K), query(Q) or a value (V).
+
+\begin{itemize}
+    \item $q_i = W^Q x_i$
+    \item $k_i= W^K x_i$
+    \item $v_i = W^V x_i$
+\end{itemize}
+
+Self attention is carried out by the interaction of these matrices, that are produced by multiplying the input layer with the projection matrices. The scoring of the relevance is done by multiplying the query associated with the current position with the key matrix. Self attention combines the relevant information of previous positions by multiplying their relevance scores by their respective value vectors. With this step we get and improved and contextualized embedding representation of the current word.
+
+\vspace{10pt}
+
+Since each output $y_i$ is computed independently this entire process can be parallelized by packing the input embeddings of the N tokens of the input sequence into a single matrix $X \in \mathbb{R}^{Nxd}$. Each row of X is the embedding of one token of the input. The next step is to multiply X by the key, query and value matrices 
+
+\begin{itemize}
+    \item $Q = XW^Q$
+    \item $K = XW^K$
+    \item $V = XW^V$
+\end{itemize}
+
+We can also get query and key together by multiplying Q and $K^t$. After we can scale these scores, take the softmax and then multiply the result by V. We can reduce self-attention as 
+
+\[
+\text{SelfAttention(Q, K, V)} = \text{softmax}(\frac{QK^T}{\sqrt{d_k}})V
+\]
+
+
+\subsubsection{Deeper into the encoder block}
+
+
+\subsubsection{The architecture of decoders}
 
 

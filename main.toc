@@ -1,93 +1,160 @@
-\contentsline {section}{\numberline {1}Ethics for data science}{3}{section.1}%
-\contentsline {subsection}{\numberline {1.1}Introduction}{3}{subsection.1.1}%
-\contentsline {subsubsection}{\numberline {1.1.1}Law, moral and ethics}{3}{subsubsection.1.1.1}%
-\contentsline {subsubsection}{\numberline {1.1.2}What is ethics}{3}{subsubsection.1.1.2}%
-\contentsline {subsubsection}{\numberline {1.1.3}Ethical dilemmas}{3}{subsubsection.1.1.3}%
-\contentsline {subsection}{\numberline {1.2}History of data ethics}{5}{subsection.1.2}%
-\contentsline {subsection}{\numberline {1.3}Basics of organizational ethics}{5}{subsection.1.3}%
-\contentsline {subsubsection}{\numberline {1.3.1}Privacy and confidentiality}{7}{subsubsection.1.3.1}%
-\contentsline {subsubsection}{\numberline {1.3.2}Bias and fairness in statistical models}{8}{subsubsection.1.3.2}%
-\contentsline {subsubsection}{\numberline {1.3.3}Data sharing and collaboration}{9}{subsubsection.1.3.3}%
-\contentsline {subsubsection}{\numberline {1.3.4}Responsible use of predictive analytics and machine learning}{11}{subsubsection.1.3.4}%
-\contentsline {subsubsection}{\numberline {1.3.5}Transparency and accountability}{11}{subsubsection.1.3.5}%
-\contentsline {subsubsection}{\numberline {1.3.6}Ethical decision-making process}{12}{subsubsection.1.3.6}%
-\contentsline {subsubsection}{\numberline {1.3.7}Promoting ethical culture}{13}{subsubsection.1.3.7}%
-\contentsline {subsubsection}{\numberline {1.3.8}Ethical leadership}{14}{subsubsection.1.3.8}%
-\contentsline {subsection}{\numberline {1.4}Theranos \& Black Mirror}{15}{subsection.1.4}%
-\contentsline {section}{\numberline {2}Computational intelligence}{16}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Introduction}{16}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Optimization algorithms}{17}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}Fitness landscape}{18}{subsection.2.3}%
-\contentsline {subsection}{\numberline {2.4}Annealing}{20}{subsection.2.4}%
-\contentsline {subsection}{\numberline {2.5}Practical applications of Hill climbing}{20}{subsection.2.5}%
-\contentsline {subsection}{\numberline {2.6}Simulated annealing}{21}{subsection.2.6}%
-\contentsline {subsection}{\numberline {2.7}Genetic algorithms}{23}{subsection.2.7}%
-\contentsline {subsection}{\numberline {2.8}Again Genetic algorithms}{24}{subsection.2.8}%
-\contentsline {subsubsection}{\numberline {2.8.1}Fitness proportionate selection}{25}{subsubsection.2.8.1}%
-\contentsline {subsubsection}{\numberline {2.8.2}Ranking selection}{25}{subsubsection.2.8.2}%
-\contentsline {subsubsection}{\numberline {2.8.3}Tournament selection}{25}{subsubsection.2.8.3}%
-\contentsline {subsection}{\numberline {2.9}Crossover and mutation}{26}{subsection.2.9}%
-\contentsline {subsubsection}{\numberline {2.9.1}Crossover}{26}{subsubsection.2.9.1}%
-\contentsline {subsubsection}{\numberline {2.9.2}Mutation}{26}{subsubsection.2.9.2}%
-\contentsline {subsubsection}{\numberline {2.9.3}General function of genetic algorithms}{26}{subsubsection.2.9.3}%
-\contentsline {subsubsection}{\numberline {2.9.4}Hyperparameters of genetic algorithms}{27}{subsubsection.2.9.4}%
-\contentsline {section}{\numberline {3}Big data analytics}{28}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Introduction}{28}{subsection.3.1}%
-\contentsline {subsubsection}{\numberline {3.1.1}What is Big data}{28}{subsubsection.3.1.1}%
-\contentsline {subsubsection}{\numberline {3.1.2}Data sources}{28}{subsubsection.3.1.2}%
-\contentsline {subsubsection}{\numberline {3.1.3}The Vs of Big data}{29}{subsubsection.3.1.3}%
-\contentsline {subsubsection}{\numberline {3.1.4}The Big data ecosystem}{29}{subsubsection.3.1.4}%
-\contentsline {subsubsection}{\numberline {3.1.5}Applications of Big data}{29}{subsubsection.3.1.5}%
-\contentsline {subsection}{\numberline {3.2}Distributed storage, ecosystems and programming paradigms}{30}{subsection.3.2}%
-\contentsline {subsubsection}{\numberline {3.2.1}Distributed storage and file systems}{30}{subsubsection.3.2.1}%
-\contentsline {subsubsection}{\numberline {3.2.2}Distributed computing models}{30}{subsubsection.3.2.2}%
-\contentsline {subsubsection}{\numberline {3.2.3}The big data ecosystem}{30}{subsubsection.3.2.3}%
-\contentsline {subsubsection}{\numberline {3.2.4}Programming paradigms}{31}{subsubsection.3.2.4}%
-\contentsline {subsection}{\numberline {3.3}Distributed parallel processing and the map reduce paradigm}{31}{subsection.3.3}%
-\contentsline {subsubsection}{\numberline {3.3.1}Distributed parallel processing}{31}{subsubsection.3.3.1}%
-\contentsline {subsubsection}{\numberline {3.3.2}The MapReduce paradigm}{31}{subsubsection.3.3.2}%
-\contentsline {subsubsection}{\numberline {3.3.3}Case study}{31}{subsubsection.3.3.3}%
-\contentsline {subsection}{\numberline {3.4}The Hadoop ecosystem}{32}{subsection.3.4}%
-\contentsline {subsubsection}{\numberline {3.4.1}Hadoop}{32}{subsubsection.3.4.1}%
-\contentsline {subsubsection}{\numberline {3.4.2}Filesystems and HDFS basics}{32}{subsubsection.3.4.2}%
-\contentsline {subsubsection}{\numberline {3.4.3}Hadoop's execution model}{32}{subsubsection.3.4.3}%
-\contentsline {subsubsection}{\numberline {3.4.4}Optimization and refinements}{33}{subsubsection.3.4.4}%
-\contentsline {subsubsection}{\numberline {3.4.5}YARN and scheduling}{34}{subsubsection.3.4.5}%
-\contentsline {subsubsection}{\numberline {3.4.6}Hive, Pig and Sqoop}{34}{subsubsection.3.4.6}%
-\contentsline {subsubsection}{\numberline {3.4.7}Summary}{35}{subsubsection.3.4.7}%
-\contentsline {subsection}{\numberline {3.5}Introduction to Spark}{35}{subsection.3.5}%
-\contentsline {subsection}{\numberline {3.6}DataFrames in Spark and Spark-Hadoop relationship}{37}{subsection.3.6}%
-\contentsline {subsubsection}{\numberline {3.6.1}Recap}{37}{subsubsection.3.6.1}%
-\contentsline {subsubsection}{\numberline {3.6.2}DataFrames}{37}{subsubsection.3.6.2}%
-\contentsline {subsubsection}{\numberline {3.6.3}Datasets}{39}{subsubsection.3.6.3}%
-\contentsline {subsubsection}{\numberline {3.6.4}Spark-Hadoop relationship}{39}{subsubsection.3.6.4}%
-\contentsline {subsection}{\numberline {3.7}Spark in Cloud-based computational environments}{39}{subsection.3.7}%
-\contentsline {subsubsection}{\numberline {3.7.1}Databricks}{40}{subsubsection.3.7.1}%
-\contentsline {subsubsection}{\numberline {3.7.2}AWS Elastic MapReduce (EMR)}{41}{subsubsection.3.7.2}%
-\contentsline {subsubsection}{\numberline {3.7.3}Google Cloud Dataproc}{41}{subsubsection.3.7.3}%
-\contentsline {subsubsection}{\numberline {3.7.4}Azure HDInsight}{41}{subsubsection.3.7.4}%
-\contentsline {subsubsection}{\numberline {3.7.5}Kubernetes}{41}{subsubsection.3.7.5}%
-\contentsline {subsubsection}{\numberline {3.7.6}Google Colab}{42}{subsubsection.3.7.6}%
-\contentsline {subsubsection}{\numberline {3.7.7}Lightning AI}{42}{subsubsection.3.7.7}%
-\contentsline {subsection}{\numberline {3.8}Performance and data engineering in Spark}{42}{subsection.3.8}%
-\contentsline {subsubsection}{\numberline {3.8.1}Why Spark jobs are slow}{42}{subsubsection.3.8.1}%
-\contentsline {subsubsection}{\numberline {3.8.2}How Spark optimizes queries}{42}{subsubsection.3.8.2}%
-\contentsline {subsubsection}{\numberline {3.8.3}Data engineering for performance}{42}{subsubsection.3.8.3}%
-\contentsline {subsection}{\numberline {3.9}Big data storage technologies and relation with Spark}{44}{subsection.3.9}%
-\contentsline {subsubsection}{\numberline {3.9.1}Intro to big data storage}{44}{subsubsection.3.9.1}%
-\contentsline {subsubsection}{\numberline {3.9.2}Key-value DB}{44}{subsubsection.3.9.2}%
-\contentsline {subsubsection}{\numberline {3.9.3}Document DB - MongoDB focus}{45}{subsubsection.3.9.3}%
-\contentsline {subsubsection}{\numberline {3.9.4}Wide column DB}{46}{subsubsection.3.9.4}%
-\contentsline {subsubsection}{\numberline {3.9.5}Graph DB}{46}{subsubsection.3.9.5}%
-\contentsline {subsubsection}{\numberline {3.9.6}Other DB types}{46}{subsubsection.3.9.6}%
-\contentsline {section}{\numberline {4}Neural and evolutionary learning}{47}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Machine learning review}{47}{subsection.4.1}%
-\contentsline {subsubsection}{\numberline {4.1.1}Performance measures for regression}{47}{subsubsection.4.1.1}%
-\contentsline {subsubsection}{\numberline {4.1.2}Performance measures for classification}{48}{subsubsection.4.1.2}%
-\contentsline {subsubsection}{\numberline {4.1.3}Features}{50}{subsubsection.4.1.3}%
-\contentsline {subsubsection}{\numberline {4.1.4}Experimental ML study}{50}{subsubsection.4.1.4}%
-\contentsline {section}{\numberline {5}Text mining}{51}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Introduction to NLP}{51}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}Challenges of natural language}{51}{subsection.5.2}%
-\contentsline {subsection}{\numberline {5.3}The NLP pipeline}{51}{subsection.5.3}%
-\contentsline {subsection}{\numberline {5.4}Text preprocessing methods}{51}{subsection.5.4}%
+\contentsline {section}{\numberline {1}Computational intelligence}{4}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Introduction}{4}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Optimization algorithms}{5}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Fitness landscape}{6}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Annealing}{8}{subsection.1.4}%
+\contentsline {subsection}{\numberline {1.5}Practical applications of Hill climbing}{8}{subsection.1.5}%
+\contentsline {subsection}{\numberline {1.6}Simulated annealing}{9}{subsection.1.6}%
+\contentsline {subsection}{\numberline {1.7}Genetic algorithms}{11}{subsection.1.7}%
+\contentsline {subsection}{\numberline {1.8}Again Genetic algorithms}{12}{subsection.1.8}%
+\contentsline {subsubsection}{\numberline {1.8.1}Fitness proportionate selection}{13}{subsubsection.1.8.1}%
+\contentsline {subsubsection}{\numberline {1.8.2}Ranking selection}{13}{subsubsection.1.8.2}%
+\contentsline {subsubsection}{\numberline {1.8.3}Tournament selection}{13}{subsubsection.1.8.3}%
+\contentsline {subsection}{\numberline {1.9}Crossover and mutation}{14}{subsection.1.9}%
+\contentsline {subsubsection}{\numberline {1.9.1}Crossover}{14}{subsubsection.1.9.1}%
+\contentsline {subsubsection}{\numberline {1.9.2}Mutation}{14}{subsubsection.1.9.2}%
+\contentsline {subsubsection}{\numberline {1.9.3}General function of genetic algorithms}{14}{subsubsection.1.9.3}%
+\contentsline {subsubsection}{\numberline {1.9.4}Hyperparameters of genetic algorithms}{15}{subsubsection.1.9.4}%
+\contentsline {subsection}{\numberline {1.10}Why genetic algorithms work}{15}{subsection.1.10}%
+\contentsline {subsubsection}{\numberline {1.10.1}Effect of selection on schemata}{16}{subsubsection.1.10.1}%
+\contentsline {subsubsection}{\numberline {1.10.2}Effect of crossover on schemata}{16}{subsubsection.1.10.2}%
+\contentsline {subsubsection}{\numberline {1.10.3}Combined effect of selection and crossover}{17}{subsubsection.1.10.3}%
+\contentsline {subsubsection}{\numberline {1.10.4}Effect of mutation}{17}{subsubsection.1.10.4}%
+\contentsline {subsubsection}{\numberline {1.10.5}Building blocks' hypothesis}{17}{subsubsection.1.10.5}%
+\contentsline {subsubsection}{\numberline {1.10.6}K-armed bandit problem}{18}{subsubsection.1.10.6}%
+\contentsline {subsection}{\numberline {1.11}Problems with genetic algorithms}{18}{subsection.1.11}%
+\contentsline {subsubsection}{\numberline {1.11.1}Premature convergence}{18}{subsubsection.1.11.1}%
+\contentsline {subsubsection}{\numberline {1.11.2}Position problem}{20}{subsubsection.1.11.2}%
+\contentsline {subsection}{\numberline {1.12}Multi-objective optimization}{21}{subsection.1.12}%
+\contentsline {subsection}{\numberline {1.13}Continuous optimization}{22}{subsection.1.13}%
+\contentsline {subsubsection}{\numberline {1.13.1}Geometric crossover}{22}{subsubsection.1.13.1}%
+\contentsline {subsubsection}{\numberline {1.13.2}Geometric mutation}{23}{subsubsection.1.13.2}%
+\contentsline {subsection}{\numberline {1.14}Particle Swarm Optimization}{23}{subsection.1.14}%
+\contentsline {section}{\numberline {2}Big data analytics}{24}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Introduction}{24}{subsection.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.1}What is Big data}{24}{subsubsection.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.2}Data sources}{24}{subsubsection.2.1.2}%
+\contentsline {subsubsection}{\numberline {2.1.3}The Vs of Big data}{25}{subsubsection.2.1.3}%
+\contentsline {subsubsection}{\numberline {2.1.4}The Big data ecosystem}{25}{subsubsection.2.1.4}%
+\contentsline {subsubsection}{\numberline {2.1.5}Applications of Big data}{25}{subsubsection.2.1.5}%
+\contentsline {subsection}{\numberline {2.2}Distributed storage, ecosystems and programming paradigms}{26}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}Distributed storage and file systems}{26}{subsubsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2}Distributed computing models}{26}{subsubsection.2.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.3}The big data ecosystem}{27}{subsubsection.2.2.3}%
+\contentsline {subsubsection}{\numberline {2.2.4}Programming paradigms}{27}{subsubsection.2.2.4}%
+\contentsline {subsection}{\numberline {2.3}Distributed parallel processing and the map reduce paradigm}{27}{subsection.2.3}%
+\contentsline {subsubsection}{\numberline {2.3.1}Distributed parallel processing}{27}{subsubsection.2.3.1}%
+\contentsline {subsubsection}{\numberline {2.3.2}The MapReduce paradigm}{28}{subsubsection.2.3.2}%
+\contentsline {subsubsection}{\numberline {2.3.3}Case study}{28}{subsubsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.4}The Hadoop ecosystem}{28}{subsection.2.4}%
+\contentsline {subsubsection}{\numberline {2.4.1}Hadoop}{28}{subsubsection.2.4.1}%
+\contentsline {subsubsection}{\numberline {2.4.2}Filesystems and HDFS basics}{29}{subsubsection.2.4.2}%
+\contentsline {subsubsection}{\numberline {2.4.3}Hadoop's execution model}{29}{subsubsection.2.4.3}%
+\contentsline {subsubsection}{\numberline {2.4.4}Optimization and refinements}{30}{subsubsection.2.4.4}%
+\contentsline {subsubsection}{\numberline {2.4.5}YARN and scheduling}{30}{subsubsection.2.4.5}%
+\contentsline {subsubsection}{\numberline {2.4.6}Hive, Pig and Sqoop}{31}{subsubsection.2.4.6}%
+\contentsline {subsubsection}{\numberline {2.4.7}Summary}{32}{subsubsection.2.4.7}%
+\contentsline {subsection}{\numberline {2.5}Introduction to Spark}{32}{subsection.2.5}%
+\contentsline {subsection}{\numberline {2.6}DataFrames in Spark and Spark-Hadoop relationship}{34}{subsection.2.6}%
+\contentsline {subsubsection}{\numberline {2.6.1}Recap}{34}{subsubsection.2.6.1}%
+\contentsline {subsubsection}{\numberline {2.6.2}DataFrames}{34}{subsubsection.2.6.2}%
+\contentsline {subsubsection}{\numberline {2.6.3}Datasets}{36}{subsubsection.2.6.3}%
+\contentsline {subsubsection}{\numberline {2.6.4}Spark-Hadoop relationship}{36}{subsubsection.2.6.4}%
+\contentsline {subsection}{\numberline {2.7}Spark in Cloud-based computational environments}{36}{subsection.2.7}%
+\contentsline {subsubsection}{\numberline {2.7.1}Databricks}{37}{subsubsection.2.7.1}%
+\contentsline {subsubsection}{\numberline {2.7.2}AWS Elastic MapReduce (EMR)}{37}{subsubsection.2.7.2}%
+\contentsline {subsubsection}{\numberline {2.7.3}Google Cloud Dataproc}{38}{subsubsection.2.7.3}%
+\contentsline {subsubsection}{\numberline {2.7.4}Azure HDInsight}{38}{subsubsection.2.7.4}%
+\contentsline {subsubsection}{\numberline {2.7.5}Kubernetes}{38}{subsubsection.2.7.5}%
+\contentsline {subsubsection}{\numberline {2.7.6}Google Colab}{38}{subsubsection.2.7.6}%
+\contentsline {subsubsection}{\numberline {2.7.7}Lightning AI}{39}{subsubsection.2.7.7}%
+\contentsline {subsection}{\numberline {2.8}Performance and data engineering in Spark}{39}{subsection.2.8}%
+\contentsline {subsubsection}{\numberline {2.8.1}Why Spark jobs are slow}{39}{subsubsection.2.8.1}%
+\contentsline {subsubsection}{\numberline {2.8.2}How Spark optimizes queries}{39}{subsubsection.2.8.2}%
+\contentsline {subsubsection}{\numberline {2.8.3}Data engineering for performance}{39}{subsubsection.2.8.3}%
+\contentsline {subsection}{\numberline {2.9}Big data storage technologies and relation with Spark}{41}{subsection.2.9}%
+\contentsline {subsubsection}{\numberline {2.9.1}Intro to big data storage}{41}{subsubsection.2.9.1}%
+\contentsline {subsubsection}{\numberline {2.9.2}Key-value DB}{41}{subsubsection.2.9.2}%
+\contentsline {subsubsection}{\numberline {2.9.3}Document DB - MongoDB focus}{42}{subsubsection.2.9.3}%
+\contentsline {subsubsection}{\numberline {2.9.4}Wide column DB}{43}{subsubsection.2.9.4}%
+\contentsline {subsubsection}{\numberline {2.9.5}Graph DB}{43}{subsubsection.2.9.5}%
+\contentsline {subsubsection}{\numberline {2.9.6}Other DB types}{43}{subsubsection.2.9.6}%
+\contentsline {subsection}{\numberline {2.10}Machine Learning in Spark}{43}{subsection.2.10}%
+\contentsline {subsubsection}{\numberline {2.10.1}Introduction}{43}{subsubsection.2.10.1}%
+\contentsline {subsubsection}{\numberline {2.10.2}Spark MLlib concepts}{44}{subsubsection.2.10.2}%
+\contentsline {subsubsection}{\numberline {2.10.3}Algorithms}{44}{subsubsection.2.10.3}%
+\contentsline {subsubsection}{\numberline {2.10.4}Evaluation}{45}{subsubsection.2.10.4}%
+\contentsline {subsubsection}{\numberline {2.10.5}Advanced Topics}{45}{subsubsection.2.10.5}%
+\contentsline {subsection}{\numberline {2.11}Pipelines in Spark}{45}{subsection.2.11}%
+\contentsline {subsubsection}{\numberline {2.11.1}Introduction}{45}{subsubsection.2.11.1}%
+\contentsline {subsubsection}{\numberline {2.11.2}Spark pipeline API}{45}{subsubsection.2.11.2}%
+\contentsline {subsubsection}{\numberline {2.11.3}Feature engineering pipelines}{46}{subsubsection.2.11.3}%
+\contentsline {subsubsection}{\numberline {2.11.4}Model training and evaluation}{46}{subsubsection.2.11.4}%
+\contentsline {subsubsection}{\numberline {2.11.5}Hyperparameter tuning}{46}{subsubsection.2.11.5}%
+\contentsline {subsection}{\numberline {2.12}Graph Analytics}{46}{subsection.2.12}%
+\contentsline {subsubsection}{\numberline {2.12.1}Introduction}{46}{subsubsection.2.12.1}%
+\contentsline {subsubsection}{\numberline {2.12.2}Spark GraphX}{46}{subsubsection.2.12.2}%
+\contentsline {subsubsection}{\numberline {2.12.3}GraphFrames}{47}{subsubsection.2.12.3}%
+\contentsline {subsubsection}{\numberline {2.12.4}Advanced topics}{47}{subsubsection.2.12.4}%
+\contentsline {subsection}{\numberline {2.13}Streaming}{47}{subsection.2.13}%
+\contentsline {subsubsection}{\numberline {2.13.1}Introduction}{47}{subsubsection.2.13.1}%
+\contentsline {subsubsection}{\numberline {2.13.2}Structured streaming overview}{47}{subsubsection.2.13.2}%
+\contentsline {subsubsection}{\numberline {2.13.3}Streaming concepts}{48}{subsubsection.2.13.3}%
+\contentsline {subsubsection}{\numberline {2.13.4}Spark structured streaming API}{48}{subsubsection.2.13.4}%
+\contentsline {subsubsection}{\numberline {2.13.5}Advanced streaming}{49}{subsubsection.2.13.5}%
+\contentsline {subsubsection}{\numberline {2.13.6}Challenges and best practices}{49}{subsubsection.2.13.6}%
+\contentsline {section}{\numberline {3}Neural and evolutionary learning}{50}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Machine learning review}{50}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.1}Performance measures for regression}{50}{subsubsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.2}Performance measures for classification}{51}{subsubsection.3.1.2}%
+\contentsline {subsubsection}{\numberline {3.1.3}Features}{53}{subsubsection.3.1.3}%
+\contentsline {subsubsection}{\numberline {3.1.4}Experimental ML study}{53}{subsubsection.3.1.4}%
+\contentsline {subsection}{\numberline {3.2}Genetic programming}{53}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Evolutionary algorithms}{53}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}Symbolic regression}{54}{subsubsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.3}Why do evolutionary algorithms work?}{54}{subsubsection.3.2.3}%
+\contentsline {subsubsection}{\numberline {3.2.4}Peculiarities of genetic programming}{54}{subsubsection.3.2.4}%
+\contentsline {subsubsection}{\numberline {3.2.5}Weak points of genetic programming}{55}{subsubsection.3.2.5}%
+\contentsline {subsection}{\numberline {3.3}Geometric semantic genetic programming}{56}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}Optimization problems}{56}{subsubsection.3.3.1}%
+\contentsline {subsubsection}{\numberline {3.3.2}Fitness Landscapes}{56}{subsubsection.3.3.2}%
+\contentsline {subsubsection}{\numberline {3.3.3}Genetic algorithms}{56}{subsubsection.3.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.4}Genetic programming}{57}{subsubsection.3.3.4}%
+\contentsline {subsubsection}{\numberline {3.3.5}Implementation of geometric semantic operators}{57}{subsubsection.3.3.5}%
+\contentsline {subsubsection}{\numberline {3.3.6}Discussion}{57}{subsubsection.3.3.6}%
+\contentsline {subsubsection}{\numberline {3.3.7}Open issues}{57}{subsubsection.3.3.7}%
+\contentsline {subsection}{\numberline {3.4}Semantic Learning algorithm based on inflate and deflate mutations}{58}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Neural networks}{59}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.6}Introduction}{59}{subsection.3.6}%
+\contentsline {subsubsection}{\numberline {3.6.1}Perceptron}{59}{subsubsection.3.6.1}%
+\contentsline {subsubsection}{\numberline {3.6.2}ADALINE}{60}{subsubsection.3.6.2}%
+\contentsline {subsubsection}{\numberline {3.6.3}Non-linearly separable problems}{61}{subsubsection.3.6.3}%
+\contentsline {subsubsection}{\numberline {3.6.4}Backpropagation}{62}{subsubsection.3.6.4}%
+\contentsline {subsubsection}{\numberline {3.6.5}Cyclic (or Recursive) Neural networks}{63}{subsubsection.3.6.5}%
+\contentsline {subsection}{\numberline {3.7}Neuroevolution and NEAT}{63}{subsection.3.7}%
+\contentsline {section}{\numberline {4}Text mining}{64}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Introduction to NLP}{64}{subsection.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.1}Challenges of natural language}{64}{subsubsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.2}The NLP pipeline}{64}{subsubsection.4.1.2}%
+\contentsline {subsubsection}{\numberline {4.1.3}Text preprocessing methods}{64}{subsubsection.4.1.3}%
+\contentsline {subsection}{\numberline {4.2}Word representation}{65}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}Classification with BoW}{65}{subsubsection.4.2.1}%
+\contentsline {subsubsection}{\numberline {4.2.2}Word representations}{65}{subsubsection.4.2.2}%
+\contentsline {subsubsection}{\numberline {4.2.3}Vector embeddings (Word2Vec)}{66}{subsubsection.4.2.3}%
+\contentsline {subsubsection}{\numberline {4.2.4}Classification with Word2Vec}{66}{subsubsection.4.2.4}%
+\contentsline {subsection}{\numberline {4.3}Sequential models}{66}{subsection.4.3}%
+\contentsline {subsubsection}{\numberline {4.3.1}Review of word embeddings}{66}{subsubsection.4.3.1}%
+\contentsline {subsubsection}{\numberline {4.3.2}RNNs}{66}{subsubsection.4.3.2}%
+\contentsline {subsubsection}{\numberline {4.3.3}LSTM}{67}{subsubsection.4.3.3}%
+\contentsline {subsubsection}{\numberline {4.3.4}Seq-to-seq models}{68}{subsubsection.4.3.4}%
+\contentsline {subsection}{\numberline {4.4}Attention and transformers}{69}{subsection.4.4}%
+\contentsline {subsubsection}{\numberline {4.4.1}Attention mechanisms}{69}{subsubsection.4.4.1}%
+\contentsline {subsubsection}{\numberline {4.4.2}Transformer architecture}{70}{subsubsection.4.4.2}%
+\contentsline {subsubsection}{\numberline {4.4.3}Transformer encoders}{70}{subsubsection.4.4.3}%
+\contentsline {subsection}{\numberline {4.5}LLMs}{71}{subsection.4.5}%
+\contentsline {subsubsection}{\numberline {4.5.1}Transformer architecture}{71}{subsubsection.4.5.1}%
+\contentsline {subsubsection}{\numberline {4.5.2}Transform encoders}{72}{subsubsection.4.5.2}%
+\contentsline {subsubsection}{\numberline {4.5.3}Classification with encoders}{73}{subsubsection.4.5.3}%
+\contentsline {subsubsection}{\numberline {4.5.4}Self-attention}{73}{subsubsection.4.5.4}%
+\contentsline {subsubsection}{\numberline {4.5.5}Deeper into the encoder block}{74}{subsubsection.4.5.5}%
+\contentsline {subsubsection}{\numberline {4.5.6}The architecture of decoders}{74}{subsubsection.4.5.6}%
