@@ -1046,15 +1046,6 @@ Common mistakes
     \item Ignoring skew
 \end{itemize}
 
-
-
-
-
-
-
-
-
-
 \subsection{Big data storage technologies and relation with Spark}
 
 
@@ -1216,15 +1207,6 @@ We also have additional kinds of databases like
     \item Time-series databases \ra Specialized for sequential data. Some examples are InfluxDB, TimescaleDB and Prometheus. This structure is optimized for regular insertions and aggregations over time windows
     \item Vector databases \ra New generation databases for AI and similarity search. Some examples are Pinecone, Weaviate, Milvus and FAISS. The database stores embeddings of our numerical vectors and can be used for semantic search, recommendation and image/text similarity.
 \end{itemize}
-
-
-
-
-
-
-
-
-
 
 \subsection{Machine Learning in Spark}
 
@@ -1408,7 +1390,11 @@ To train a pipeline we use the fit method, it will create a pipeline. To apply i
 
 To improve our models we can use some built-in functions such as grid search, cross validation and the split in validation and training. 
 
+\subsubsection{Advanced Pipelines}
 
+Some advanced concepts can be persistence and deployment of pipelines. With MLflow we can track experiments, manage models and deploy pipelines efficiently.
+
+This can be used to enable reproducibility and deployment. We can also integrate Spark SQL and MLlib or to real time streaming (structured streaming). 
 
 \subsection{Graph Analytics}
 
@@ -1459,7 +1445,7 @@ Since we can use GraphX only with Scala and since it's mainly RDD based we would
 
 \vspace{10pt}
 
-We can explore our graph using graph queries. If we want to do some pattern matching operation we can use something called motif finding. Additional operations are for computation of degrees, aggregations, page rank (node importance), connected components (find group of nodes), label propagation (find communities) and breadth first search (the shortest path, reachability and relationship discovery). 
+We can explore our graph using graph queries. If we want to do some pattern matching operation we can use something called motif finding. Additional operations are for computation of degrees (inDegrees, outDegrees and degrees), aggregations, page rank (node importance), connected components (find group of nodes), label propagation (find communities) and breadth first search (the shortest path, reachability and relationship discovery). 
 
 
 \subsubsection{Advanced topics}
@@ -1475,7 +1461,16 @@ The storage options are usually:
 
 With these structures we can encounter problems if our graphs are huge since we can fall inside problems with our partitions. Also, the algorithms might not parallelize well. Some useful ways to solve the problems are partitioning, caching, check pointing and query optimization. 
 
+\subsubsection{Algorithms in details}
 
+Here we can see how our algorithms can work
+
+\begin{itemize}
+    \item PageRank \ra We consider a node important if many important nodes link to it. We iteratively distribute rank across the graph to find which is the most influential node. 
+    \item Connected components \ra We group vertices connected by paths
+    \item The Shortest path \ra We want to find the minimum distance path between nodes by applying algorithms like Dijkstra or BFS. 
+    \item Triangle counting \ra We have a triangle when 3 nodes are all connected, this can tell us the clustering coefficient (how tight a network is).
+\end{itemize}
 
 \subsection{Streaming}
 
@@ -1570,7 +1565,7 @@ A structured streaming recipe follows this pipeline
 
 \subsubsection{Advanced streaming}
 
-Some ways to improve our streaming can be using triggers (control how often the streaming query processes new data), use stateless (no stored history) or stateful (keeps running state) transformations, use the right aggregations and joins, use ML models and graph analytics. For performance and scaling we can tune batch interval, use state TTLs, prefer append mode, compress checkpoints and monitor latency. 
+Some ways to improve our streaming can be using triggers (control how often the streaming query processes new data), use stateless (no stored history) or stateful (keeps running state) transformations, use the right aggregations and joins (stream-to-stream or stream-to-batch), use ML models and graph analytics. For performance and scaling we can tune batch interval, use state TTLs, prefer append mode, compress checkpoints and monitor latency. 
 
 
 \subsubsection{Challenges and best practices}
@@ -1592,3 +1587,82 @@ Best practices
 \end{itemize}
 
 To monitor our streaming apps we can use metrics embedded in Spark UI, do some latency monitoring and integrate with Prometheus or Grafana
+
+\subsubsection{Deep dives}
+
+In more details
+
+\begin{itemize}
+    \item Windowed aggregation \ra We can have a fixed window, a sliding window or a session window
+    \item Watermarks for late data \ra To handle delayed events, if an event is later than the selected time frame it will be ignored. 
+    \item Stream joins \ra Can be stream-to-stream or stream-to-batch
+\end{itemize}
+
+\subsection{The future of Big Data}
+
+\subsubsection{Intro}
+As Big Data tech evolves rapidly it will happen that tools that work today like Hadoop and Spark they won't do it in the future. 
+
+\subsubsection{Current limitations of Big Data}
+
+As we know in our setting we can have problematic limitations. Hadoop and Spark for example by having a batch-first architecture will have high latency. Also, they entail a heavy ecosystem, they are heavy on the disk and the support for current tasks is limited. 
+
+\vspace{10pt}
+
+From the point of view of cost and complexity we can say that maintaining on-prem clusters is expensive, data duplication can happen, and we need to comply with different regulations. Also, the shift is happening on the professional level. 
+
+\subsubsection{Emerging trends}
+
+Some emerging trends are
+
+\begin{itemize}
+    \item Shift from on-prem Hadoop to cloud
+    \item Data lakehouse are being used much more (scalability of lakes + governance of warehouse)
+    \item Shift from batch to real time insights
+    \item Lower complexity for unified batch and streaming
+    \item The need for serverless Big Data
+\end{itemize}
+
+\subsubsection{AI and Big Data integration}
+
+ML can be used for automatic indexing and so for query optimization, this can reduce manual tuning overhead. We can also integrate LLMs to automate different steps or applying natural language querying. More human tasks like report writing, dashboard and explanations can be automated. 
+
+\subsubsection{Privacy, ethics and regulation} 
+
+Regulations keep being written, the main problems are related to data residency and sovereignty in global cloud. A must-have is the application of encryption and differential privacy. 
+
+\vspace{10pt}
+
+The main ethical concerns (if did not have ethics then you won't understand) are:
+
+\begin{itemize}
+    \item Bias in AI pipelines
+    \item Surveillance risks
+    \item The need for explainability
+\end{itemize}
+
+In the future we will have metadata driven platforms automated lineage tracking and the embedding of transparency and auditability. Datacenters will be required to use renewable energy and carbon-aware scheduling. 
+
+\subsubsection{Semantic data and interoperability}
+
+Future Big Data will not only store data but also understand it. Some ways will be the use of RDF, OWL and knowledge graphs. Metadata catalogs and semantic layers link raw data to business meaning. 
+
+\subsubsection{MLOps, DataOps, and AIOps convergence}
+
+In the future we will have much more automation across the lifecycle of our analytics
+
+\begin{itemize}
+    \item DataOps \ra Automates data ingestion, quality and lineage
+    \item MLOps \ra Automates model training, validation and deployment
+    \item AIOps \ra Uses AI to optimize and monitor data and ML pipelines
+\end{itemize}
+
+\subsubsection{Research and open challenges}
+
+We still need to solve some problems like:
+
+\begin{itemize}
+    \item Scalability challenges
+    \item Processing at edge
+    \item Quantum computing application
+\end{itemize}
