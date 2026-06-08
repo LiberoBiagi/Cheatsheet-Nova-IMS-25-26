@@ -1,6 +1,7 @@
 \section{Text mining}
 
-\subsection{Introduction to NLP}
+\subsection{Introduction to Text mining}
+\subsubsection{Introduction to NLP}
 
 Natural language processing is an area of computer science and artificial intelligence that is concerned with the interaction between computers and humans in natural language. The ultimate goal of NLP is to enable computers to understand language as well as we do.
 
@@ -35,7 +36,7 @@ A typical NLP pipeline follows these steps: Corpus \ra Feature engineering \ra T
 Before applying BoW we need to define what's a word, this process is called \textbf{Tokenization}. We want to identify tokens (features in text), but it's not a trivial task. Some problems can arise from composed words and punctuation. It's also clear that with this kind of sparse representation we can encounter problems like the usual curse of dimensionality and the fact that we lose semantic relationships.
 
 \begin{itemize}
-    \item \text{Curse of dimensionality} \ra The total dimension of the BoW is the vocabulary size. Our model can easily overfit. We can use dimensionality reduction techniques.
+    \item \textbf{Curse of dimensionality} \ra The total dimension of the BoW is the vocabulary size. Our model can easily overfit. We can use dimensionality reduction techniques.
     \item \textbf{No semantic relationships} \ra BoW doesn't consider the semantic relationships between words since we discard the order and similar words can be considered as different features. 
 \end{itemize}
 
@@ -57,8 +58,7 @@ Some ways are
 
 We can also just consider certain type of words like verbs, nouns, adjectives and adverbs. 
 
-
-\subsection{Word representation}
+\subsection{Word representations}
 
 \subsubsection{Classification with BoW}
 
@@ -68,7 +68,7 @@ We just throw our binary vectors inside a neural network.
 
 BoW is the baseline for every text mining task since it has a lot of limitations like curse of dimensionality, no semantic relationship, all words will have the same importance and the context is ignored even though it changes the meaning.
 
-To solve these problems we want to use vectors to represent our words. From words to tokens to embeddings. Using embeddings for words is better than embed full documents since we can have a more granular and precise representation. One of the breakpoints was the creation of Word2Vec in 2013. 
+To solve these problems we want to use vectors to represent our words. From words to tokens to embeddings. Using embeddings for words is better than embed full documents since we can have a more granular and precise representation. One of the breakpoints was the creation of Word2Vec in 2013.
 
 \vspace{10pt}
 
@@ -135,6 +135,7 @@ To build our PMI between information and data
 \begin{itemize}
     \item Calculate co-occurence matrix
     \item Calculate word probability
+    \item Calculate context probability
     \item Calculate co-occurence probability
     \item Create probabilities matrix
     \item Calculate PPMI
@@ -157,8 +158,8 @@ More in details
 \begin{enumerate}
     \item Define word and context, for each word in our corpus select the context window
     \item Add negative samples for words that do not appear in the same context window
-    \item Define the task, usually if word w and c appeared in the corpus
-    \item Train the model
+    \item Define the task, usually if word w and c appeared in the corpus. Use the weights of our first model to represent the words
+    \item Train the model to get our embedding size and get the probabilities for each possible word
     \item Retrieve the embeddings
 \end{enumerate}
 
@@ -166,8 +167,7 @@ After this pipeline we have the possibility to extract semantic relationships be
 
 \subsubsection{Classification with Word2Vec}
 
-To make predictions using our embeddings we need to find a way to give the vectors as input. Some ideas can be to use the mean of the vector or apply an RNN since we consider the input as a varying one. 
-
+To make predictions using our embeddings we need to find a way to give the vectors as input. Some ideas can be to use the mean of the vector or apply an RNN (or a LSTM) since we consider the input as a varying one. 
 
 \subsection{Sequential models}
 
@@ -235,7 +235,7 @@ for sequential learning problems where context and order are important.
 
 \vspace{10pt}
 
-For a sentence/document, each word (embedding) is processed through the network one step at the time. In parallel, the hidden vector of the previous word, moves in the network and is used to calculate the hidden vector of the next word. The main problem with RNNs is related to long dependencies, The final hidden state reflects more information about the end of the sentence than it beginning. 
+For a sentence/document, each word (embedding) is processed through the network one step at the time. In parallel, the hidden vector of the previous word, moves in the network and is used to calculate the hidden vector of the next word. The main problem with RNNs is related to long dependencies, The final hidden state reflects more information about the end of the sentence than its beginning. 
 
 \vspace{10pt}
 
@@ -246,7 +246,7 @@ Another problem is the one of vanishing gradient, during the backward pass of tr
 The long dependencies' problem can be solved by using bidirectional models. 
 
 
-\subsubsection{LSTM}
+\subsubsection{LSTMs}
 
 As said we can use bidirectional models to solve some problems related to RNNs. LSTMs models are explicitly designed to avoid the long term dependency problems. The context management is divided into two subproblems:
 \begin{itemize}
@@ -413,7 +413,6 @@ models may struggle with long sequences because the entire input information mus
 compressed into a single context vector. This limitation motivated the development of
 attention mechanisms and Transformer architectures.
 
-
 \subsection{Attention and transformers}
 
 
@@ -436,7 +435,13 @@ A way to solve this problem is using the mechanism of attention. We allow the de
 \end{itemize}
 
 
-\textbf{Add formulas}
+In more details
+
+\begin{itemize}
+    \item Compute how much to focus on each encoder state. Relevancy is captured by computing for each state a score measure. This score is called dot product attention $\text{score} (h_{i-1}^d, h_j^e ) = h_{i-1}^d \cdot h_j^e$ 
+    \item The score that we get is a scalar that reflects the degree of similarity between two vectors. To make use of these scores we have to normalize them with a softmax to create a vector of weights. This vector will tell us the proportional relevance of each encoder hidden state to the prior hidden decoder state $\alpha_{ij} = \text{softmax} ( \text{score}(h_{i-1}^d, h_{j}^e) \forall j \in e)$
+    \item Finally we compute a fixed length context vector for the current decoder state by taking a weighted average over all the encoder hidden states $c_i = \sum_{j}\alpha_{ij} h_{j}^e$
+\end{itemize}
 
 
 \subsubsection{Transformer architecture}
@@ -560,61 +565,8 @@ smaller labeled dataset
     \item DeBERTa
 \end{itemize}
 
-
 \subsection{LLMs}
 
-
-\subsubsection{Transformer architecture}
-
-We recall that deep learning relies a lot on GPUs since we can parallelize computation. However, RNNs process tokens one word at a time, with each hidden state depending on the previous one, so computation must proceed sequentially. This implies that GPUs cannot use their cores at full potential. 
-
-\vspace{10pt}
-
-The sequential nature of attention based RNNs prevents parallelization during training of the model, making this process less efficient and not well-optimized. This issue was solved using the mechanism of self-attention. It allows each token to directly attend to all other tokens in the sequence at the same time, capturing dependencies regardless of distance. The creator of self-attention proposed a new model called Transformer, that uses self-attention and Feed-forward networks eliminating sequential computation, and enabling fast and efficient training on modern hardware. 
-
-\vspace{10pt}
-
-This is the standard architecture for building modern LLMs. Like LSTMs it can capture long-distance relationships between words in a sequence. But unlike LSTMs, transformers do not rely on recurrent connections that process tokens step by step. Using self-attention transformers can compute token representations in parallel, improving training efficiency and making much better use of GPUs. 
-
-\vspace{10pt}
-
-Transformers are made of two main types of blocks
-
-\begin{itemize}
-    \item Encoder \ra Reads the input sequence and transforms each token into a contextual representation
-    \item Decoder \ra Uses representations to generate the output sequence, one toke at a time
-\end{itemize}
-
-In the original architecture they worked together.
-
-Each transformer will have many encoders and decoders. 
-
-\begin{itemize}
-    \item Inside each encoder we have a layer of self-attention and a standard neural network, information moves forward through the encoders
-    \item The decoders receive the output from the encoder and move them through two attention layers and a neural network. The last decoder layer produces an output. We might also find a layer of encoder-decoder attention. 
-\end{itemize}
-
-
-\subsubsection{Transform encoders}
-
-Some transformers use only the encoder, because the goal is to understand text rather than generate it. These models read the full sentence at once, capturing context from both previous and following words. With this they can produce context aware word and sentence representation. We can reuse them in downstream tasks in a context of transfer-learning. 
-
-\vspace{10pt}
-
-Generating Word Representations with Transformers and Transformer Encoders introduces BERT (Bidirectional Encoder Representations from Transformers), developed by Google, which is probably the most famous Encoder-only Transformer model. The BERT (BERTLarge) model uses 24 encoder layers, referred to in the paper as Transformer blocks. BERT uses 16 self-attention heads, allowing the model to capture multiple contextual relationships in parallel. It has a hidden size of 1024 units, making its internal representations larger and more expressive. This means that each token is represented by a 1024-dimensional contextual embedding produced by the final encoder layer. The representations generated by BERT can then be fed to another model as word embeddings.
-
-Regarding the training of BERT and Transformer Encoders, transfer learning is the process of reusing knowledge learned from one task to improve performance on another task. In NLP, models such as BERT are first pre-trained on massive text corpora to learn general language patterns. They are called Pre-trained Language Models (PLMs). This models can be called Foundation models - very large pre-trained models trained on broad and diverse datasets at massive scale. The pre-trained model is then adapted (fine-tuned) to a specific downstream task using a smaller labeled dataset.
-
-Continuing with Training BERT and Transformer Encoders, BERT was pre-trained on large unlabeled datasets, including English Wikipedia and the BookCorpus collection of books. The model learns language patterns using self-supervised tasks such as Masked Language Modeling (MLM) and Next Sentence Prediction (NSP). In MLM, during training, random words are masked, and BERT learns to predict them using context from both directions of the sentence. In NSP, BERT receives two sentences as input and predicts whether the second sentence logically follows the first. The original BERT Large model contains approximately 340 million parameters, with 24 encoder layers, 16 attention heads, and 1024 hidden dimensions.
-
-The stages of Training BERT and Transformer Encoders follow a specific training process:
-\begin{enumerate}
-    \item First pre-training a model (which is already done when we use it)
-    \item And then fine-tuning it for a particular task (there are a lot of models already fine-tuned in hugging face for ex.)
-    \item Finally, we can fine-tune it for a particular task, like sentiment analysis or predicting movie reviews
-\end{enumerate}
-
-In the context of Training BERT and Transformer Encoders, over the years, many variations of BERT have been developed, including RoBERTa, DistilBERT, ALBERT, and XLM-RoBERTa, each trained in various contexts.
 
 \subsubsection{Classification with encoders}
 
@@ -639,14 +591,11 @@ We can perform classification directly with a task specific model or indirectly 
 To use BERT we have to
 
 \begin{itemize}
-    \item Tokenize the input sequence
+    \item Tokenize the input sequence using the tokenizer of the transformer model
     \item Embed our sentences
     \item Use the embeddings as features
     \item Train a classification model
 \end{itemize}
-
-
-
 
 \subsubsection{Self-attention}
 
@@ -654,7 +603,7 @@ Recall that like LSTMs, transformers can capture long-distance relationships bet
 
 \vspace{10pt}
 
-Self- attention is different from attention, first is made of two steps
+Self-attention is made of two steps
 
 \begin{itemize}
     \item Relevance scoring for each position
@@ -695,10 +644,128 @@ We can also get query and key together by multiplying Q and $K^t$. After we can 
 \text{SelfAttention(Q, K, V)} = \text{softmax}(\frac{QK^T}{\sqrt{d_k}})V
 \]
 
-
 \subsubsection{Deeper into the encoder block}
 
+The self-Attention calculation lies at the core of what's called a transformer block which includes also additional feedforward layers, residual connections and normalizing layers. The transformers as we have described them don't have any notion about the positions of the tokens of the input, this means that scrambling the order of the inputs will give the same answer. One solution is to modify the input embeddings by combining them with Positional Embeddings specific to each position in an input sequence. 
+
+\vspace{10pt}
+
+We can get better LLMs by doing attention multiple times in parallel, increasing the model's capacity to attend different types of information. Hence, we have many "self-attention heads". Each head in a self-attention layer is provided with its own set of key, query and value matrices. These are used to project the inputs into separate key, value and query embeddings separately for each head, with the rest of the self-attention computation remaining unchanged.
+
+\[
+\text{head}_i = \text{SelfAttention}(Q, K, V)
+\]
+
+The outputs from each head are concatenated and then using yet another linear projection to reduce it to the original output dimension for each token. 
+
+\vspace{10pt}
+
+Residual connections in transformers are implemented by adding a layer's input vector to its output vector before passing it forward. Residual connections pass information  from a lower layer to a higher one without going through an intermediate. This allows information from the activation going forward and the gradient going backwards to skip a layer. This allows us to improve learning and gives higher level layers direct access from lower layers. 
+
+\vspace{10pt}
+
+These summed vectors are then normalized using layer normalization using a variant of the standard score by applying it to a single hidden layer. In the standard implementation we introduce two parameters called $\gamma$ and $\beta$ representing gain and offset values. 
+
+\vspace{10pt}
+
+The representations generated by the encoder are 
+
+\begin{itemize}
+    \item Contextualized \ra Each word is represented based on its contextual meaning, allowing the same word to have different representations depending on surrounding words
+    \item Bidirectional \ra Representations are influenced by both left and right context
+    \item Position-aware \ra Using positional embedding the model retains information about word order
+\end{itemize}
 
 \subsubsection{The architecture of decoders}
+
+In the decoder we can also find a layer of encoder-decoder attention (where the decoder attends to the outputs of the encoder). The decoder attention is called masked attention because it can only attend to previous tokens because it can't look into the future. The encoder starts by processing the input sequence. The output of the top encoder is then transformed into a set of attention vectors K and V. These are to be used by each decoder in its "encoder-decoder attention" layer which helps the decoder focus on appropriate places in the input sequence. 
+
+\vspace{10pt}
+
+The decoder has an additional attention layer that attends to the output of the encoder. At a high level of abstraction, Transformer LLMs take a text prompt and output generated text. The decoder decides which of the tokens to output by sampling based on the probabilities. The tokens with the highest probability after the model's forward pass are chosen. Transformer LLMs generate one token at a time, not the entire text at once. An output token is appended to the prompt, then this new text is presented to the model again for another forward pass to generate the next token. 
+
+\vspace{10pt}
+
+The final linear layer (that is followed by a softmax one) turns the output into a word. This linear layer is a simple neural network that projects the vector produced by the stack of decoders into a bigger vector called logits vector. The logits is then sent into the softmax layer that will turn the scores into probabilities and produce the most probable output. The previous process is repeated until a special symbol is reached indicating that the transformer decoder has completed its output. The predicted word is fed to the bottom decoder in the next time step, and the decoders send up their decoding results. Just like in the encoder inputs we embed and add positional encoding to those decoder inputs to indicate the position of each word. 
+
+\vspace{10pt}
+
+In summary
+
+\begin{enumerate}
+    \item Sample a word in the output to get our first input
+    \item Use the word embedding for that first word as the input to the network at the next time step
+    \item Continue generating until the end marker is reached
+\end{enumerate}
+
+\subsubsection{Generative AI models}
+
+Two main kinds of LLMs exist
+
+\begin{itemize}
+    \item Proprietary models \ra Also known as closed source, they can be accessed by an API, as a result the details of their code and architecture are not shred with the user
+    \item Open models \ra they are directly managed by the user and so people can see code and architecture
+\end{itemize}
+
+As we know these kinds of models are huge and to reduce their weight and size we can try different strategies
+
+\begin{itemize}
+    \item Quantization \ra reduces model size and memory usage by reducing the number of bits needed to represent the parameters of an LLM. It enables them to run faster and with less powerful hardware requirements
+    \item GGUF \ra GPT-Generated Unified Format, a file format used to represent a compressed version of the quantized LLM
+\end{itemize}
+
+\subsubsection{Model Configuration}
+
+LLMs can generate different outputs even if they are presented with the same input. We can control the kind of output that we receive modifying some parameters
+
+\begin{itemize}
+    \item Temperature \ra the randomness of the generated text. How easy is to select tokens that are less probable
+    \item Top\_p \ra nucleus sampling, control which subset of tokens the LLM can consider
+    \item Top\_k \ra how many tokens the LLM can consider  
+\end{itemize}
+
+Another way to shape our output is to use some prompt engineering. The two most basic components are the instruction and the data it refers to. If we extend the prompt with an output indicator that allows for some specific outputs we can transform our LLM into a classifier. 
+
+\vspace{10pt}
+
+If we provide our LLM with examples of exactly the thing that we want to achieve we enter the realm of incontext learning. Zero-shot prompting does not use examples, one-shot prompts give one example and few-shot prompts use multiple examples. 
+
+\vspace{10pt}
+
+We can also define the system prompt as the set of hidden instructions that an LLM has to follow before it interacts with a user. The maximum number of tokens an LLM can process simultaneously is called context window. This can be considered as a sort of memory of the model. One of the most intuitive forms of giving LLMs memory is by using Conversation Buffer Memory (we append a past conversation in our prompt). If we reach the end of our context window we can apply Conversation Summary Memory where we first ask another LLM to summarize our conversation.  
+
+\subsubsection{Retrieval Augmented Generation (RAG)}
+
+LLMs are trained on massive amount of data, but they cannot know some private information. Also, they are able to hallucinate or generate wrong answers if the information that we want to know is missing. RAG is an AI framework that grounds LLMs with specific and authoritative data outside their original training data. A basic RAG pipeline is made up of a search step followed by a grounded generation step where the LLM is prompted with the question and the information retrieved from the search step. 
+
+\vspace{10pt}
+
+The first step is to chunk our documents and save them in a vectorial database. We can then query this database for information about the knowledge base. To improve our search we can split documents into smaller chunks at different levels (sentence, paragraph or overlapping window). Once the query is embedded we need to find the nearest vector to it from our text archive. We can compare embeddings to find the most similar documents to a query. This is called semantic search. 
+
+\vspace{10pt}
+
+Semantic search can be done with different kinds of strategies
+
+\begin{itemize}
+    \item Dense search \ra uses embedding to capture meaning and intent
+    \item Keyword search \ra matches exact terms in documents while ignoring semantics
+    \item Hybrid search \ra run keyword search and semantic one while combining the scores of both methods using a weighted formula
+\end{itemize}
+
+We can find the most relevant information to an input prompt by comparing the similarities between embeddings. The most relevant information is added to the prompt before giving it to the LLM. 
+
+\subsubsection{Agentic AI}
+
+On its own a standalone LLM is primarily performing next-token prediction. Hence, LLMs can struggle with some tasks like basic arithmetic. LLM agents are advanced systems that use LLMs as their brain to understand problems, break them into steps and use tools to complete tasks. 
+
+In agentic AI the LLM is the cognitive core, augmented by 3 primary components:
+
+\begin{itemize}
+    \item Memory \ra short term and long term
+    \item Tools \ra APIs that enable real-time interaction with dynamic environments
+    \item Planning/reasoning \ra The core generative capability of the LLM, which forms plans and generates responses
+\end{itemize}
+
+With memory, tools and planning our agent can do ReAct (Reason + Act). If our problem is too complex for the capabilities of a single agent we might need to use Multi-Agent Systems (MAS). These agents can collaborate with agent orchestration using a supervisor model
 
 

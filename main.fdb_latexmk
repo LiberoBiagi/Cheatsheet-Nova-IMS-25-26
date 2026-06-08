@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1780677374.03893 "/home/libero/Desktop/Appunti/main.tex" "main.pdf" "main" 1780677378.04098 0
+["pdflatex"] 1780928101.84311 "/home/libero/Desktop/Appunti/main.tex" "main.pdf" "main" 1780928106.07933 0
   "/etc/texmf/web2c/texmf.cnf" 1774274963.51512 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/libero/Desktop/Appunti/main.tex" 1777718681.65027 4464 9e0a551a6b6baeb13f43ceef57ecea44 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -298,18 +298,18 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1774274999.43548 5472669 54eaf61a88b6b7896ebd0dac973cb29c ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1774275055 8212203 591f3182e6e5f1b19a2dcc5afb02f587 ""
-  "Courses/bigdata.aux" 1780677377.40066 12777 94c3951012a83c97018a413f81119c17 "pdflatex"
+  "Courses/bigdata.aux" 1780928105.35825 12777 94c3951012a83c97018a413f81119c17 "pdflatex"
   "Courses/bigdata.tex" 1780668968.47048 71482 760c20fba1f85d8579ef30e2145aaf12 ""
-  "Courses/cifo.aux" 1780677377.06266 5726 f8baae4a12b8175f0648866d71afdb79 "pdflatex"
+  "Courses/cifo.aux" 1780928105.02121 5726 f8baae4a12b8175f0648866d71afdb79 "pdflatex"
   "Courses/cifo.tex" 1779716082.42057 62173 ec5bbf5b8ee180e114dbefdde8ee93e9 ""
-  "Courses/neural.aux" 1780677377.60065 5898 7d129cb707c691147f24960e07c7b2f9 "pdflatex"
+  "Courses/neural.aux" 1780928105.59428 5898 7d129cb707c691147f24960e07c7b2f9 "pdflatex"
   "Courses/neural.tex" 1780677369.40372 52196 0ac0e5ab911e7a767fc3b51716c80e20 ""
-  "Courses/text.aux" 1780677377.73365 4539 094715c3ea381b8324a11f036759962c "pdflatex"
-  "Courses/text.tex" 1779895952.46423 36062 d33cbb5ec88dc9954bc04bdbf20c2a5a ""
-  "main.aux" 1780677377.73465 272 119a9bc6d0be80dbc61134e5f27dc5b9 "pdflatex"
-  "main.out" 1780677377.74165 32136 86dc5f7f77b841a9446620047b81463b "pdflatex"
+  "Courses/text.aux" 1780928105.7563 4965 e657a994a77048bd10f73f7bf4e171dc "pdflatex"
+  "Courses/text.tex" 1780928101.46979 41577 e5044c8bf31a01af9261512f3a2e316d ""
+  "main.aux" 1780928105.7573 272 e2f1ed4cc463fac333204023c0a0b903 "pdflatex"
+  "main.out" 1780928105.7653 32733 f31f06463fee7082d309229620e53397 "pdflatex"
   "main.tex" 1777718681.65027 4464 9e0a551a6b6baeb13f43ceef57ecea44 ""
-  "main.toc" 1780677377.74265 17139 8e87e6a34c933527c335e407b8a83051 "pdflatex"
+  "main.toc" 1780928105.7653 17442 f2c8d2caafd7bbc7d244d51bae8b0e38 "pdflatex"
   (generated)
   "Courses/bigdata.aux"
   "Courses/cifo.aux"
