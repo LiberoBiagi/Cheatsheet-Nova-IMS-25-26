@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.3.23)  23 JUN 2026 09:25
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.3.23)  23 JUN 2026 09:26
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -941,25 +941,25 @@ File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 
 
 ] [37] [38]
-<Courses/Images/L2.png, id=2151, 380.622pt x 298.11375pt>
+<Courses/Images/L2.png, id=2150, 380.622pt x 298.11375pt>
 File: Courses/Images/L2.png Graphic file (type png)
 <use Courses/Images/L2.png>
 Package pdftex.def Info: Courses/Images/L2.png  used on input line 285.
 (pdftex.def)             Requested size: 380.62105pt x 298.11302pt.
  [39]
-<Courses/Images/L1.png, id=2164, 368.577pt x 305.943pt>
+<Courses/Images/L1.png, id=2163, 368.577pt x 305.943pt>
 File: Courses/Images/L1.png Graphic file (type png)
 <use Courses/Images/L1.png>
 Package pdftex.def Info: Courses/Images/L1.png  used on input line 295.
 (pdftex.def)             Requested size: 368.57608pt x 305.94223pt.
  [40 <./Courses/Images/L2.png> <./Courses/Images/L1.png>] [41] [42] [43] [44] [45] [46] [47] [48] [49] [50] [51] [52]
-<Courses/Images/ensemble tree.png, id=2270, 720.89325pt x 424.58624pt>
+<Courses/Images/ensemble tree.png, id=2269, 720.89325pt x 424.58624pt>
 File: Courses/Images/ensemble tree.png Graphic file (type png)
 <use Courses/Images/ensemble tree.png>
 Package pdftex.def Info: Courses/Images/ensemble tree.png  used on input line 1284.
 (pdftex.def)             Requested size: 483.69684pt x 284.88594pt.
  [53 <./Courses/Images/ensemble tree.png>] [54] [55]
-<Courses/Images/svm.png, id=2293, 290.2845pt x 302.3295pt>
+<Courses/Images/svm.png, id=2292, 290.2845pt x 302.3295pt>
 File: Courses/Images/svm.png Graphic file (type png)
 <use Courses/Images/svm.png>
 Package pdftex.def Info: Courses/Images/svm.png  used on input line 1451.
@@ -1043,28 +1043,28 @@ Underfull \hbox (badness 10000) in paragraph at lines 1929--1930
  []
 
 [80] [81] [82]
-<Courses/Images/simple dag.png, id=2495, 97.5645pt x 70.46326pt>
+<Courses/Images/simple dag.png, id=2494, 97.5645pt x 70.46326pt>
 File: Courses/Images/simple dag.png Graphic file (type png)
 <use Courses/Images/simple dag.png>
 Package pdftex.def Info: Courses/Images/simple dag.png  used on input line 2126.
 (pdftex.def)             Requested size: 142.26378pt x 102.74753pt.
-<Courses/Images/backdoor.png, id=2496, 93.951pt x 63.23625pt>
+<Courses/Images/backdoor.png, id=2495, 93.951pt x 63.23625pt>
 File: Courses/Images/backdoor.png Graphic file (type png)
 <use Courses/Images/backdoor.png>
 Package pdftex.def Info: Courses/Images/backdoor.png  used on input line 2133.
 (pdftex.def)             Requested size: 142.26378pt x 95.76788pt.
  [83 <./Courses/Images/simple dag.png>]
-<Courses/Images/unobserved.png, id=2510, 91.542pt x 66.2475pt>
+<Courses/Images/unobserved.png, id=2509, 91.542pt x 66.2475pt>
 File: Courses/Images/unobserved.png Graphic file (type png)
 <use Courses/Images/unobserved.png>
 Package pdftex.def Info: Courses/Images/unobserved.png  used on input line 2138.
 (pdftex.def)             Requested size: 142.26378pt x 102.96559pt.
-<Courses/Images/other dag.png, id=2511, 89.133pt x 67.452pt>
+<Courses/Images/other dag.png, id=2510, 89.133pt x 67.452pt>
 File: Courses/Images/other dag.png Graphic file (type png)
 <use Courses/Images/other dag.png>
 Package pdftex.def Info: Courses/Images/other dag.png  used on input line 2142.
 (pdftex.def)             Requested size: 142.26378pt x 107.66808pt.
-<Courses/Images/examples colliders.png, id=2512, 389.65575pt x 140.32425pt>
+<Courses/Images/examples colliders.png, id=2511, 389.65575pt x 140.32425pt>
 File: Courses/Images/examples colliders.png Graphic file (type png)
 <use Courses/Images/examples colliders.png>
 Package pdftex.def Info: Courses/Images/examples colliders.png  used on input line 2158.
@@ -1077,40 +1077,40 @@ Package pdftex.def Info: Courses/Images/examples colliders.png  used on input li
 
 
 ]
-<Courses/Images/dbms structure.png, id=2542, 738.3585pt x 393.26926pt>
+<Courses/Images/dbms structure.png, id=2541, 738.3585pt x 393.26926pt>
 File: Courses/Images/dbms structure.png Graphic file (type png)
 <use Courses/Images/dbms structure.png>
 Package pdftex.def Info: Courses/Images/dbms structure.png  used on input line 80.
 (pdftex.def)             Requested size: 455.24408pt x 242.47424pt.
  [88 <./Courses/Images/dbms structure.png>]
-<Courses/Images/structure erd.png, id=2548, 646.21425pt x 509.5035pt>
+<Courses/Images/structure erd.png, id=2547, 646.21425pt x 509.5035pt>
 File: Courses/Images/structure erd.png Graphic file (type png)
 <use Courses/Images/structure erd.png>
 Package pdftex.def Info: Courses/Images/structure erd.png  used on input line 129.
 (pdftex.def)             Requested size: 227.62204pt x 179.46394pt.
-<Courses/Images/basic crows.png, id=2549, 784.1295pt x 343.88475pt>
+<Courses/Images/basic crows.png, id=2548, 784.1295pt x 343.88475pt>
 File: Courses/Images/basic crows.png Graphic file (type png)
 <use Courses/Images/basic crows.png>
 Package pdftex.def Info: Courses/Images/basic crows.png  used on input line 131.
 (pdftex.def)             Requested size: 227.62204pt x 99.82372pt.
-<Courses/Images/multiplicities.png, id=2550, 602.25pt x 254.75175pt>
+<Courses/Images/multiplicities.png, id=2549, 602.25pt x 254.75175pt>
 File: Courses/Images/multiplicities.png Graphic file (type png)
 <use Courses/Images/multiplicities.png>
 Package pdftex.def Info: Courses/Images/multiplicities.png  used on input line 141.
 (pdftex.def)             Requested size: 170.71652pt x 72.21239pt.
-<Courses/Images/options.png, id=2552, 585.98924pt x 280.6485pt>
+<Courses/Images/options.png, id=2551, 585.98924pt x 280.6485pt>
 File: Courses/Images/options.png Graphic file (type png)
 <use Courses/Images/options.png>
 Package pdftex.def Info: Courses/Images/options.png  used on input line 142.
 (pdftex.def)             Requested size: 170.71652pt x 81.75854pt.
  [89 <./Courses/Images/structure erd.png> <./Courses/Images/basic crows.png> <./Courses/Images/multiplicities.png> <./Courses/Images/options.png>] [90] [91] [92] [93] [94] [95] [96] [97] [98] [99]
-<Courses/Images/nosql.png, id=2611, 767.86874pt x 448.67625pt>
+<Courses/Images/nosql.png, id=2610, 767.86874pt x 448.67625pt>
 File: Courses/Images/nosql.png Graphic file (type png)
 <use Courses/Images/nosql.png>
 Package pdftex.def Info: Courses/Images/nosql.png  used on input line 764.
 (pdftex.def)             Requested size: 284.52756pt x 166.25407pt.
  [100 <./Courses/Images/nosql.png>]
-<Courses/Images/cap theorem.png, id=2624, 560.69475pt x 194.52675pt>
+<Courses/Images/cap theorem.png, id=2623, 560.69475pt x 194.52675pt>
 File: Courses/Images/cap theorem.png Graphic file (type png)
 <use Courses/Images/cap theorem.png>
 Package pdftex.def Info: Courses/Images/cap theorem.png  used on input line 796.
@@ -1180,18 +1180,18 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 943DD018EA5498A03668863100253F00;52560.
  ) 
 Here is how much of TeX's memory you used:
- 47907 strings out of 474222
- 1139644 string characters out of 5748733
+ 47906 strings out of 474222
+ 1139634 string characters out of 5748733
  2464975 words of memory out of 5000000
  68049 multiletter control sequences out of 15000+600000
  665384 words of font info for 115 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  116i,17n,121p,1988b,2255s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/latxfont/lcircle1.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/latxfont/line10.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx5.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx7.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx8.pfb></usr/share/texmf/fonts/type1/public/lm/lmex10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi12.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi5.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi7.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi9.pfb></usr/share/texmf/fonts/type1/public/lm/lmmib10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr17.pfb></usr/share/texmf/fonts/type1/public/lm/lmr5.pfb></usr/share/texmf/fonts/type1/public/lm/lmr7.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr9.pfb></usr/share/texmf/fonts/type1/public/lm/lmri10.pfb></usr/share/texmf/fonts/type1/public/lm/lmss9.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy5.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy7.pfb></usr/share/texmf/fonts/type1/public/lm/lmtk10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (190 pages, 2149245 bytes).
+Output written on main.pdf (190 pages, 2149503 bytes).
 PDF statistics:
- 3701 PDF objects out of 4296 (max. 8388607)
- 3372 compressed objects within 34 object streams
- 1351 named destinations out of 1440 (max. 500000)
+ 3699 PDF objects out of 4296 (max. 8388607)
+ 3370 compressed objects within 34 object streams
+ 1350 named destinations out of 1440 (max. 500000)
  2513 words of extra memory for PDF output out of 10000 (max. 10000000)
 
